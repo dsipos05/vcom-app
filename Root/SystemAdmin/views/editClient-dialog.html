@@ -1,0 +1,143 @@
+<div class="modal-header">
+	<h3>{{ screenTitle }}</h3>
+</div>
+<div class="modal-body">
+	<!-- novalidate here prevents popups telling users to fill in missing fields, since they annoyingly pop up every time any part of the form is modified -->
+	<form class="form-horizontal" name="EditForm" novalidate="novalidate">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Client Identification</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row" style="margin-right: 10px;">
+                            <a id="topAnchor"></a>
+                            <fieldset>
+                                <!-- Client Type -->
+                                <myform formdata="clientTypeForm" models="clientTypeFormModels"></myform>
+                                <!-- Remaining fields -->
+                                <myform formdata="myFormData" models="myFormModels"></myform>
+                            </fieldset>
+                            <div class="col-xs-12">
+                                Fields marked with an asterisk (*) are required.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-if="showOptions()" class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Options</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row" style="margin-right: 10px;">
+                            <fieldset>
+                                <div class="form-group">
+                                    <label for="disableClientLogin" class="col-xs-12 col-sm-12 col-md-9 col-lg-9 control-label">Disable Client Login / Connection</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" style="margin-top: 5px;">
+                                        <toggle-switch ng-model="client.LABEL_DISABLED"></toggle-switch>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="alwaysShowSelectorWhenOffline" class="col-xs-12 col-sm-12 col-md-9 col-lg-9 control-label">Always Show Selector when Off-line</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" style="margin-top: 5px;">
+                                        <toggle-switch ng-model="client.SHOW_SELECTOR_WHEN_OFFLINE"></toggle-switch>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="latchDisableTalkSelector" class="col-xs-12 col-sm-12 col-md-9 col-lg-9 control-label">Latch Disable Talk Selector</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" style="margin-top: 5px;">
+                                        <toggle-switch ng-model="client.LATCH_DISABLE" labels="On,Off" stateValues="ON,OFF"></toggle-switch>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="partyLineOperation" class="col-xs-12 col-sm-12 col-md-9 col-lg-9 control-label">Party Line Operation</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" style="margin-top: 5px;">
+                                        <toggle-switch ng-model="client.PARTY_LINE_OPERATION"></toggle-switch>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="ifbDestination" class="col-xs-12 col-sm-12 col-md-9 col-lg-9 control-label">IFB Destination</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" style="margin-top: 5px;">
+                                        <toggle-switch ng-model="client.IFB_DESTINATION"></toggle-switch>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="isoDestination" class="col-xs-12 col-sm-12 col-md-9 col-lg-9 control-label">ISO Destination</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" style="margin-top: 5px;">
+                                        <toggle-switch ng-model="client.ISO_DESTINATION"></toggle-switch>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="allowAssignmentToMultiplePartyLines" class="col-xs-12 col-sm-12 col-md-9 col-lg-9 control-label">Allow Assignment to Multiple Party Lines</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" style="margin-top: 5px;">
+                                        <toggle-switch ng-model="client.ALLOW_MEMBER_ASSIGMENT_TO_MULTIPLE_PARTY_LINES"></toggle-switch>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="standardSystemAdminstrationPrivileges" class="col-xs-12 col-sm-12 col-md-9 col-lg-9 control-label">System Administration Privilege</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" style="margin-top: 5px;">
+                                        <ui-select id="systemAdministrationPrivileges" ng-model="$parent.client.SYSTEM_ADMINISTRATION_PRIVILEGES">
+                                            <ui-select-match placeholder="">{{$select.selected.label}}</ui-select-match>
+                                            <ui-select-choices repeat="item in $parent.privilegesDropdownOptions | filter: $select.search">
+                                                <div ng-bind-html="trustAsHtml(( item.label | highlight: $select.search ))"></div>
+                                            </ui-select-choices>
+                                        </ui-select>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-if="showRestrictions()" class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Selector Assignment Restrictions</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row" style="margin-right: 10px;">
+                            <fieldset>
+                                <div class="form-group">
+                                    <label for="noLocalAssignmentByAdministrator" class="col-xs-12 col-sm-12 col-md-9 col-lg-9 control-label">No Local Assignment by Administrator</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" style="margin-top: 5px;">
+                                        <toggle-switch ng-model="client.NO_LOCAL_ASSIGNMENT_BY_ADMINISTRATOR"></toggle-switch>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="noLocalAssignmentByUser" class="col-xs-12 col-sm-12 col-md-9 col-lg-9 control-label">No Local Assignment by User</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" style="margin-top: 5px;">
+                                        <toggle-switch ng-model="client.NO_LOCAL_ASSIGNMENT_BY_USER"></toggle-switch>
+                                    </div>
+                                </div>
+                                <div class="form-group" ng-if="isTIForHasTrunking">
+                                    <label for="noLocalAssignmentByUser" class="col-xs-12 col-sm-12 col-md-9 col-lg-9 control-label">No Remote Assignment by Administrator</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" style="margin-top: 5px;">
+                                        <toggle-switch ng-model="client.NO_REMOTE_ASSIGNMENT_BY_ADMISTRATOR"></toggle-switch>
+                                    </div>
+                                </div>
+                                <div class="form-group" ng-if="isTIForHasTrunking">
+                                    <label for="noLocalAssignmentByUser" class="col-xs-12 col-sm-12 col-md-9 col-lg-9 control-label">No Remote Assignment by User</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" style="margin-top: 5px;">
+                                        <toggle-switch ng-model="client.NO_REMOTE_ASSIGNMENT_BY_USER"></toggle-switch>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</form>
+	
+</div>
+<div class="modal-footer">
+	<button class="btn" data-ng-click="cancel()">Cancel</button>
+	<button class="btn btn-warning" data-ng-click="save()">Save</button>
+</div>

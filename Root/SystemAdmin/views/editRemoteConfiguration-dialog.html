@@ -1,0 +1,108 @@
+<div class="modal-header">
+	<h3>{{ screenTitle }}</h3>
+</div>
+<div class="modal-body">
+    <!-- End Notifications -->
+	<form class="form-horizontal">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Label Identification</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row" style="margin-right: 10px;">
+                            <fieldset>
+                                <div class="form-group">
+                                    <label for="clientType" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 control-label">Label Type</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                                        <ui-select id="labelType" ng-model="$parent.selectedLabelType" ng-disabled="true">
+                                            <ui-select-match placeholder="">{{ $select.selected.label }}</ui-select-match>
+                                            <ui-select-choices repeat="item in $parent.labelTypes | filter: $select.search">
+                                                <div ng-bind-html="trustAsHtml(( item.label | highlight: $select.search ))"></div>
+                                            </ui-select-choices>
+                                        </ui-select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="clientDescription" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 control-label">Label Description</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                                        <input type="text" id="labelDescription" ng-model="label.DESCRIPTION" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="clientDescription" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 control-label">Selector Name</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                                        <input type="text" id="selectorName" ng-model="label.SELECTOR_NAME" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="clientDescription" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 control-label">External Alpha (8U characters)</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                                        <input type="text" id="external8U" ng-model="label.EXTERNAL_NAME_LONG" ng-disabled="true" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="clientDescription" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 control-label">External Alpha (4 characters)</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                                        <input type="text" id="external8U" ng-model="label.EXTERNAL_NAME_SHORT" ng-disabled="true" class="form-control">
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Options</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row" style="margin-right: 10px;">
+                            <fieldset>
+                                <div class="form-group">
+                                    <label for="RTSUseOnly4CharAlphas" class="col-md-7 col-lg-7 col-lg-7 control-label">Always Show Selector When Off-line</label>
+                                    <div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
+                                        <toggle-switch ng-model="label.SHOW_SELECTOR_WHEN_OFFLINE" labels="On,Off" stateValues="ON,OFF"></toggle-switch>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="RTSUseOnly4CharAlphas" class="col-md-7 col-lg-7 col-lg-7 control-label">Latch Disable Talk Selector</label>
+                                    <div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
+                                        <toggle-switch ng-model="label.LATCH_DISABLE" labels="On,Off" stateValues="ON,OFF"></toggle-switch>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Selector Assignment Restrictions</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row" style="margin-right: 10px;">
+                            <fieldset>
+                                <div class="form-group">
+                                    <label for="RTSUseOnly4CharAlphas" class="col-md-7 col-lg-7 col-lg-7 control-label">No Local Assignment by Administrator</label>
+                                    <div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
+                                        <toggle-switch ng-model="label.NO_LOCAL_ASSIGNMENT_BY_ADMINISTRATOR" labels="On,Off" stateValues="ON,OFF" ng-disabled="true"></toggle-switch>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="RTSUseOnly4CharAlphas" class="col-md-7 col-lg-7 col-lg-7 control-label">No Local Assignment by User</label>
+                                    <div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
+                                        <toggle-switch ng-model="label.NO_LOCAL_ASSIGNMENT_BY_USER" labels="On,Off" stateValues="ON,OFF" ng-disabled="true"></toggle-switch>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+	<button class="btn" data-ng-click="cancel()">Cancel</button>
+	<button class="btn btn-warning" data-ng-click="save()">Save</button>
+</div>

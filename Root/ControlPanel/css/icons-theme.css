@@ -1,0 +1,40 @@
+/* Unchanging */
+.selector-bg{
+	left:30%;
+	width:40%;
+}
+.selector-left,.selector-right{
+	width:30%;
+}
+.selector i{
+	position:relative;
+}
+.selector-bg{
+	height:55px;
+}
+.selector-left,.selector-right{
+	bottom:20px;
+	height:55px;
+}
+/* Icons */
+.selector i{
+	font-size: 1.5em;
+	top:17.5px;
+}
+
+/* borders */
+.selector:not(.offline){
+	border-left:0.5px solid rgba(170,170,170);
+	border-right:0.5px solid rgba(170,170,170);
+}
+
+/* Online */
+.selector:not(.offline):not(.talkActive) .talk i{
+	color: #A50422;
+}
+.selector:not(.offline):not(.listenActive) .listen i{
+	color: #04A51B;
+}
+.selector:not(.offline):not(.videoActive) .video i{
+	color:rgb(143, 93, 0);
+}

@@ -1,0 +1,105 @@
+/* page-level containers*/
+.container-container{
+	height:100vh;
+	background-color:#EFEFEF;
+}
+#container-upper{
+	height:0px;
+	overflow:hidden;
+}
+#container-middle{
+	height:100vh;
+}
+/* container for the destinations */
+#container{
+	display:flex;
+	flex-direction:row;
+	flex-wrap:wrap;
+	padding:15px;
+	background-color:#EFEFEF;
+}
+
+/* text that welcomes the user (narrow screen) */
+.welcome{
+	margin-top:60px;
+	text-align:center;
+	font-size:18px;
+}
+/* text that welcomes the user (wide screen) */
+@media only screen and (min-width:1000px){
+	.welcome{
+		margin-top:10px;
+	}
+}
+.welcome-span{
+	font-size:22px;
+}
+.welcome-development{
+	color:orange;
+}
+.welcome-error{
+	font-weight:bold;
+	color:red;
+}
+
+.dest{
+	margin:0 15px 15px 15px;
+	flex:1 1 350px;
+	cursor:pointer;
+	padding:20px;
+    border-radius: 15px;
+	border: 0.5px solid gray;
+	background-color:white;
+}
+.dest:hover{
+	box-shadow:inset 0px 0px 0px 2px black
+}
+.dest img{
+	max-width:100%;
+	max-height:100%;
+	border:0.5px solid gray;
+}
+.dest h1{
+	margin-top:0px;
+	text-align:center;
+	font-family:'CenturyGothic';
+	font-weight:bold;
+	letter-spacing:-0.8px;
+}
+
+#loader{
+	position:fixed;
+	top:40px;
+	width:80vw;
+	height:45px;
+	display:none;
+}
+
+/* HEADER */
+#logo-container{
+	position:absolute;
+	top:15px;
+	left:40px;
+	height:40px;
+}
+#logoImage{
+    height:100%;
+}
+
+/* destyling anchors */
+a.nostyle:link {
+    text-decoration: inherit;
+    color: inherit;
+    /* cursor: auto; */
+}
+
+a.nostyle:visited {
+    text-decoration: inherit;
+    color: inherit;
+    /* cursor: auto; */
+}
+/* Font */
+@font-face {
+	font-family: 'CenturyGothic';
+	src: url('/fonts/CenturyGothic.ttf');
+}

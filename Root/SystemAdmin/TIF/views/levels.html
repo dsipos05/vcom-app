@@ -1,0 +1,36 @@
+<!-- This view contains basic information about the currently selected phone line -->
+<div class="panel panel-primary">
+    <div class="panel-body">
+        <progress-bar
+            status="levelsLoaderStatus",
+            message="levelsLoaderMessage">
+        </progress-bar>
+        <div ng-hide="levelsLoaderStatus == 'pending'">
+            <div class="form-group row">
+                <label class="col-xs-5 control-label">Audio Input Gain:</label>
+                <div class="col-xs-3">
+                    <div style="border: 1px solid #000;text-align: center;">
+                        {{ getInputGainLabel() }}
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <button ng-click="decrementInputStep()" class="btn btn-default">-&nbsp;<i class="fa fa-volume-down"></i></button>
+                    <button ng-click="incrementInputStep()" class="btn btn-default">+&nbsp;<i class="fa fa-volume-up"></i></button>
+                </div>
+            </div>
+            <br>
+            <div class="form-group row">
+                <label class="col-xs-5 control-label">Audio Output Gain:</label>
+                <div class="col-xs-3">
+                    <div style="border: 1px solid #000;text-align: center;">
+                        {{ getOutputGainLabel() }}
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <button ng-click="decrementOutputStep()" class="btn btn-default">-&nbsp;<i class="fa fa-volume-down"></i></button>
+                    <button ng-click="incrementOutputStep()" class="btn btn-default">+&nbsp;<i class="fa fa-volume-up"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+<!-- This view contains basic information about the currently selected phone line -->
+<div class="panel panel-primary">
+    <div class="panel-body flex">
+        <div ng-hide="getSelectedPhone()">
+            Click on a phone to view its details.
+        </div>
+        <div class="tif-details" ng-show="getSelectedPhone()">
+            <label>Line #: &nbsp;</label>{{getSelectedPhone().LINE_ID}} <br>
+            <label>Name: &nbsp;</label>{{getSelectedPhone().LINE_NAME}} <br>
+            <label>Number: &nbsp;</label>{{getSelectedPhone().LINE_NUMBER}} <br>
+            <label>Line State: &nbsp;</label>{{getStateDescription()}} <br>
+            <label>Last changed state: &nbsp;</label> {{getSelectedPhone()?timeSinceLastChange(getSelectedPhone()):""}}
+        </div>
+        <largevumeter ng-show="enableVuMeter"
+            rxa="rxa"
+            rxp="rxp"
+            txa="txa"
+            txp="txp">
+        </largevumeter>
+
+        <input ng-show="isDebug()" type="text" ng-model="rxa2" placeholder="Simulate RX average">
+        <input ng-show="isDebug()" type="text" ng-model="rxp2" placeholder="Simulate RX peak">
+    </div>
+</div>

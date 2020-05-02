@@ -1,0 +1,69 @@
+.geoMap{
+    height:100%
+}
+
+.latlngPopup{
+    float:right;
+    font-family:monospace;
+}
+
+.clusterTooltipActive{
+    background-color:rgba(255, 0, 0, 0.418);
+    width:100%;
+}
+
+.clusterTooltipInactive{
+    /* background-color:blue; */
+    background-color:rgba(255,255,255,0.418);
+    width:100%
+}
+.clusterTooltipOffline{
+    color:rgb(128, 128, 128);
+    font-style: italic;
+}
+.clusterTooltipIndicator{
+    background-color:green;
+    border:0.5px solid gray;
+    height: 8px;
+    width:8px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right:5px;
+}
+.clusterTooltipOffline>.clusterTooltipIndicator{
+    background-color:#FFFFFF00;
+}
+.soloTooltip.offline{
+    color:rgb(128, 128, 128);
+    font-style: italic;
+}
+
+.leaflet-tooltip{
+    font-size:12px;
+}
+.marker-cluster,.awesome-marker-icon-red{
+    left:0px;
+    top:0px;
+    border-radius:40px;
+}
+.marker-cluster span{
+    line-height:30px;
+}
+.leaflet-control-zoom{
+    transform: scale(1);
+    top:0px;
+    left:0px;
+}
+.marker-cluster>div{
+    font-size:14px;
+    width: 30px;
+    height: 30px;
+    border-radius:15px;
+    /* font-size:initial; */
+}
+
+/* Enable marker color of 'white' for awesome-markers library.
+Not sure why it isn't included in leaflet-awesome-markers.css but it isn't*/
+.awesome-marker-icon-white{
+    background-position: -576px 0;
+}

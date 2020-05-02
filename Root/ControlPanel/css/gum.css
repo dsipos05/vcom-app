@@ -1,0 +1,183 @@
+.gum{
+    /* background-color:red; */
+    position:relative; /* gives position absolute elements like record button the ability to anchor from this */
+    height:100%;
+    width:100%;
+    z-index:1;
+}
+.gum video{
+    position:absolute;
+    left:0;
+    top:0;
+    z-index:-1;
+}
+.gum video.stretchToFit{
+    object-fit: fill;
+    width: 100%;
+    height:100%;
+}
+.gum video:not(.stretchToFit){
+    width:100%;
+    max-height:100%;
+}
+.gum-header{
+    position:absolute;
+    width:100%;
+    text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+    color:white;
+    margin-left:10px;
+    position:absolute;
+    top:0;
+    left:0;
+}
+.gum-controls{
+    position:absolute;
+    text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+    color:white;
+    margin-left:10px;
+    top:0;
+    left:0;
+}
+
+.gum-option-button{
+    text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+    color:white;
+    cursor:pointer;
+    font-size:55px;
+}
+.gum-option-button:not(:hover){
+    opacity:0.5;
+}
+.gum-option-button:hover{
+    opacity:0.9;
+}
+
+
+.gum-controls>div{
+    display:inline-block;
+    position:relative;
+    cursor:pointer;
+}
+.gum-controls div:not(:hover){
+    opacity:0.5;
+}
+.gum-controls div:hover{
+    opacity:0.9;
+}
+.gum-controls select{
+    width:100px;
+    display:inline-block;
+}
+.gum-camera-switch{
+    height:64px;
+}
+.gum-camera-switch span{
+    position:absolute;
+}
+.gum-camera-switch .fa-video-camera{
+    top: 25px;
+    left:20px;
+    font-size:30px;
+}
+.gum-footer{
+    background-color:lightgray;
+    position:absolute;
+    bottom:0;
+    font-size:30px;
+    opacity:0.8;
+}
+.gum-status{
+    height:100%;
+}
+
+.gum-controls{
+    font-size:55px;
+    margin-top:-10px;
+}
+.gum-camera-switch{
+    height:45px;
+}
+.gum-camera-switch .fa-video-camera{
+    top:16px;
+    left:13px;
+    font-size:20px;
+}
+
+.gum-record-button{
+    position:absolute;
+    right:20px;
+    top:0;
+    z-index:11;
+}
+
+
+/* base */
+.tricircle{
+    border-radius: 50%;
+    position:relative;
+    cursor:pointer;
+    width:51px;
+    height:58px;
+    font-size:60px;
+    --my-color: red;
+}
+.tricircle.yellow{
+    --my-color:orange;
+}
+.tricircle.green{
+    --my-color:green;
+}
+.tricircle.blue{
+    --my-color:blue;
+}
+.tricircle.orange{
+    --my-color:rgb(231, 127, 0);
+}
+
+.tricircle .out{
+    left:0;
+    position:absolute;
+    color:black;
+    z-index:13;
+    text-shadow: 1px 0 0 #88888888, 0 -1px 0 #88888888, 0 1px 0 #88888888, -1px 0 0 #88888888;
+}
+
+.tricircle .in{
+    position:absolute;
+    left:0;
+    color:var(--my-color);
+    z-index:12;
+}
+.tricircle .standBy{
+    display:none;
+}
+
+/* disabled */
+.tricircle[disabled]{
+    cursor:not-allowed;
+}
+/* changing */
+.tricircle-changing .standBy{
+    display:block;
+    position:absolute;
+    color:white;
+    left:8px;
+    top:13px;
+    font-size:34px;
+    z-index:13;
+}
+/* off */
+.tricircle-off:not(:hover) .in, .tricircle[disabled] .in{
+    opacity:0.5;
+}
+.tricircle-off:hover:not([disabled]) .in{
+    opacity: 0.7;
+}
+/* on */
+.tricircle-on{
+    box-shadow: 0 0 25px 15px var(--my-color),
+                 0 0 5px 5px var(--my-color) inset;
+}
+.tricircle-on .in{
+    opacity:0.9;
+}

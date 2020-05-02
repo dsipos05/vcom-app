@@ -1,0 +1,144 @@
+
+<!-- <iframe id="iframe" style="width:100%;height:100%"></iframe> -->
+<style>
+    #container{
+        width:100%;
+        height:100%;
+    }
+    #container iframe{
+        width:100%;
+        height:100%;
+        border-width:0;
+    }
+</style>
+<head>
+    <link rel="stylesheet" href="../flow/skin/skin.css">
+</head>
+<div id="container"></div>
+
+
+<script src="../js/jquery.min.js"></script>
+<script src="../goldenlayout/goldenlayout.js"></script>
+<script src="../../js/Sorting.js"></script>
+<script src="../../js/Util.js"></script>
+<script src="../flow/hls.min.js"></script>
+<script src="../flow/flowplayer.js"></script>
+<script>
+
+    const playYoutubeVideo = ($container,id) => {
+        console.log("playing youtube video with id",id);
+        const srcBeginning = "https://www.youtube.com/embed/";
+        const srcEnding = "?autoplay=1&amp;showinfo=0&amp;modestbranding=1&amp;fs=1&amp;cc_load_policy=0&amp;iv_load_policy=3&amp;rel=0&amp;showInfo=0&amp;autohide=0&amp;enablejsapi=1&amp;widgetid=1";
+        let src = srcBeginning + id + srcEnding;
+        playAsIframe($container,src);
+    }
+    
+    const playAsIframe = ($container,uri) => {
+        $container.empty().append(
+            $("<iframe>").attr("src",uri)
+        )
+    }
+
+    const playInFlow = ($container,uri) => {
+        let id = "flowPlayer"+Math.floor(Math.random()*100000);
+        $container.empty().append($("<div>").attr("id",id))
+
+        /* RTMP support */
+        if(Util.startsWith(uri,"rtmp")){
+
+            let split = uri.indexOf("mp4");
+            let rtmpPart = uri.slice(0,split-1);
+            let srcPart = uri.slice(split);
+
+            console.log("rtmp part",rtmpPart,"srcPart",srcPart);
+
+            flowplayer("#"+id, {
+                // aspectRatio: "12:5",
+                //splash: true,
+                autoplay: true,
+                background: true,
+                rtmp: rtmpPart,
+                qualities: ["160p", "260p", "530p", "800p"],
+                defaultQuality: "260p",
+                //loop: true,
+                playlist: [{
+                sources: [
+                    { type: "video/flash", src: srcPart }
+                ]}]
+            }).on("load",function(e,api){
+                console.log("flowplayer loaded");
+                api.play();
+            })
+        }
+        /* HLS support */
+        else if(Util.endsWith(uri,".m3u8")){
+            // let colonIndex = uri.indexOf(":");
+            // uri = uri.slice(colonIndex+1);
+            console.log("hls modified uri",uri);
+            flowplayer("#"+id,{
+                playlist: [{
+                sources: [
+                    { type: "application/x-mpegurl",
+                      src:  uri }
+                  ]
+                }]
+            })
+        }
+        else{
+            alert("how do I play? "+uri);
+        }
+        
+    }
+
+    const playURI = ($container,uri) => {
+        console.log("playing uri",uri);
+        if(Util.startsWith(uri,"rtmp") ||
+            Util.endsWith(uri,".m3u8")){
+                playInFlow($container,uri);
+            }
+        else if(Util.startsWith(uri,"http")){
+            if(Util.startsWith(uri,"https://www.youtube.com/watch?v=")){
+                let videoID = uri.slice(32);
+                playYoutubeVideo($container,videoID);
+
+            }
+            else if(Util.startsWith(uri,"https://youtu.be/")){
+                let videoID = uri.slice(17);
+                playYoutubeVideo($container,videoID);
+            }
+            else{
+                playAsIframe($container,uri);
+            }
+        }
+        else{
+            // RTSP
+            alert("can't play RTSP " + uri);
+        }
+        
+    }
+    
+    const getParams = function (url) {
+        var params = {};
+        var parser = document.createElement('a');
+        parser.href = url;
+        var query = parser.search.substring(1);
+        var vars = query.split('&');
+        for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split('=');
+            params[pair[0]] = decodeURIComponent(pair[1]);
+        }
+        return params;
+    };
+
+
+    const init = () => {
+        let params = getParams(window.location.href);
+
+        playURI($("#container"),params.videoURI);
+
+        console.log("href",window.location.href);
+        console.log("params",params);
+    }
+    
+    init();
+</script>

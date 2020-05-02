@@ -1,0 +1,155 @@
+/* Helps header text to be visible */
+.ag-header-cell-text {
+    /* font-size: 11px; */
+    font-weight: bold;
+}
+.ag-default-header .ag-cell-label-container .ag-header-cell-label{
+    overflow:visible; /* PART 1: allow text to bleed over to the right so we can see it */
+    cursor: pointer; /* Sorting is done by clicking on this */
+}
+.ag-default-header .ag-cell-label-container .ag-header-cell-label .ag-header-cell-text{
+    overflow: visible; /* PART 2: allow text to bleed over to the right so we can see it */
+    white-space: normal; /* allow text to wrap to next line */
+    line-height: normal; /* otherwise the vertical space between two lines of text is too much */
+    padding-top: 12px; /* otherwise too close to top (the default line-height of 23 kept it from being too close) */
+}
+
+/* Helps cell text to be visible */
+.ag-default-cell{
+    font-size:100%
+}
+
+/* Borders */
+.selector-choice-container{
+    border: 1px lightgray solid;
+    background-color:#f5f5f5;
+}
+.ag-grid{
+    border: 1px lightgray solid;
+}
+
+/* Cursor */
+.ag-cell {
+    cursor: pointer;
+}
+
+/* Grid Heights */
+/* vh units represent percentage of the screen's height, so 100vh is the height of the whole screen */
+.ag-grid{
+    /* default height for ag-grids */
+    height:90vh;
+}
+#rightGrid,#leftGrid{
+    /* applies to selector assignments and search-and-replace grid pairs */
+    height:70vh;
+}
+/* client configuration grid is set by javascript to fit within the visible window.
+So it does not have a height setting here */
+#templatesGrid{
+    height:60vh;
+}
+#clientTemplatesGrid{
+    height:60vh;
+}
+#debugLogGrid{
+    height:70vh;
+}
+#selectorChooserGrid{
+    height:55vh;
+}
+/* Don't show a horizontal scrollbar for this element that contains the grid.
+This isn't a useful horizontal scrollbar that pops up when we have too many columns
+It is like the grid is one pixel too wide for its container so a scrollbar takes up valuable
+vertical space to allow us to jitter the grid to the left/right by 1 pixel. */
+.ag-bl-full-height{
+    overflow:hidden !important; 
+}
+.ag-grid .ag-row .ag-cell{
+    line-height:20px; /* it's good for this line-height to match the ag-grid's gridOptions.rowHeight property, which defaults to 20px */
+    padding-right:3px;
+    padding-left:3px;
+}
+.ag-grid .ag-header-row .ag-header-cell{
+    padding-left:3px;
+    padding-right:3px;
+}
+
+/* Client Configuration List */
+#clientConfigurationGrid{
+    color:black;
+}
+#clientConfigurationGrid .ag-cell{
+    text-overflow:default;
+}
+
+/* client template grid */
+.ag-theme-fresh .ag-row.highlighted{
+    background-color:rgb(126, 185, 190)
+
+}
+
+
+.searchBox{
+    width:7.5em;
+}
+
+
+/* Group Membership grids */
+#groupMembershipGridsContainer{
+    display:flex
+}
+#groupMembershipGridsContainer #leftGrid{
+    width:45%;
+}
+#groupMembershipGridsContainer #buttons{
+    width:25%;
+    /* text-align:center; */
+    padding-left:5%
+}
+#groupMembershipGridsContainer #rightGrid{
+    width:30%
+}
+
+/* Used to temporarily disable scrolling for Activity Log during updates. Otherwise,
+scrolling adds many events to set scroll (distance from top) to a particular value.
+Since we are adding content to the top, we want to maintain scroll distance from the
+BOTTOM, not the top, and these scroll events cause huge unwanted jumps. So we disable
+scrolling for a short period to allow us to add content to the bottom with no jump */
+.stopScrolling{
+    overflow-y:hidden !important;
+}
+
+/* Space below grid so that grid is not right up against the bottom of the page.
+For grids with enableAutoVerticalResize = true, this should be a little smaller than the
+roomToLeaveAtBottom variable in the shrinkGrowFitHeight function in Grid.js */
+.ag-grid-fullscreen{
+    margin-bottom:28px; 
+}
+
+/* Intended to prevent unnecessary flashing/jittering caused by activity log updates.
+When an update comes in and vertical scroll is disabled, then more horizontal room is available
+which might remove the need for a horizontal scrollbar, so more vertical room is available and
+content moves. So instead we will just display the horizontal scrollbar whether or not it is needed */
+#activityLogGrid .ag-body-viewport{
+    overflow-x:scroll;
+}
+
+
+
+/* Client statistics */
+/* 
+.ag-theme-fresh .ag-row-odd.clientStatistics-vcp{background-color:orange;}
+.ag-theme-fresh .ag-row-even.clientStatistics-vcp{background-color:rgba(255, 166, 0, 0.664)}
+.ag-theme-fresh .ag-row-odd.clientStatistics-vdi{background-color:palegoldenrod;}
+.ag-theme-fresh .ag-row-even.clientStatistics-vdi{background-color:rgba(238, 232, 170, 0.589);}
+.ag-theme-fresh .ag-row-odd.clientStatistics-sip{background-color:aqua;}
+.ag-theme-fresh .ag-row-even.clientStatistics-sip{background-color:rgba(0, 255, 255, 0.63);}
+.ag-theme-fresh .ag-row-odd.clientStatistics-rtsp{background-color:springgreen;}
+.ag-theme-fresh .ag-row-even.clientStatistics-rtsp{background-color:rgba(0, 255, 128, 0.664);}
+*/
+
+
+/* For disabled clients */
+.ag-row.disabled{
+    opacity:0.5;
+}

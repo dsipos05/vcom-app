@@ -1,0 +1,577 @@
+<div class="container">
+    <!-- Page Controls -->
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-left: -15px;">
+            <button class="btn btn-primary" ng-click="save()" ng-disabled="userUnauthorizedToChangeSettings"><span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;Save</button>&nbsp;
+        </div>
+    </div>
+    <div class="row">&nbsp;</div>
+    <!-- End Page Controls -->
+    <form class="form-horizontal">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="row">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Master System Administration Login</h3>
+                    </div>
+                    <div class="panel-body">
+                        <fieldset>
+                            <div class="form-group">
+                                <label for="loginName" class="col-md-5 col-lg-5 control-label">Login Name:</label>
+                                <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                                    <input type="text" class="form-control" id="loginName" placeholder="Login Name" ng-model="systemSettings.SYSTEM_ADMINISTRATOR_LOGIN_NAME" ng-disabled="disallowChanges">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="loginPassword" class="col-md-5 col-lg-5 col-lg-5 control-label">Login Password:</label>
+                                <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                                    <input type="{{ (showPassword) ? 'text' : 'password' }}" class="form-control" id="loginPassword" placeholder="Login Password" ng-model="systemSettings.SYSTEM_ADMINISTRATOR_LOGIN_PASSWORD" ng-disabled="disallowChanges">
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">General Settings</h3>
+                    </div>
+                    <div class="panel-body">
+                        <fieldset>
+                            <div class="form-group">
+                                <label for="loginName" class="col-md-4 col-lg-4 control-label">Audible Battery Status Message Levels:</label>
+                                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8" style="padding-top: 6px;">
+                                    <label for="5percent">5&#37;:&nbsp;</label><input type="checkbox" ng-model="systemSettings.BATTERY_LEVEL_MESSAGE_5_PERCENT" ng-true-value="'ON'" ng-false-value="'OFF'" id="5percent">&nbsp;&nbsp;
+                                    <label for="10percent">10&#37;:&nbsp;</label><input type="checkbox" ng-model="systemSettings.BATTERY_LEVEL_MESSAGE_10_PERCENT" ng-true-value="'ON'" ng-false-value="'OFF'" id="10percent">&nbsp;&nbsp;
+                                    <label for="15percent">15&#37;:&nbsp;</label><input type="checkbox" ng-model="systemSettings.BATTERY_LEVEL_MESSAGE_15_PERCENT" ng-true-value="'ON'" ng-false-value="'OFF'" id="15percent">&nbsp;&nbsp;
+                                    <label for="20percent">20&#37;:&nbsp;</label><input type="checkbox" ng-model="systemSettings.BATTERY_LEVEL_MESSAGE_20_PERCENT" ng-true-value="'ON'" ng-false-value="'OFF'" id="20percent">&nbsp;&nbsp;
+                                    <label for="25percent">25&#37;:&nbsp;</label><input type="checkbox" ng-model="systemSettings.BATTERY_LEVEL_MESSAGE_25_PERCENT" ng-true-value="'ON'" ng-false-value="'OFF'" id="25percent">&nbsp;&nbsp;
+                                    <label for="30percent">30&#37;:&nbsp;</label><input type="checkbox" ng-model="systemSettings.BATTERY_LEVEL_MESSAGE_30_PERCENT" ng-true-value="'ON'" ng-false-value="'OFF'" id="30percent">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="loginPassword" class="col-md-4 col-lg-4 control-label">Allow Assignment of Selection to Self:</label>
+                                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                                    <toggle-switch ng-model="systemSettings.ALLOW_ASSIGNMENT_OF_SELECTOR_FOR_SELF" labels="On,Off" stateValues="ON,OFF"></toggle-switch>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+            <div class="row" ng-show="supportsFailover">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Failover Settings</h3>
+                    </div>
+                    <div class="panel-body">
+                        <fieldset>
+                            <div class="form-group">
+                                <label for="failoverActivationDelay" class="col-md-3 col-lg-3 control-label">Failover Activation Delay:</label>
+                                <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" style="margin-left: -15px;">
+                                    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                                        <input type="text" class="form-control" id="failoverActivationDelay" placeholder="" ng-model="systemSettings.FAILOVER_ACTIVATION_DELAY" ng-disabled="disallowChanges">
+                                    </div>
+                                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                                        <span >(seconds)</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="automaticFailback" class="col-md-3 col-lg-3 control-label">Automatic Failback:</label>
+                                <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" style="margin-left: -15px;">
+                                    <div class="col-xs-12 col-sm-12 colmd-12 col-lg-12">
+                                        <ui-select ng-model="$parent.selectedAutoFailback" ng-disabled="disallowChanges">
+                                            <ui-select-match placeholder="">{{$select.selected.label}}</ui-select-match>
+                                            <ui-select-choices repeat="option in $parent.failbackOptions | filter: $select.search">
+                                                <div ng-bind-html="trustAsHtml(( option.label | highlight: $select.search ))"></div>
+                                            </ui-select-choices>
+                                        </ui-select>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                        <input type="text" class="form-control" id="automaticFailback2" placeholder="" ng-model="systemSettings.FAILOVER_AUTOMATIC_FAILBACK_TIME" ng-disabled="disallowChanges">
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                        <span>(hh:mm)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+            <div class="row" ng-show="hasTrunking">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Trunking Network Settings</h3>
+                    </div>
+                    <div class="panel-body">
+                        <fieldset>
+                            <div class="form-group">
+                                <label for="RTSServerIP" class="col-md-5 col-lg-5 col-lg-5 control-label">Local Network Interface</label>
+                                <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                                    <ui-select ng-model="$parent.systemSettings.IP_ADDRESS_OF_INTERFACE_FOR_TELEX_TRUNK_MASTER" theme="bootstrap">
+                                        <ui-select-match allow-clear="true">{{ $select.selected }}</ui-select-match>
+                                        <ui-select-choices repeat="address in validIpAddresses " >
+                                            <div ng-bind-html="trustAsHtml(( address | highlight: $select.search ))"></div>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="RTSTrunkMasterMainIP" class="col-md-5 col-lg-5 col-lg-5 control-label">RTS Trunk Master Main / Backup IP Address</label>
+                                <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7" style="margin-left: -15px;">
+                                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                        <input type="text" class="form-control" id="telexServerIP" placeholder="" ng-model="systemSettings.IP_ADDRESS_FOR_TELEX_TRUNK_MASTER" ng-disabled="disallowChanges">
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                        <input type="text" class="form-control" id="telexServerIP" placeholder="" ng-model="systemSettings.IP_ADDRESS_FOR_TELEX_TRUNK_MASTER_BACKUP" ng-disabled="disallowChanges">    
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="RTSTrunkMasterMainPort" class="col-md-5 col-lg-5 col-lg-5 control-label" >RTS Trunk Master Main / Backup IP Port</label>
+                                <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7" style="margin-left: -15px;">
+                                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                        <input type="number" class="form-control" id="telexServerIP" placeholder="" ng-model="systemSettings.IP_PORT_FOR_TELEX_TRUNK_MASTER_DATA" ng-disabled="disallowChanges">
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                        <input type="number" class="form-control" id="telexServerIP" placeholder="" ng-model="systemSettings.IP_PORT_FOR_TELEX_TRUNK_MASTER_BACKUP" ng-disabled="disallowChanges">    
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="RTSUseOnly4CharAlphas" class="col-md-5 col-lg-5 col-lg-5 control-label">Use only 4 character alphas</label>
+                                <div class="col-xs-12 col-sm-7 col-md-7 col-lg-7">
+                                    <toggle-switch ng-model="useOnly4CharAlphas" labels="On,Off" stateValues="ON,OFF"></toggle-switch>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">PBX Settings</h3>
+                    </div>
+                    <div class="panel-body">
+                        <fieldset>
+                            <div class="form-group">
+                                <label for="PBXPrimaryHostName" class="col-md-5 col-lg-5 control-label">PBX Primary Server Host Name:</label>
+                                <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                                    <input type="text" class="form-control" id="PBXPrimaryHostName" placeholder="PBX Primary Server Host Name" ng-model="systemSettings.PBX_PRIMARY_HOST_NAME" ng-disabled="disallowChanges">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="PBXSecondaryHostName" class="col-md-5 col-lg-5 col-lg-5 control-label">PBX Secondary Server Host Name:</label>
+                                <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                                    <input type="text" class="form-control" id="PBXSecondaryHostName" placeholder="PBX Secondary Server Host Name" ng-model="systemSettings.PBX_SECONDARY_HOST_NAME" ng-disabled="disallowChanges">
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+            <div class="row" ng-show="isTIF">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Telephone Interface Network Settings</h3>
+                    </div>
+                    <div class="panel-body">
+                        <fieldset>
+                            <div class="form-group">
+                                <label for="telexServerIP" class="col-md-5 col-lg-5 col-lg-5 control-label">Local Network Interface</label>
+                                <div class="col-xs-12 col-sm-7 col-md-7 col-lg-7">
+                                    <ui-select ng-model="$parent.systemSettings.IP_ADDRESS_OF_INTERFACE_FOR_TELEX_TIF_MASTER" theme="bootstrap">
+                                        <ui-select-match allow-clear="true">{{ $select.selected }}</ui-select-match>
+                                        <ui-select-choices repeat="address in validIpAddresses " >
+                                            <div ng-bind-html="trustAsHtml(( address | highlight: $select.search ))"></div>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="telexMastControllerMainIP" class="col-md-5 col-lg-5 col-lg-5 control-label">RTS Master Controller Main / Backup IP</label>
+                                <div class="col-xs-12 col-sm-7 col-md-7 col-lg-7" style="margin-left: -15px;">
+                                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                        <input type="text" class="form-control" id="telexMastControllerMainIP" placeholder="" ng-model="systemSettings.IP_ADDRESS_FOR_TELEX_TIF_MASTER" ng-disabled="disallowChanges">
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                        <input type="text" class="form-control" id="telexMastControllerBackupIP" placeholder="" ng-model="systemSettings.IP_ADDRESS_FOR_TELEX_TIF_MASTER_BACKUP" ng-disabled="disallowChanges">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="telexMastControllerMainPort" class="col-md-5 col-lg-5 col-lg-5 control-label">RTS Master Controller Main  / Backup Port</label>
+                                <div class="col-xs-12 col-sm-7 col-md-7 col-lg-7" style="margin-left: -15px;">
+                                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                        <input type="number" class="form-control" id="telexMastControllerMainPort" placeholder="" ng-model="systemSettings.IP_PORT_FOR_TELEX_TIF_MASTER_DATA" ng-disabled="disallowChanges">
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                        <input type="number" class="form-control" id="telexMastControllerBackupPort" placeholder="" ng-model="systemSettings.IP_PORT_FOR_TELEX_TIF_MASTER_BACKUP" ng-disabled="disallowChanges">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="RTSUseOnly4CharAlphas" class="col-md-5 col-lg-5 col-lg-5 control-label">Use only 4 character alphas</label>
+                                <div class="col-xs-12 col-sm-7 col-md-7 col-lg-7">
+                                    <toggle-switch ng-model="useOnly4CharAlphas" labels="On,Off" stateValues="ON,OFF"></toggle-switch>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+            <!-- These geo fields are defunct
+                
+                <div class="row" ng-show="supportsGeo">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Geo Mapping Server Network Settings</h3>
+                    </div>
+                    <div class="panel-body">
+                        <fieldset>
+                            <div class="form-group">
+                                <label for="geoMappingServerIP" class="col-md-7 col-lg-7 col-lg-7 control-label">Geo Mapping Server IP Address</label>
+                                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+                                    <input type="text" class="form-control" id="geoMappingServerIP" placeholder="" ng-model="systemSettings.IP_ADDRESS_FOR_GEO_MAPPING_SERVER" ng-disabled="disallowChanges">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="geoMappingServerPort" class="col-md-7 col-lg-7 col-lg-7 control-label">Geo Mapping Server IP Port</label>
+                                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5" style="margin-left: -15px;">
+                                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                                        <input type="number" class="form-control" id="geoMappingServerPort" placeholder="" ng-model="systemSettings.IP_PORT_FOR_GEO_MAPPING_SERVER" ng-disabled="disallowChanges">
+                                    </div>
+                                    <div class="hidden-xs hidden-sm col-md-5 col-lg-5"></div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div> -->
+            <div class="row">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Voice Activity Indication</h3>
+                    </div>
+                    <div class="panel-body">
+                        <fieldset>
+                            <div class="form-group">
+                                <label for="geoMappingServerIP" class="col-md-5 col-lg-5 control-label">Background</label>
+                                <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7" style="margin-left: -15px;">
+                                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                                        <input 
+                                            minicolors="minicolorsCustomSettings" 
+                                            id="background_color" 
+                                            class="form-control" 
+                                            type="text" 
+                                            ng-model="VOICE_ACTIVITY_INDICATION.BACKGROUND_COLOR" 
+                                            ng-disabled="disallowChanges">
+                                    </div>
+                                    <div class="hidden-xs hidden-sm col-md-5 col-lg-5" >
+                                        <input type="text" class="form-control" style="background-color: {{VOICE_ACTIVITY_INDICATION.BACKGROUND_COLOR}};color: {{VOICE_ACTIVITY_INDICATION.TEXT_COLOR}}" value="Sample">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="geoMappingServerPort" class="col-md-5 col-lg-5 control-label">Text</label>
+                                <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7" style="margin-left: -15px;">
+                                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                                        <input
+                                            minicolors="minicolorsCustomSettings"
+                                            id="text_color"
+                                            class="form-control"
+                                            type="text"
+                                            ng-model="VOICE_ACTIVITY_INDICATION.TEXT_COLOR"
+                                            ng-disabled="disallowChanges">
+                                    </div>
+                                    <div class="hidden-xs hidden-sm col-md-5 col-lg-5"></div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+                
+            </div>
+            <!-- Audio Settings-->
+            <div class="row">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Audio Settings</h3>
+                    </div>
+                    <div class="panel-body">
+                        <fieldset>
+                            <div class="form-group">
+                                <label for="audoMixSampleRate" class="col-md-5 col-lg-5 control-label">Audio Mix Sample Rate</label>
+                                <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                                    <ui-select ng-model="$parent.selectedSampleRate" theme="bootstrap" ng-disabled="disallowChanges">
+                                        <ui-select-match placeholder="Sample Rate...">{{ $select.selected.label }}</ui-select-match>
+                                        <ui-select-choices repeat="sampleRate in audioMixSampleRateOptions | propsFilter: { label: $select.search } " >
+                                            <div ng-bind-html="trustAsHtml(( sampleRate.label | highlight: $select.search ))"></div>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="audioOutputLevelGain" class="col-md-5 col-lg-5 control-label">Audio Output Level Gain (Post Mix)</label>
+                                <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                                    <slider
+                                        id="audioOutputLevelGain"
+                                        ng-model="systemSettings.AUDIO_OUTPUT_LEVEL_GAIN_STEP"
+                                        floor="0"
+                                        ceiling="18"
+                                        step="6"
+                                        precision="1" style="width: 45px;" ng-disabled="disallowChanges">
+                                    </slider>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="hidden-xs hidden-sm col-md-1 col-lg-1">&nbsp;</div>
+        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+            <div class="row">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Primary Server Network Settings</h3>
+                    </div>
+                    <div class="panel-body">
+                        <fieldset>
+                            <div class="form-group">
+                                <label for="primaryServerServerIP" class="col-md-7 col-lg-7 col-lg-7 control-label">Server IP Address / Local Network Interface</label>
+                                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+                                    <ui-select ng-if="!isFailedOver()" ng-model="$parent.systemSettings.IP_ADDRESS_FOR_PRIMARY_SERVER" theme="bootstrap">
+                                        <ui-select-match allow-clear="true">{{ $select.selected }}</ui-select-match>
+                                        <ui-select-choices repeat="address in validIpAddresses " >
+                                            <div ng-bind-html="trustAsHtml(( address | highlight: $select.search ))"></div>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                    <!-- If we're failed over, show an editable field instead of a dropdown -->
+                                    <div ng-if="isFailedOver()">
+                                            <input type="text" class="form-control" ng-model="$parent.systemSettings.IP_ADDRESS_FOR_PRIMARY_SERVER" ng-disabled="disallowChanges">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="primaryServerNATIP" class="col-md-7 col-lg-7 col-lg-7 control-label">Server Public IP Address</label>
+                                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+                                    <input type="text" class="form-control" id="primaryServerNATIP" placeholder="" ng-model="systemSettings.IP_ADDRESS_OF_NAT_FOR_PRIMARY_SERVER" ng-disabled="disallowChanges">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="primaryServerPortClientData" class="col-md-7 col-lg-7 col-lg-7 control-label">Server IP Port for Client Data</label>
+                                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5" style="margin-left: -15px;">
+                                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                                        <input type="number" class="form-control" id="primaryServerPortClientData" placeholder="" ng-model="systemSettings.IP_PORT_FOR_PRIMARY_SERVER_DATA" ng-disabled="disallowChanges" positive-number>
+                                    </div>
+                                    <div class="hidden-xs hidden-sm col-md-4 col-lg-4"></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="primaryServerPortClientAudio" class="col-md-7 col-lg-7 col-lg-7 control-label">Server IP Port for Client Audio</label>
+                                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5" style="margin-left: -15px;">
+                                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                                        <input type="number" class="form-control" id="primaryServerPortClientAudio" placeholder="" ng-model="systemSettings.IP_PORT_FOR_PRIMARY_SERVER_AUDIO" ng-disabled="disallowChanges" positive-number>
+                                    </div>
+                                    <div class="hidden-xs hidden-sm col-md-4 col-lg-4"></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="primaryServerPortSIPData" class="col-md-7 col-lg-7 col-lg-7 control-label">Server IP Port for SIP Data</label>
+                                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5" style="margin-left: -15px;">
+                                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                                        <input type="number" class="form-control" id="primaryServerPortSIPData" placeholder="" ng-model="systemSettings.IP_PORT_FOR_PRIMARY_SERVER_SIP" ng-disabled="disallowChanges" positive-number>
+                                    </div>
+                                    <div class="hidden-xs hidden-sm col-md-4 col-lg-4"></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="primaryServerPortSIPRTPAudioBase" class="col-md-7 col-lg-7 col-lg-7 control-label">Server IP Port for SIP RTP Audio Base</label>
+                                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5" style="margin-left: -15px;">
+                                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                                        <input type="number" class="form-control" id="primaryServerPortSIPRTPAudioBase" placeholder="" ng-model="systemSettings.IP_PORT_FOR_RTP_AUDIO_BASE" ng-disabled="disallowChanges" positive-number>
+                                    </div>
+                                    <div class="hidden-xs hidden-sm col-md-4 col-lg-4"></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-12 col-md-7 control-label">Web Server HTTP Port</label>
+                                <div class="col-xs-12 col-md-5" style="margin-left: -15px;">
+                                    <div class="col-xs-12 col-md-8">
+                                        <input type="number" class="form-control" ng-model="systemSettings.IP_PORT_FOR_WEB_SERVER_HTTP" ng-disabled="disallowChanges" positive-number>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                    <label class="col-xs-12 col-md-7 control-label">Web Server HTTPS Port</label>
+                                    <div class="col-xs-12 col-md-5" style="margin-left: -15px;">
+                                        <div class="col-xs-12 col-md-8">
+                                            <input type="number" class="form-control" ng-model="systemSettings.IP_PORT_FOR_WEB_SERVER_HTTPS" ng-disabled="disallowChanges" positive-number>
+                                        </div>
+                                    </div>
+                                </div>
+                            <div class="form-group">
+                                <label for="primaryServerSIPDomainName" class="col-md-7 col-lg-7 col-lg-7 control-label">Server SIP Domain Name</label>
+                                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+                                    <input type="text" class="form-control" id="primaryServerSIPDomainName" placeholder="" ng-model="systemSettings.SIP_DOMAIN_NAME" ng-disabled="disallowChanges">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="primaryServerDisableDomainAuthentication" class="col-md-7 col-lg-7 col-lg-7 control-label">Disable Domain Authentication</label>
+                                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+                                    <toggle-switch ng-model="disableDomainAuthentication" labels="On,Off" stateValues="ON,OFF"></toggle-switch>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+            <div class="row" ng-show="supportsFailover">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Secondary Server [Failover] Network Settings</h3>
+                    </div>
+                    <div class="panel-body">
+                        <fieldset>
+                            <div class="form-group">
+                                <label for="secondaryServerLocalNetworkInterface" class="col-md-7 col-lg-7 col-lg-7 control-label">Local Network Interface</label>
+                                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+                                    <ui-select id="secondaryServerLocalNetworkInterface" ng-model="$parent.systemSettings.IP_ADDRESS_OF_INTERFACE_FOR_FAILOVER" theme="bootstrap">
+                                        <ui-select-match allow-clear="true">{{ $select.selected }}</ui-select-match>
+                                        <ui-select-choices repeat="address in validIpAddresses " >
+                                            <div ng-bind-html="trustAsHtml(( address | highlight: $select.search ))"></div>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="secondaryServerServerIP" class="col-md-7 col-lg-7 col-lg-7 control-label">Server IP Address</label>
+                                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+                                    <input type="text" class="form-control" id="secondaryServerServerIP" ng-model="systemSettings.IP_ADDRESS_FOR_SECONDARY_SERVER" ng-disabled="disallowChanges">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="secondaryServerNATIP" class="col-md-7 col-lg-7 col-lg-7 control-label">Server Public IP Address</label>
+                                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+                                    <input type="text" class="form-control" id="secondaryServerNATIP" placeholder="" ng-model="systemSettings.IP_ADDRESS_OF_NAT_FOR_SECONDARY_SERVER" ng-disabled="disallowChanges">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="scondaryServerPortClientData" class="col-md-7 col-lg-7 col-lg-7 control-label">Server IP Port for {{productName}} Client Data</label>
+                                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5" style="margin-left: -15px;">
+                                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                                        <input type="number" class="form-control" id="scondaryServerPortClientData" placeholder="" ng-model="systemSettings.IP_PORT_FOR_SECONDARY_SERVER_DATA" ng-disabled="disallowChanges" positive-number>
+                                    </div>
+                                    <div class="hidden-xs hidden-sm col-md-4 col-lg-4"></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="secondaryServerPortClientAudio" class="col-md-7 col-lg-7 col-lg-7 control-label">Server IP Port for {{productName}} Client Audio</label>
+                                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5" style="margin-left: -15px;">
+                                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                                        <input type="number" class="form-control" id="scondaryServerPortClientAudio" placeholder="" ng-model="systemSettings.IP_PORT_FOR_SECONDARY_SERVER_AUDIO" ng-disabled="disallowChanges" positive-number>
+                                    </div>
+                                    <div class="hidden-xs hidden-sm col-md-4 col-lg-4"></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="secondaryServerPortClientAudio" class="col-md-7 col-lg-7 col-lg-7 control-label">Server IP Port for Failover Data</label>
+                                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5" style="margin-left: -15px;">
+                                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                                        <input type="number" class="form-control" id="scondaryServerPortClientAudio" placeholder="" ng-model="systemSettings.IP_PORT_FOR_FAILOVER_DATA" ng-disabled="disallowChanges" positive-number>
+                                    </div>
+                                    <div class="hidden-xs hidden-sm col-md-4 col-lg-4"></div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+            <!-- Media Server Settings -->
+            <div class="row" ng-show="showMediaServerSettings">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Media Server Settings</h3>
+                    </div>
+                    <div class="panel-body">
+                        <fieldset>
+                            <!-- KNAS secure port -->
+                            <div class="form-group">
+                                <label class="col-md-7 col-lg-7 col-lg-7 control-label">IP Port for Video Application Server WSS</label>
+                                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5" style="margin-left: -15px;">
+                                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                                        <input type="number" class="form-control" placeholder=""
+                                        ng-model="systemSettings.IP_PORT_FOR_VIDEO_APPLICATION_SERVER_WSS"
+                                        ng-disabled="disallowChanges" positive-number>
+                                    </div>
+                                    <div class="hidden-xs hidden-sm col-md-4 col-lg-4"></div>
+                                </div>
+                            </div>
+                            <!-- KMS ip address -->
+                            <div class="form-group">
+                                <label class="col-md-7 col-lg-7 col-lg-7 control-label">Hostname for Video Media Server</label>
+                                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+                                    <input type="text" class="form-control"
+                                    placeholder="" ng-model="systemSettings.HOSTNAME_FOR_VIDEO_MEDIA_SERVER"
+                                    ng-disabled="disallowChanges">
+                                </div>
+                            </div>
+                            <!-- KMS insecure port -->
+                            <div class="form-group">
+                                <label class="col-md-7 col-lg-7 col-lg-7 control-label">IP Port for Video Media Server WS</label>
+                                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5" style="margin-left: -15px;">
+                                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                                        <input type="number" class="form-control" placeholder=""
+                                        ng-model="systemSettings.IP_PORT_FOR_VIDEO_MEDIA_SERVER_WS"
+                                        ng-disabled="disallowChanges" positive-number>
+                                    </div>
+                                    <div class="hidden-xs hidden-sm col-md-4 col-lg-4"></div>
+                                </div>
+                            </div>
+                            <!-- KMS secure port -->
+                            <div class="form-group">
+                                <label class="col-md-7 col-lg-7 col-lg-7 control-label">IP Port for Video Media Server WSS</label>
+                                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5" style="margin-left: -15px;">
+                                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                                        <input type="number" class="form-control" placeholder=""
+                                        ng-model="systemSettings.IP_PORT_FOR_VIDEO_MEDIA_SERVER_WSS"
+                                        ng-disabled="disallowChanges" positive-number>
+                                    </div>
+                                    <div class="hidden-xs hidden-sm col-md-4 col-lg-4"></div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+    </form>
+</div>
+<script>
+    $(function() {
+        // On document load resize the slider
+        resizeSlider();
+    });
+
+    $( window ).resize(function() {
+        // On window resize, resize the slider
+        resizeSlider();
+    });
+    
+    function resizeSlider() {
+        var w = $('#audioOutputLevelGain').parent().width();
+        $('#audioOutputLevelGain').css({
+            'width' : w + 'px'
+        });
+    }
+</script>

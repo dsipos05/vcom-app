@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+	<link rel="apple-touch-icon" href="img/touch-icon-iphone.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="img/touch-icon-ipad.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="img/touch-icon-iphone-retina.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="img/touch-icon-ipad-retina.png">
+    <link rel="apple-touch-startup-image" href="/static/agk/img/-splash.jpg">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
+
+
+	<link href="../css/bootstrap/css/vcom-bootstrap-theme.min.css" rel="stylesheet">
+    <link href="../css/bootstrap/css/vcom-bootstrap.min.css" rel="stylesheet">
+    <link href="../bower_components/jquery-minicolors/jquery.minicolors.css" rel="stylesheet">
+	<link href="../bower_components/angular/angular-csp.css" rel="stylesheet">
+    <link href="../bower_components/angular-bootstrap/ui-bootstrap-csp.css" rel="stylesheet">
+    <link href="../bower_components/ui-select/dist/select.min.css" rel="stylesheet">
+    <link href="../css/slider.css" rel="stylesheet">
+    <link href="../css/led.css" rel="stylesheet">
+        <!-- <link href="../bower_components/datatables/media/css/jquery.dataTables.min.css" rel="stylesheet"> -->
+        <!-- <link href="../bower_components/datatables/media/css/dataTables.bootstrap.min.css" rel="stylesheet"> -->
+        <!-- <link href="../bower_components/angular-ui-grid/ui-grid.min.css" rel="stylesheet"> -->
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
+    
+    <!-- VCOM Custom CSS Class -->
+    <link href="../css/vcom.css" rel="stylesheet">
+    <link href="../css/header.css" rel="stylesheet">
+    <link href="../css/login.css" rel="stylesheet">
+    <link href="../css/misc.css" rel="stylesheet">
+
+    <link href="css/header.css" rel="stylesheet">
+    <link href="css/systemStatus.css" rel="stylesheet">
+    <link href="/directives/css/style.css" rel="stylesheet">
+
+    <!-- Telephone Inteface CSS -->
+    <link href="css/telephoneInterface.css" rel="stylesheet">
+    <link href="css/datatables.css" rel="stylesheet">
+    <link href="css/misc.css" rel="stylesheet">
+    
+    <!-- jquery -->
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- URI -->
+    <script src="../bower_components/URI/uri.js"></script>
+
+	
+</head>
+<body ng-app="app">
+
+	<div class="">
+        <div id="browserUnsupportedContainer" ng-show="false" style="visibility:hidden">
+            Your browser is unsupported. Please try the latest version of Google Chrome.
+        </div>
+		<div ui-view="upper"></div>
+		<div ui-view="middle"></div>
+		<div ui-view="bottom"></div>
+    </div>
+
+    <script>
+        $(document).ready(function(){
+            $("#browserUnsupportedContainer").css("visibility","visible");
+        })
+    </script>
+    
+    <script src="../bower_components/blob-polyfill/Blob.js"></script>
+    <!-- <script src="../bower_components/datatables/media/js/jquery.dataTables.min.js"></script> -->
+    <script src="../css/bootstrap/js/bootstrap.min.js" ></script>
+    <script src="../bower_components/angular/angular.min.js"></script>
+    <script src="../bower_components/angular-touch/angular-touch.min.js"></script>
+    <script src="../bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+    <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="../bower_components/angular-route/angular-route.min.js"></script>
+    <script src="../bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="../bower_components/ui-select/dist/select.min.js"></script>
+    <script src="../bower_components/angular-slider/build/angular-slider.min.js"></script>
+    <script src="../bower_components/jquery-minicolors/jquery.minicolors.js"></script>
+    <script src="../bower_components/angular-minicolors/angular-minicolors.js"></script>
+    <!-- <script src="../bower_components/angular-datatables/dist/angular-datatables.min.js"></script>
+    <script src="../bower_components/angular-datatables/dist/plugins/bootstrap/angular-datatables.bootstrap.min.js"></script>
+    <script src="../bower_components/angular-datatables/dist/plugins/scroller/angular-datatables.scroller.min.js"></script> -->
+    <!-- <script src="../bower_components/angular-ui-grid/ui-grid.min.js"></script> -->
+    <script src="../bower_components/ng-file-upload/ng-file-upload-shim.min.js"></script> <!-- for no html5 browsers support -->
+    <script src="../bower_components/ng-file-upload/ng-file-upload.min.js"></script>
+    <script src="../bower_components/ag-grid/dist/ag-grid.js"></script>
+    
+    <!-- Geo -->
+    <link rel="stylesheet" href="../Geo/css/MarkerCluster.css">
+    <link rel="stylesheet" href="../Geo/css/MarkerCluster.Default.css">
+    <link rel="stylesheet" href="../Geo/css/leaflet-dist.css"> <!-- Specifically noted to include leaflet css before js -->
+    <link rel="stylesheet" href="../bower_components/Leaflet.awesome-markers/dist/leaflet.awesome-markers.css">
+    <script src="../Geo/js/leaflet-dist.js"></script>
+    <script src="../bower_components/Leaflet.awesome-markers/dist/leaflet.awesome-markers.js"></script>
+    <script src="../bower_components/leaflet-popup-angular/src/L.Popup.Angular.js"></script>
+    <script src="../Geo/js/leaflet.markercluster.js"></script>
+    <!-- <script src="../bower_components/Leaflet.label/dist/leaflet.label.js"></script> -->
+
+    <script src="/config/env.js"></script>
+    <script src="bundle-d2a19ae457.js"></script>
+    
+    <!-- End Application scripts -->
+
+    <!-- Unsupported Browser message -->
+    <!-- <div ng-hide="true">
+        <h1 id="unsupportedMessage">Your current browser is unsupported. We recommend updating to the latest version of Google Chrome, Microsoft Edge, or Mozilla Firefox.</h1>
+    </div> -->
+
+</body>
+</html>

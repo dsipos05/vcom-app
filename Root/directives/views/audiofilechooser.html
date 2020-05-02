@@ -1,0 +1,4 @@
+<div class="audioFileChooser">
+    <select class="form-control" ng-model="ngModel" ng-options="item as item.label for item in soundFiles track by item.value"></select><span ng-show="ngModel" ng-click="confirmDelete()" class="deleteButton fa fa-close"></span>
+    <uploader upload-fn="uploadFn" on-success="onSuccess" on-failure="onFailure"></uploader>
+</div>

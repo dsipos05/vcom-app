@@ -1,0 +1,10 @@
+/* Make alternate rows darker for the system status list */
+#systemStatusPanel div:nth-child(4n+1).row{
+    /* 4n+1 matches elements #1, #5, #9, ... starting from 1 rather than 0 */
+    /* These rules copied from the .altRow class from vcom.css */
+    background-color: #F1F1F1;
+    border-top: 1px solid #E4E4E4;
+    border-bottom: 1px solid #E4E4E4;
+    padding-top: 7px;
+    padding-bottom: 7px;
+}

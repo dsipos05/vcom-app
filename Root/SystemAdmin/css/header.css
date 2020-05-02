@@ -1,0 +1,32 @@
+/* Positioning */
+#header-container>ul>li>a{
+	padding-top:10px;
+	padding-bottom:10px;
+}
+
+#header-container{
+	padding-bottom:5px;
+	margin-top:-15px;
+	margin-bottom: 10px;
+}
+#extraSmallCurrentLocation{
+	margin-top:-20px;
+}
+#extraSmallCurrentLocation>ul{
+	display:inline-block;
+	float:right;
+}
+
+/* Color */
+#header-container{
+	border-bottom: 1px solid #DBDBDB;
+}
+
+.clickable{
+	cursor: pointer;
+}
+
+
+#logoImage{
+	height:50px;
+}

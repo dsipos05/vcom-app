@@ -1,0 +1,134 @@
+<!-- This view allows users to view and modify configuration 
+    options for a single line that they've selected -->
+
+<!-- These options include
+    Login Name
+    Phone Line #:
+    SIP User Name
+    SIP User Password
+    Phone Line Name
+    Auto Answer -->
+<div class="panel panel-primary">
+    <div class="panel-body">
+        <form ng-show="getSelectedPhone()" preventDefault>
+            <table>
+                <tbody>
+                    <tr>
+                        <td> <label> Line State: </label> </td>
+                        <td>
+                            <toggle-switch ng-model="getSelectedPhone().config.phoneLineStatus">
+                                <div class="btn-group pull-right" ng-model="ngModel">
+                                    <button class="btn btn-sm btn-default btn-on ng-\">ON</button>
+                                    <button class="btn btn-sm btn-default btn-off ng-binding btn-warning">OFF</button>
+                                </div>
+                            </toggle-switch>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="configSpacer"> </td>
+                    </tr>
+                    <tr>
+                        <td> <label> Line Name: </label> </td>
+                        <td>
+                            <input type="text" ng-model="getSelectedPhone().config.phoneLineName">
+                        </td>
+                    <tr>
+                        <td> <label> Phone Number: </label> </td>
+                        <td>
+                            <input type="text" ng-model="getSelectedPhone().config.phoneLineNumber">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="configSpacer"> </td>
+                    </tr>
+                    <tr>
+                        <td> <label> SIP User Name: </label> </td>
+                        <td>
+                            <input type="text" ng-model="getSelectedPhone().config.userName">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> <label> SIP User Password: </label> </td>
+                        <td>
+                            <input type="text" ng-model="getSelectedPhone().config.password">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="configSpacer"> </td>
+                    </tr>
+                    <tr>
+                        <td> <label> Auto Answer: </label> </td>
+                        <td>
+                            <toggle-switch ng-model="getSelectedPhone().config.autoAnswer">
+                                <div class="btn-group pull-right" ng-model="ngModel">
+                                    <button class="btn btn-sm btn-default btn-on ng-\">ON</button>
+                                    <button class="btn btn-sm btn-default btn-off ng-binding btn-warning">OFF</button>
+                                </div>
+                            </toggle-switch>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> <label> Auto Answer Sound File: </label> </td>
+                        <td>
+                            <select id="autoAnswerSound" class="form-control" ng-model="getSelectedPhone().config.autoAnswerSound" ng-options="item as item.label for item in soundFiles track by item.value"></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> <label> Upload new Answer Sound File: </label> </td>
+                        <td>
+                            <uploader
+                                upload-fn="uploadAnswerSoundFile"
+                                on-success="onSuccessUploadAnswerSoundFile"
+                                on-failure="onFailureUploadAnswerSoundFile">
+                            </uploader>
+                        </td>
+                    <tr>
+                        <td class="configSpacer"> </td>
+                    </tr>
+                    <tr>
+                        <td> <label> Ringtone Sound File: </label> </td>
+                        <td>
+                            <select id="autoAnswerSound" class="form-control" ng-model="getSelectedPhone().config.ringtone" ng-options="item as item.label for item in soundFiles track by item.value"></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> <label> Upload new Ringtone: </label> </td>
+                        <td>
+                            <uploader
+                                upload-fn="uploadRingtoneFile"
+                                on-success="onSuccessUploadRingtoneFile"
+                                on-failure="onFailureUploadRingtoneFile">
+                            </uploader>
+                        </td>
+                    <tr>
+                    <tr>
+                        <td class="configSpacer"> </td>
+                    </tr>
+                    <tr>
+                        <td> <label> RTS Function Type <label> </td>
+                        <td>
+                            <select id="rtsFunctionTypeSelect" class="form-control" ng-model="getSelectedPhone().config.rtsFunctionType" ng-options="item as item.label for item in rtsFunctionTypes track by item.value"></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> <label> RTS Function Number <label> </td>
+                        <td>
+                            <input type="text" ng-model="getSelectedPhone().config.rtsFunctionNumber">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> <label> RTS Alpha <label> </td>
+                        <td>
+                            <input type="text" ng-model="getSelectedPhone().config.rtsAlpha" ng-disabled="RTSAlphaDisabled(getSelectedPhone())">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="configSpacer"> </td>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="submit" ng-click="saveChanges()">Save Changes </button>
+        </form>
+        <p ng-show="changesSaved">Changes Saved! </p>
+    </div>
+</div>

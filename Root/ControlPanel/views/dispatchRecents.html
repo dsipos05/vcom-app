@@ -1,0 +1,22 @@
+<div id="dispatchPane">
+    <div class="scrollContainer">
+        <div class="dispatch-list">
+            <div ng-repeat="item in dispatchRecents track by item.randID"
+            class="dispatch-item noSelect"
+            ng-class="{
+                'selected':item.dispatchSelected,
+                'offline':item.offline,
+                'voiceActive':item.voiceActive
+        }"
+            ng-click="clickDispatchItem(item.ID)">
+                <div class="dispatch-logo">
+                    <img class="selector-image" ng-src='{{item.label.IMAGE_URL}}'>
+                </div>
+                {{item.name}}
+                <div class="dispatch-last-call">
+                    {{timeSince(callLog.get(item.ID))}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

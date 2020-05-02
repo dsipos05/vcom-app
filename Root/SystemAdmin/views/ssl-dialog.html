@@ -1,0 +1,37 @@
+<div class="modal-header">
+    <h3>SSL Certificate</h3>
+</div>
+<div class="modal-body ssl">
+    <div class="row">
+        <div class="col-xs-12">
+
+                <h4><strong>Self-Signed</strong></h4>
+                <button class="btn btn-primary" ng-click="installSelfSignedCertificate()">Install Self-Signed Certificate</button>
+                <br><br>
+                <h4><strong>Certificate Authority (CA)</strong></h4>
+                <h5>Generate CSR for Certificate Authority (CA) Signed Certificate</h5>
+                <button class="btn btn-primary" ng-click="generateDefaultCSR()">Generate CSR with Default Values</button><br>
+                <button class="btn btn-primary" ng-click="generateCustomCSR()">Generate Custom CSR</button><br>
+                <h5>Install Certificate Authority (CA) Signed Certificate</h5>
+                <button class="btn btn-primary" ng-click="promptInstallCACertificate()">Install Signed Certificate</button>
+                <br><br>
+                <h4><strong>Current Certificate</strong></h4>
+                <button class="btn btn-default" ng-click="download()">Download Currently Installed Certificate</button>
+                <button class="btn btn-default" ng-click="displayPrivates()">Display CSR, Private Key, Installed Certificate</button>
+        </div>
+    </div>
+    
+</div>
+
+
+
+<div class="modal-footer">
+    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+        <!-- <div class="btn btn-primary" ngf-select="upload($file)"><span class="fa fa-upload"></span>&nbsp;Upload SSL certificate</div> -->
+    </div>
+    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+    </div>
+    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+        <button class="btn btn-default" ng-click="close()">Close</button>
+    </div>
+</div>

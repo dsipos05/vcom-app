@@ -1,0 +1,206 @@
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <!-- Page Controls -->
+    <div class="">
+        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5" style="">
+            <button class="btn btn-default" ng-click="cancel()"><i class="fa fa-times" aria-hidden="true"></i>&nbsp;Cancel</button>
+            <button class="btn btn-warning" ng-click="save()"><i class="fa fa-check" aria-hidden="true"></i>&nbsp;Save</button>
+        </div>
+    </div>
+    <!-- End Page Controls -->
+</div>
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">&nbsp;</div>
+    
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div style="margin-left: 15px; margin-right: 15px;">
+        <div class="well">
+            <div><strong>Selected Client:</strong>&nbsp;{{ client.SELECTOR_NAME }} / {{ client.DESCRIPTION }}</div>
+        </div>
+    </div>
+</div>
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <!-- Left Grid -->
+    <div class="col-xs-12 col-sm-12 col-md-5 selector-choice-container">
+        <h3> Non-Assigned Selectors</h3>
+        <label>Search:</label>
+        <input type="text" id="leftSearchBox" ng-model="leftSearchText" ng-change="leftSearch()"/>
+        <br>
+        <div id="leftGrid" class="ag-theme-bootstrap ag-grid"></div>
+        <div>
+            Showing {{leftGridCount}} selectors.
+        </div>
+        <br>
+    </div>
+    <!-- <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+        <div class="panel panel-default">
+            <div class="panel-heading">Non-Assigned Selectors</div>
+            <div class="panel-body">
+                <table datatable="ng" dt-options="dtOptions1" class="row-border hover" style="font-size: 8pt;">
+                    <thead>
+                        <tr>
+                            <th ng-if="userInfo.systemSupport.supportsTelexTrunking === true || userInfo.systemSupport.supportsTelexTelephoneInterface === true">System Name</th>
+                            <th>Talk/Listen Name</th>
+                            <th>Description</th>
+                            <th>Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="selector in nonAssignedSelectors" ng-click="setNonAssignedSelector(selector)" id="nonAssignedSelector_{{ selector.ID }}">
+                            <td ng-if="userInfo.systemSupport.supportsTelexTrunking === true  || userInfo.systemSupport.supportsTelexTelephoneInterface === true">{{ selector.SYSTEM_NAME }}</td>
+                            <td>{{ selectorNameFilter(selector) }}</td>
+                            <td>{{ selector.DESCRIPTION }}</td>
+                            <td>{{ nonAssignedLabelType(selector) }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div> -->
+    <!-- Middle Buttons -->
+    <div class="hidden-xs hidden-sm col-md-2 col-lg-2">
+        <div class="text-right">
+            <div>
+                <button class="btn btn-default" ng-disabled="!hasUnassignedSelected()" ng-click="addNonAssignedSelector('SELECTOR')">Split Talk/Listen&nbsp;<span class="fa fa-arrow-right"></span></button>
+            </div>
+            <div>
+                <button class="btn btn-default" ng-disabled="!hasUnassignedSelected()" ng-click="addNonAssignedSelector('SELECTOR_TALK')">Talk Only&nbsp;<span class="fa fa-arrow-right"></span></button>
+            </div>
+            <div>
+                <button class="btn btn-default" ng-disabled="!hasUnassignedSelected()" ng-click="addNonAssignedSelector('SELECTOR_LISTEN')">Listen Only&nbsp;<span class="fa fa-arrow-right"></span></button>
+            </div>
+            <div>
+                <button class="btn btn-default" ng-disabled="!hasAssignedSelected()" ng-click="addSpacerObject('SPACER')">Spacer&nbsp;<span class="fa fa-arrow-right"></span></button>
+            </div>
+            <div>
+                <button class="btn btn-default" ng-disabled="!hasAssignedSelected()" ng-click="addSpacerObject('ROW_BREAK')">Row&nbsp;<span class="fa fa-arrow-right"></span></button>
+            </div>
+            <div>
+                <button class="btn btn-default" ng-disabled="!hasAssignedSelected()" ng-click="addSpacerObject('PAGE_BREAK')">Page&nbsp;<span class="fa fa-arrow-right"></span></button>
+            </div>
+            <div>
+                <button class="btn btn-default" ng-disabled="!hasAssignedSelected()" ng-click="addSpacerObject('CALL_NOTIFICATION')">Call Notification&nbsp;<span class="fa fa-arrow-right"></span></button>
+            </div>
+        </div>
+        <div>&nbsp;</div>
+        <div class="text-right">
+            <div>
+                <button class="btn btn-default" ng-disabled="!hasAssignedSelected()" ng-click="removeSelector()"><span class="fa fa-arrow-left"></span>&nbsp;Remove</button>
+            </div>
+            <div>
+                <button class="btn btn-default" ng-click="clearAllSelectors()">Clear&nbsp;<span class="fa fa-arrow-right"></span></button>
+            </div>
+        </div>
+        <div>&nbsp;</div>
+        <div class="text-right">
+            <div>
+                <button class="btn btn-default" ng-disabled="!hasUnassignedSelected()" ng-click="duplicate()">Duplicate&nbsp;<span class="fa fa-arrow-right"></span></button>
+            </div>
+            <!--<div><button class="btn btn-default">Latchable&nbsp;<span class="fa fa-arrow-right"></span></button></div>
+            <div><button class="btn btn-default">IFB&nbsp;<span class="fa fa-arrow-right"></span></button></div>
+            <div><button class="btn btn-default">ISO&nbsp;<span class="fa fa-arrow-right"></span></button></div>
+            <div><button class="btn btn-default">Speaker Dim&nbsp;<span class="fa fa-arrow-right"></span></button></div> -->
+        </div>
+        <div>&nbsp;</div>
+        <div class="text-right">
+            <div><button class="btn btn-default" ng-disabled="!hasAssignedSelected()" ng-click="hotKey()">Hot Key&nbsp;<span class="fa fa-arrow-right"></span></button></div>
+        </div>
+    </div>
+    <!-- Right Grid -->
+    <!-- <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5"> 
+            <div class="panel panel-default">
+            <div class="panel-heading">Assigned Selectors</div>
+            <div class="panel-body">
+                <table datatable="ng" dt-options="dtOptions2" dt-instance="dtInstanceAssignedSelectors" class="row-border hover" style="font-size: 8pt;">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Selector Type</th>
+                            <th>Latch Disable</th>
+                            <th>IFB</th>
+                            <th>ISO</th>
+                            <th>Spkr Dim</th>
+                            <th>Always On Visible</th>
+                            <th>Always On Invisible</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="selector in client.SELECTORS track by $index" id="assignedSelector_{{ selector.ID }}">
+                            <td ng-click="setAssignedSelector(selector, $index)">{{ assignedSelectorNameFilter(selector) }}</td>
+                            <td ng-click="setAssignedSelector(selector, $index)">{{ selector.TYPE }}</td>
+                            <td class="text-center">
+                                <input type="checkbox" ng-model="selector.LATCH_DISABLE" ng-true-value="'ON'" ng-false-value="">
+                            </td>
+                            <td class="text-center">
+                                <input type="checkbox" ng-model="selector.IFB_DESTINATION" ng-true-value="'ON'" ng-false-value="">
+                            </td>
+                            <td class="text-center">
+                                <input type="checkbox" ng-model="selector.ISO_DESTINATION" ng-true-value="'ON'" ng-false-value="">
+                            </td>
+                            <td class="text-center">
+                                <input type="checkbox" ng-model="selector.SPEAKER_DIM" ng-true-value="'ON'" ng-false-value="">
+                            </td>
+                           <td class="text-center">
+                                <input type="checkbox" ng-model="selector.ALWAYS_ON_VISIBLE" ng-click="toggleSelectorAlwaysOn('ALWAYS_ON_VISIBLE', selector)" ng-true-value="'ON'" ng-false-value="'OFF'">
+                            </td>
+                            <td class="text-center">
+                                <input type="checkbox" ng-model="selector.ALWAYS_ON_INVISIBLE" ng-click="toggleSelectorAlwaysOn('ALWAYS_ON_INVISIBLE', selector)" ng-true-value="'ON'" ng-false-value="'OFF'">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>  
+            </div>
+        </div> -->
+
+    <!-- Right Grid (Selector to act as Replacement) -->
+    <div class="col-xs-12 col-sm-12 col-md-5 selector-choice-container">
+        <h3> Assigned Selectors </h3>
+        <label>Search:</label>
+        <input type="text" id="rightSearchBox" ng-model="rightSearchText" ng-change="rightSearch()"/>
+        <br>
+        <div id="rightGrid" class="ag-theme-bootstrap ag-grid"></div>
+        <div>
+            Showing {{rightGridCount}} selectors.
+        </div>
+        <br>
+        <!-- Additional Options -->
+        <div class="">
+            <div ng-show="showSelectorsToDisplayPerRow()" class="form-group">
+                <label for="selectorsPerRow" class="col-xs-12 col-sm-12 col-md-6 col-lg-6 control-label">Selectors to Display per Row</label>
+                <div class="col-xs-12 col-sm-12 col-md-1 col-lg-1">
+                    <input type="text" ng-model="client.SELECTORS_PER_ROW" ng-disabled="disableSelectorsPerRow" class="form-contol text-right" >
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">&nbsp;</div>
+            </div>
+            <div ng-show="showDefaultAssignmentsToNonLatchable()" class="form-group">
+                <label for="selectorsPerRow" class="col-xs-12 col-sm-12 col-md-6 col-lg-6 control-label">Default Assignments to Non-Latchable</label>
+                <div class="col-xs-12 col-sm-12 col-md-1 col-lg-1">
+                    <input type="checkbox" ng-model="client.DEFAULT_SELECTOR_ASSIGNMENTS_TO_LATCH_DISABLE" ng-true-value="'ON'" ng-false-value="'OFF'" ng-disabled="disableDefaultToNonLatchable" class="form-contol text-right" >
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">&nbsp;</div>
+            </div>
+            <!-- Selector Activation Method -->
+            <div ng-show="showActivationMethod()" class="form-group">
+                <label class="col-xs-12 col-md-5 control-label">Activation Method</label>
+                <div class="col-xs-12 col-md-7">
+                    <select
+                        ng-model="client.SELECTOR_ACTIVATION" 
+                        ng-options="item.value as item.label 
+                        disable when item.disabled
+                        for item in activationMethodDropdown">
+                    </select>
+                </div>
+            </div>
+            <br>
+            <!-- Selector Activation Detail (could be used to send more info about Selector Activation Method) not to be used for now-->
+            <!-- <div ng-show="showActivationDetail()" class="form-group">
+                <label for="selectorsPerRow" class="col-xs-12 col-sm-12 col-md-6 col-lg-6 control-label">Selectors Activation Detail</label>
+                <div class="col-xs-12 col-sm-12 col-md-1 col-lg-1">
+                    <input type="text" class="form-contol text-right" >
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">&nbsp;</div>
+            </div> -->
+        </div>
+    </div>
+    <!-- End Content -->
+</div>

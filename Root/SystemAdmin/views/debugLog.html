@@ -1,0 +1,20 @@
+<div class="container">
+    <!-- Page Controls -->
+    <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <h3>Debug Log</h3>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-right" style="padding-top: 18px;">
+            <label>Auto Refresh:
+                <span class="pull-right"><toggle-switch ng-model="autoRefresh" labels="On,Off" ></toggle-switch></span>
+            </label>
+            <label>Search:
+            <input type="text" id="searchBox" ng-model="searchText" ng-change="search()"/>
+            </label>
+        </div>
+    </div>
+    <!-- End Page Controls -->
+
+    <div id="debugLogGrid" class="ag-theme-bootstrap ag-grid"></div>
+    
+</div>

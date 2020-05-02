@@ -1,0 +1,30 @@
+<div class="modal-header">
+    <h3>Audio Troubleshooting</h3>
+</div>
+<div class="modal-body websocket-troubleshoot">
+    <div>HTML5 WebAudio: {{getWebAudioStatus()}}</div>
+    <button class="btn btn-primary" ng-click="initializeWebAudio()">Initialize</button>
+    <hr>
+    <div> WebSocket for WebRTC signaling: {{getWebSocketStatus()}}</div>
+    <button class="btn btn-primary" ng-click="reconnectWebSocket()">Open</button>
+    <button class="btn btn-primary" ng-click="disconnectWebSocket()">Close</button>
+
+    <progress-bar
+        status="wsLoaderStatus",
+        message="wsLoaderMessage">
+    </progress-bar>
+    <br>
+    <textarea>
+        {{getLog()}}
+    </textarea>
+    <hr>
+    <div>WebRTC Audio Status: {{getWebRTCStatus()}}</div>
+    <button class="btn btn-primary" ng-click="reconnectWebRTC()">Reconnect</button>
+    <button class="btn btn-default" ng-click="disconnectWebRTC()">Disconnect</button>
+    <br>
+    <!-- <br> -->
+    <!-- Echo Mode: <br> -->
+    <!-- <toggle-switch ng-model="echoMode"></toggle-switch> -->
+
+
+</div>

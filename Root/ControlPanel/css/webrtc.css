@@ -1,0 +1,79 @@
+/* .gum-video{
+    max-height:100%;
+    max-width:100%;
+}
+
+video{
+    max-width:300px;
+} */
+
+.wowza-video-stream{
+    width:100%;
+    max-height:100%;
+    position:absolute; /* gets this out of the way of the spinner */
+    top:0;
+    left:0;
+}
+.wowzaStream{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* text-align:center; horizontally centers the spinner */
+}
+.wowza-spinner{
+    font-size:80px;
+    position:absolute;
+    /* position:relative; */
+    /* top:calc(50% - 40px); vertically centers the spinner */
+}
+.rtsp-spinner{
+    font-size:80px;
+    position:absolute;
+    top:calc(50% - 40px); /* vertically centers the spinner */
+    left:calc(50% - 30px); /* horizontally centers the spinner*/
+}
+
+.wowza-spinner.hidden{
+    display:none;
+}
+
+.wowzaStream .selector-side{
+    /* width:20px; */
+    height:100%;
+}
+.wowzaStream .talk{
+    background-color: #A50422;
+}
+.wowzaStream.talkActive .talk{
+    /* width:40px; */
+    background-color:#FF0000;
+}
+.wowzaStream .listen{
+    background-color: #04A51B;  
+}
+.wowzaStream.listenActive .listen{
+    /* width:40px; */
+    background-color:#00FF00;
+}
+.wowzaStream .selector-side{
+    width:10px;
+}
+.wowzaStream.talkActive .talk{
+    width:25px;
+}
+.wowzaStream.listenActive .listen{
+    width:25px;
+}
+.wowzaStream .maximizeButton{
+    position:absolute;
+    z-index:11;
+    top:0px;
+    right:20px;
+}
+
+.wowzaStream .publishButton{
+    position:absolute;
+    right:20px;
+    bottom:0;
+    z-index:11;
+}

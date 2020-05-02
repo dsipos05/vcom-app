@@ -1,0 +1,45 @@
+<div class="container">
+
+    <!-- Left Grid (Selector To Be Replaced) -->
+    <div class="col-xs-12 col-sm-12 col-md-5 selector-choice-container">
+        <h3> Selector to be replaced </h3>
+        <label>Search:</label>
+        <input type="text" id="leftSearchBox" ng-model="leftSearchText" ng-change="leftSearch()"/>
+        <br>
+        <div id="leftGrid" class="ag-theme-bootstrap ag-grid"></div>
+        <div>
+            Showing {{leftGridCount}} selectors.
+        </div>
+    </div>
+    <!-- Replace Button -->
+    <div class="col-xs-12 col-md-2">
+        <div class="hidden-xs hidden-sm" style="height:200px">&nbsp;</div>
+        <button style="margin: auto; margin-top:20px; display:block;" class="btn btn-warning"
+                ng-click="replacePrompt()" ng-disabled="!sourceSelected || !destSelected">
+                    <i class="fa fa-arrow-left hidden-xs hidden-sm" aria-hidden="true"></i>
+                    <i class="fa fa-arrow-up hidden-md hidden-lg hidden-xl" aria-hidden="true"></i>
+                    &nbsp;Replace
+        </button>
+        <ng-pluralize ng-show="showReplacementResults" count="replacementsMade"
+                when="{'0': '(No replacements made)',
+                    'one': '(1 replacement made)',
+                    'other': '({} replacements made)'}">
+        </ng-pluralize>
+        <br><ng-pluralize ng-show="replacementsFailed" count="replacementsFailed"
+                when="{'0': '(No replacements failed)',
+                    'one': '(1 replacement failed)',
+                    'other': '({} replacements failed)'}">
+        </ng-pluralize>
+    </div>
+    <!-- Right Grid (Selector to act as Replacement) -->
+    <div class="col-xs-12 col-sm-12 col-md-5 selector-choice-container">
+        <h3> Selector to act as replacement </h3>
+        <label>Search:</label>
+        <input type="text" id="rightSearchBox" ng-model="rightSearchText" ng-change="rightSearch()"/>
+        <br>
+        <div id="rightGrid" class="ag-theme-bootstrap ag-grid"></div>
+        <div>
+            Showing {{rightGridCount}} selectors.
+        </div>
+    </div>
+</div>

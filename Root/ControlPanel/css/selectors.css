@@ -1,0 +1,275 @@
+/* Keep in mind!
+There are more style rules for selectors that are dynamically added in ControlPanelController.js
+These are retrieved through the /config/userinterface API and include properties like...
+	.lm_header 									: background-color
+	.lm_content 								: background-color
+	.selector:not(.voiceActive) .selector-name 	: color
+	.selector:not(.voiceActive) .selector-body  : background-color
+	.selector.voiceActive .selector-name		: color
+	.selector.voiceActive .selector-body		: background-color
+	.selector.offline .selector-name    		: color
+	.selector.offline .selectory-body   		: background-color
+	.lm_content									: border
+*/
+
+/***********************/
+/*  SAME FOR ALL SIZES */
+/***********************/
+.scrollContainer{
+	overflow-y:auto;
+	overflow-x:hidden;
+	/* overflow-x:hidden because...
+	otherwise dragging an item from stream selection creates a horiz scroll bar.
+	selectors wrap so we shouldn't need to scroll horizontally*/ 
+	-webkit-overflow-scrolling: touch;
+	height:100%;
+}
+
+#selectors{
+	display: grid;
+	grid-gap: 1px; 
+	justify-content: space-between;
+}
+#selectors.streamSelection{
+	display: grid;
+	grid-gap: 1px; 
+	justify-content: left;
+}
+
+.selector:not(.videoSelector){
+	cursor:pointer;
+	width:100%;
+	z-index:3;
+	position:relative;
+}
+.selector.videoSelector{
+	cursor:pointer;
+	position:relative;
+}
+
+
+.talk,.listen,.placeholder{
+	display:inline-block;
+}
+
+.selector-body{
+    position:relative;
+	height:100%;
+}
+.selector-bg{
+	position:relative;
+	height:100%;
+}
+.selector-name{
+	position:absolute;
+	left:0;
+	bottom:0;
+	width:100%;
+	overflow:hidden;
+	word-wrap:break-word;
+	height:40px;
+	font-size: 1em;
+	z-index:1; /* place text in front of logo */
+}
+.selector-name div{
+	position:absolute;
+	text-align:center;
+	bottom:0;
+	width:100%;
+}
+.selector-logo{
+    position:absolute;
+	left:0;
+	top:0;
+	width:100%;
+	height:55px;
+	z-index:1; /* place logo in front of icons theme talk/listen active red/green bars */
+}
+.selector-left{
+    position:absolute;
+	left:0;
+	top:0;
+	height:100%
+}
+.selector-right{
+	position:absolute;
+	right:0;
+	top:0;
+	height:100%;
+}
+.selector-image{
+	max-width:100%;
+	height:100%;
+	display:block;
+	margin:auto;
+}
+/* Invisible areas that we click to toggle talk/listen on selectors */
+.selector-left-clickable{
+	width:50%;
+	height:100%;
+	position:absolute;
+	left:0;
+	top:0;
+	z-index:10;
+}
+.selector-right-clickable{
+	width:50%;
+	height:100%;
+	position:absolute;
+	right:0;
+	top:0;
+	z-index:10;
+}
+
+#selectors.original{
+	grid-template-columns: repeat( auto-fit, minmax(100px, 1fr) );
+}
+#selectors.detailed{
+	grid-template-columns: repeat( auto-fit, minmax(150px, 1fr) );
+}
+#selectors.detailed .selector{
+	height:150px;
+}
+.selector{
+	height:75px;
+}
+
+.selector.streaming .selector-streaming-notification{
+	position:absolute;
+	height:45%;
+	width:75%;
+	left:12.5%;
+	top:5px;
+	text-align:center;
+	font-weight:bold;
+	border:1px solid black;
+	background-color:red;
+	color:white;
+	z-index:11;
+}
+.selector:not(.streaming) .selector-streaming-notification,.selector:not(.streaming) .selector-streaming-clickable{
+	display:none;
+}
+.selector.streaming .selector-streaming-clickable{
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	z-index:12;
+}
+
+
+/* Listen and Talk Active */
+.selector.talkActive .talk{
+	background-color:#FF0000;
+}
+.selector.talkHalfway .talk{
+	background-color:#FF000077;
+	/* background-color:#D20211; */
+}
+.selector.listenActive .listen{
+	background-color:#00FF00;
+}
+.selector.listenHalfway .listen{
+	background-color:#00FF0077;
+	/* background-color:#02D20C; */
+}
+.selector.videoActive .video{
+	background-color:rgb(250,150,0);
+}
+/* Offline */
+
+.selector.offline{
+	opacity:0.4;
+	cursor:disabled;
+}
+.selector.offline{
+	border: 0.5px solid rgba(170, 170, 170);
+}
+.selector:not(.offline){
+	border-top:0.5px solid rgba(170,170,170);
+	border-bottom:0.5px solid rgba(170,170,170);
+}
+
+/* Voice Inactive */
+.selector:not(.voiceActive) .selector-bg{
+	opacity:0.5;
+}
+
+
+.selector.streaming .selector-streaming-notification{
+	font-size:30px;
+	line-height:30px;
+}
+
+/* Selected */
+.selector.selected{
+	border:2px solid black;
+}
+
+/***********/
+/* Tallies */
+/***********/
+#selectors.tallyClock .selector.tally .talk{
+	background-color:#FF0000;
+}
+
+
+/**********************/
+/* Detailed Selectors */
+/**********************/
+.selector-info-bg{
+	position:absolute;
+	left:5px;
+	top:0px;
+	padding:2px;
+	background-color:#FFFFFFCC;
+	width: calc(100% - 10px);
+	margin-bottom:40px;
+	height:100%;
+}
+.selector-info{
+	position:absolute;
+	left:0px;
+	top:0px;
+	overflow:hidden;
+	word-wrap:break-word;
+	width: 100%;
+	height:100%;
+	font-size: 1em;
+}
+.selector-bg-image{
+	opacity:0.4;
+	max-width:100%;
+	height:100%;
+	display:block;
+	margin:auto;
+}
+#selectors.detailed .selector-name{
+	font-weight: bold;
+	font-size:1.1em;
+}
+
+/******************/
+/* Levels Control */
+/******************/
+/* To turn on levels control, apply the .showLevels class to the #selectors.original div that contains all of the selectors.
+Some selectors never have levels to control; they should have a .noLevels class applied to the .selector element */
+
+.showLevels :not(.noLevels) .selector-body{
+	height:75%;
+}
+.showLevels :not(.noLevels) .selector-levels{
+	display:block;
+	height:25px;
+	width:100%;
+	background-color:#00000088;
+}
+.selector-levels{
+	display:none;
+}
+.showLevels .selector:not(.noLevels){
+	height:100px;
+	margin-bottom:6px;
+}

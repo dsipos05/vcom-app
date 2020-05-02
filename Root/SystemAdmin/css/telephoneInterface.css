@@ -1,0 +1,240 @@
+
+.phone{
+	cursor:pointer;
+}
+.phone:hover{
+	box-shadow: 0 0 5px 5px gray;
+}
+.phone:nth-of-type(odd){
+	background:rgba(200,200,245,0.1);
+}
+.phone:nth-of-type(even){
+	background:rgba(200,245,200,0.1);
+}
+.phone-row:nth-of-type(odd){
+	background:rgba(0,0,0,0.1);
+}
+/* redundant .phone use here to prioritize over the even/odd row coloring rules*/
+.phone.phone-off-hook{
+	background:rgba(100,255,100,0.7);
+}
+.phone.phone-ringing{
+	background:rgba(255,255,100,0.7);
+}
+.phone.phone-error{
+	background:rgba(255, 157, 100, 0.7);
+}
+.phone.phone-recently-changed{
+    animation: blinker 1s linear infinite;
+	-webkit-animation: blinker 1s linear infinte;
+	-moz-animation: blinker 1s linear infinite;
+}
+/* blink red when we've recently hung up */
+.phone.phone-recently-changed.phone-on-hook{
+	background:rgba(255,100,100,0.7);
+}
+
+.phone.phone-disabled{
+	opacity:0.4;
+	background:rgba(100,100,100,0.7);
+}
+
+@-moz-keyframes blinker {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+}
+
+@-webkit-keyframes blinker {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+}
+@keyframes blinker {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+	100%{ opacity: 1.0; }
+}
+
+
+#selected-phone{
+	box-shadow: 0 0 5px 5px black;
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
+button.disabled{
+	cursor:not-allowed;
+	opacity:0.5;
+}
+
+#toggleShowDisabledPhonesButton{
+	cursor:pointer;
+}
+
+
+
+.mcStatusBad{
+	background-color:red
+}
+.mcStatusWarning{
+	background-color:goldenrod
+}
+.mcStatusGood{
+	background-color:green
+}
+
+.configSpacer{
+	height:15px;
+}
+
+.nopadding{
+	padding:0px 0px 0px 0px;
+}
+
+.phone{
+	display:flex;
+	flex-direction:row;
+	position:relative;
+}
+.phone .phoneBankText{
+	width:100%
+}
+.phone .phoneBankMeter{
+	width:12px;
+	height:100%;
+	position: absolute;
+	right:0px;
+	top: 0;
+}
+/* phonebank layout */
+.phonesContainer{
+	display: flex;
+	flex-direction: row;
+	flex-wrap:wrap
+}
+.phone{
+	width:112px;
+	padding-right:12px;
+	margin:3px; /* space between phones in phone bank */
+	/* margin-right:12px; */
+}
+
+/* tif main */
+.tifMainContainer{
+	display: flex;
+	flex-direction: row;
+}
+.phoneBankContainer{
+	width:65%; /* default size of phone bank */
+	margin-right: 5px; /* space between phone bank and sidebar */
+}
+.phoneBankContainer.full{
+	width:calc(100% - 40px); /* size of phone bank when sidebar is collapsed */
+}
+.tifSideBars{
+	width:35%; /* default size of sidebars */
+	overflow:hidden; /* when collapsed, even though extra content is hidden, the browser can tell that if it werent hidden, it would overflow and create a horizontal scroll bar for the page.  so hide that already-hidden overflow */
+}
+.tifSideBars.collapsed{
+	width:40px;
+}
+.collapsedSidebar{
+	transform: rotate(90deg); /* rotate 90 degrees clockwise to make vertical text */
+	transform-origin: left top 0; /* rotate about the top-leftmost point */
+	position: relative; /* allow us to use the left property below */
+	left:40px; /* rotation causes the text to move to the left overall, so we push it back to the right*/
+	white-space: nowrap; /* Keep this as one line since it will have plenty of room once it is rotated */
+}
+.tifMainContainer{
+	margin:auto;
+	width:98vw;
+}
+.tif-details{
+	width:300px;
+}
+
+
+
+
+
+/* updated vU meter */
+/* general */
+.vumeter-background{
+    width:100%;
+    height:100%;
+    position:absolute;
+    top:0;
+    left:0;
+}
+.vumeter-bar-red{
+    background-color:red;
+    bottom:75%;
+}
+.vumeter-bar-yellow{
+    background-color:yellow;
+    bottom:50%;
+}
+.vumeter-bar-green{
+    background-color:green;
+    bottom:1%;
+}
+.vumeter-peak{
+    width:30%;
+	height:3.5%;
+	position:absolute;
+	background-size:100% 100%;
+}
+.vumeter-peak:not(.vumeter-tx){
+	background-image: url("../../img/peakbar5.png");
+}
+.vumeter-peak.vumeter-tx{
+	background-image: url("../../img/peakbar4.png");
+}
+.vumeter-tx{
+    right:1px;
+}
+/* small vu meter */
+.vumeter-container{
+    width:15px;
+    height:65px;
+    position:relative;
+    overflow:hidden;
+}
+.vumeter-label{
+    color:white;
+    position:absolute;
+    top:0;
+    font-size:.6em;
+}
+.vumeter-bar{
+    position:absolute;
+    width:45%;
+}
+/* large vu meter */
+.vumeter-container-large{
+	width:80px;
+	height:400px;
+	position:relative;
+	overflow:hidden;
+}
+.vumeter-label-large{
+	color:white;
+	position:absolute;
+	top:0;
+	font-size:1.3em;
+	padding-left:10%;
+	padding-right:10%;
+}
+.vumeter-bar-square{
+    width:30%;
+    height:1%;
+    position:absolute;
+}
+
+
+
+.collapseSidebarButton{
+	float:right !important; /* override natural float left */
+}

@@ -1,0 +1,116 @@
+<div id="header">
+    <!-- <div class="header-brandingAndTitle"> -->
+    <div id="logo-container">
+        <img id="logoImage" class="header-branding" ng-show="BrandingService.getLogo()" ng-src="{{ BrandingService.getLogo() }}">
+    </div>
+    <div class="header-title">
+        <div class="header-title-inner">
+            {{ BrandingService.getProductName() }} - Control Panel
+        </div>
+    </div>
+    <div id="headerControls">
+        <!-- logout dropdown -->
+        <div class="btn-group" ng-show="showLogoutMenu()">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-sign-out" aria-hidden="true"></i> {{userName}} <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-right">
+                <li><a href="" ng-click="logout()">Logout</a></li>
+                <li class="dev-only" ng-show="showDev()" ng-repeat="item in testFunctions"><a href="" ng-click="item.label()">{{item.value}}</a></li>
+            </ul>
+        </div>
+        <!-- Theme dropdown -->
+        <div class="btn-group"  ng-show="showThemeMenu()">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-adjust" aria-hidden="true"></i>&nbsp;<div class="text">Theme&nbsp;</div><span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-right">
+                <li ng-repeat="item in themes"><a href="" ng-click="item.fn()">
+                    <i ng-show="item.icon" class="fa {{item.icon}}" aria-hidden="true"></i>&nbsp;{{item.label}}</a></li>
+            </ul>
+        </div>
+        <!-- Add View dropdown -->
+        <div class="btn-group"  ng-show="showAddViewMenu()">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-th-large" aria-hidden="true"></i>&nbsp;<div class="text">Add View&nbsp;</div><span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-left">
+                <li ng-repeat="item in videoDropdown"><a href="" ng-click="item.fn()" ng-hide="item.isDisabled?item.isDisabled():false">
+                    <i ng-show="item.icon" class="fa {{item.icon}}" aria-hidden="true"></i>&nbsp;{{item.label}}</a></li>
+            </ul>
+        </div>
+        <!-- Advanced dropdown -->
+        <div class="btn-group"  ng-show="showAdvancedDropdown()">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-sliders" aria-hidden="true"></i>&nbsp;<div class="text">Advanced&nbsp;</div><span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-right">
+                <li ng-repeat="item in advancedDropdown"><a href="" ng-click="item.fn()" ng-hide="item.isDisabled?item.isDisabled():false">
+                    <i ng-show="item.icon" class="fa {{item.icon}}" aria-hidden="true"></i>&nbsp;{{item.label}}</a></li>
+            </ul>
+        </div>
+        <!-- Troubleshooting -->
+        <div class="btn-group" ng-show="showTroubleshootDropdown()">
+            <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;<div class="text">Troubleshoot&nbsp;</div><span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-right">
+                <li ng-repeat="item in troubleshootingDropdown"><a href="" ng-click="item.fn()" ng-hide="item.isDisabled?item.isDisabled():false">
+                    <i ng-show="item.icon" class="fa {{item.icon}}" aria-hidden="true"></i>&nbsp;{{item.label}}</a></li>
+            </ul>
+        </div>
+        <!-- Master Volume -->
+        <div class="btn-group"  ng-show="showMasterVolume()">
+            <button type="button" style="height:97%" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-volume-down" aria-hidden="true"></i>&nbsp;
+                    <!-- <div class="text"> -->
+                        <input type="range" style="width:70px; display:inline-block; height:10px" ng-model="masterVolumeModel" min={{0}} max={{100}} step={{1}} ng-change="onMasterVolumeSliderChanged()">
+                    <!-- </div> -->
+                    <i class="fa fa-volume-up" aria-hidden="true"></i>&nbsp;
+            </button>
+        </div>
+        <!-- <div class="btn-group" ng-show="true">
+            <input type="range" ng-model="masterVolumeModel" min={{0}} max={{100}} step={{1}} ng-change="onMasterVolumeChanged()">
+        </div> -->
+    </div>
+</div>
+
+<!-- Mobile -->
+<div class="mobileMenu-container" ng-show="thinScreen()" style="display:none"; ng-click="collapse()">
+    <div class="mobileMenu-collapser" ng-click="collapse">
+    </div>
+    <div ng-show="thinScreen()" class="mobileMenu">
+    </div>
+</div>
+
+<!-- Notifications -->
+<div class="notificationContainer" >
+    <div ng-repeat="n in notifications" class="notification alert alert-{{n.type}}" >
+        {{n.message}}
+        <span class='glyphicon glyphicon-remove pull-right clickable' ng-click='n.clearFn()'></span>
+    </div>
+</div>
+
+<!-- Progress Bar -->
+<div ng-show="showProgressBar" id="headerProgressBar" ng-click="clearProgressBar()">
+    <img class="progressBarLoader" ng-show="progressBarStatus=='pending'" src="../img/loader2.gif">
+    <div class="progressBarSuccess" ng-show="progressBarStatus=='success'" style="color:green;"><i class="fa fa-check" aria-hidden="true"></i> Success!</div>
+    <pre class="progressBarFailure" ng-show="progressBarStatus=='failure'" style="color:red;"  ><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Error.</pre>
+</div>
+<!-- Spinner -->
+<i ng-show="showSpinner" id="headerSpinner" class="fa fa-refresh fa-spin"></i>
+
+<!-- Connection Status -->
+<div id="connectionStatus" ng-show="failureLevel > 0" class="connectionStatus-{{failureLevel}}">
+    <i class="fa fa-exclamation-triangle"></i>
+</div>
+
+<!-- Debug Status -->
+<div id=debugStatus ng-show="isDebug()">
+    Debug Enabled
+</div>
+
+<!-- bottom menu -->
+<div id="bottom-menu" ng-click="expand($event)" ng-show="showBottomMenu()">
+    {{getMobileMenuAction()}} <i class="fa fa-chevron-up"></i> Menu
+</div>

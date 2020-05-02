@@ -1,0 +1,138 @@
+.sysInfo {
+    text-align: center;
+    background-color: #eeeeee;
+}
+.sysInfo-NORMAL {
+    background-color: #b6ff6e;
+}
+.sysInfo-WARNING {
+    background-color: #FFFF66;
+}
+.sysInfo-INFORMATION {
+    background-color: #00FFFF;
+}
+.sysInfo-ERROR {
+    background-color: #ff4d4d;
+}
+.spacer7 {
+    line-height: 7px;
+}
+
+.altRow {
+    background-color: #F1F1F1;
+    border-top: 1px solid #E4E4E4;
+    border-bottom: 1px solid #E4E4E4;
+    padding-top: 7px;
+    padding-bottom: 7px;
+}
+
+/*
+ * Disables tooltip for venturocket angular-slider in IE 10/11
+ */
+::-ms-tooltip {
+    display: none;
+}
+
+.edit-in-place span {
+  cursor: pointer;
+}
+
+.edit-in-place input {
+  display: none;
+}
+
+.edit-in-place.active span {
+  display: none;
+}
+
+.edit-in-place.active input {
+  display: inline-block;
+}
+
+.center-div {
+    display: block;
+    text-align: center;
+}
+
+/*
+ * For scaling glyphicons
+ */
+.gi-1x{
+    line-height: 75px;
+    min-height: : 75px;
+    display: block;
+    font-size: 25px;
+    width: 1em;
+    margin: -0.5em auto 0px;
+}
+.gi-2x{
+    line-height: 80px;
+    min-height: : 80px;
+    display: block;
+    font-size: 35px;
+    width: 1em;
+    margin: -0.5em auto 0px;
+}
+.gi-3x{font-size: 3em;}
+.gi-4x{font-size: 4em;}
+.gi-5x{font-size: 5em;}
+
+.bg-dark {
+    background-color: #595959;
+    border: 1px solid #404040;
+    color: #ffffff;
+    font-weight: normal;
+}
+
+.bg-grey {
+    background-color: #e6e6e6;
+    color: #000000;
+    line-height: 80px;
+    min-height: : 80px;
+    display: block;
+}
+
+
+.selectedRow {
+    background-color: darkgray;
+}
+
+/*
+ * for ui-grid
+ */
+.myGrid {
+    width: 100%;
+    height: 500px;
+}
+.ui-grid-header-cell .ui-grid-cell-contents {
+     height: 48px;
+     white-space: normal;
+     -ms-text-overflow: clip;
+     -o-text-overflow: clip;
+     text-overflow: clip;
+     overflow: visible;
+}
+
+pre {
+    height: auto;
+    max-height: 600px;
+    overflow: auto;
+    background-color: #eeeeee;
+    word-break: normal !important;
+    word-wrap: normal !important;
+    white-space: pre !important;
+}
+
+/*
+ * Disables spinners for number input fields
+ */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+
+#selectors .offline{
+    display:none;
+}

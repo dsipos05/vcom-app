@@ -1,0 +1,56 @@
+
+<!-- If we are on the demo server -->
+<div ng-if="isPublicDemo()" class="welcome">
+    <span class="welcome-span">Welcome to the {{productName}} public demo!</span><br>
+    Below are links to the System Administration and the WebRTC Control Panel.<br>
+    For more information, refer to <a href="{{homeLinkURL}}">our home page.</a>
+</div>
+
+<!-- If we are not on the demo server -->
+<div ng-if="!isPublicDemo()" class="welcome">
+        <span class="welcome-span">{{productName}} Web Portal</span> <br>
+        Below are links to the System Administration and the WebRTC Control Panel.
+</div>
+<!-- We don't know if we are on the demo server, as there's an error with angular -->
+<div ng-hide="true" class="welcome">
+    <span class="welcome-span">Welcome to the Web Portal!</span><br>
+    Below are links to the System Administration and the WebRTC Control Panel.<br>
+</div>
+
+
+<!-- Angular is working -->
+<div id="container">
+    <div class="dest vsa">
+        <a class="nostyle" href="/SystemAdmin/" target="_blank">
+            <h1>System Administration</h1>
+            <img src="/img/vsaNoLogo.png" ng-src="{{vsaImgURL}}">
+            <div class="featureList">
+                <ul>
+                    <li>Monitor the status of the Virtual Matrix</li>
+                    <li>Add and configure clients</li>
+                    <li>Assign selectors</li>
+                    <li>View diagnostic logs</li>
+                </ul>
+            </div>
+        </a>
+    </div>
+    <div class="dest vcp">
+        <a class="nostyle" href="/ControlPanel/" target="_blank">
+            <h1>Control Panel</h1>
+            <img src="/img/no logo.jpg" ng-src="{{vcpImgURL}}">
+            <div class="featureList">
+                <ul>
+                    <li>Push-to-talk with other clients</li>
+                    <li>Watch multiple video streams simultaneously</li>
+                    <li>Rearrange windows in your control panel</li>
+                    <li ng-if="isPublicDemo()">Geolocate other clients</li>
+                    <li ng-if="!isPublicDemo()">Geolocate other clients</li>
+                </ul>
+            </div>
+        </a>
+    </div>
+</div>
+
+<div ng-hide="loaded">
+    <img id="loader" src="img/loader2.gif">
+</div>

@@ -1,0 +1,21 @@
+<div class="modal-header">
+	<h3>Edit Template Confirmation</h3>
+</div>
+<div class="modal-body">
+	<form class="form-horizontal">
+        <div class="alert alert-warning" role="alert">
+            The selected item is linked to a template. Press "Edit Template" to edit the base template.
+            Press Unlink to edit this individual client.
+        </div>
+	</form>
+	
+</div>
+<div class="modal-footer">
+    <span class="pull-left">
+        <button class="btn btn-primary" data-ng-click="editTemplate()">Edit Template</button>&nbsp;
+        <button class="btn btn-warning" data-ng-click="unlink()">Unlink</button>
+    </span>
+    <span class="pull-right">
+        <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+    </span>
+</div>

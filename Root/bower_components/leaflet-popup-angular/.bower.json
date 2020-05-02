@@ -1,0 +1,58 @@
+{
+  "name": "leaflet-popup-angular",
+  "version": "1.0.3",
+  "description": "Allows for the use of AngularJS in leaflet popups.",
+  "devDependencies": {},
+  "main": "src/L.Popup.Angular.js",
+  "scripts": {},
+  "eslintConfig": {
+    "root": true,
+    "globals": {
+      "L": true
+    },
+    "env": {
+      "commonjs": true,
+      "amd": true,
+      "node": false
+    },
+    "rules": {
+      "no-mixed-spaces-and-tabs": [
+        2,
+        "smart-tabs"
+      ],
+      "indent": [
+        2,
+        "tab",
+        {
+          "VariableDeclarator": 0
+        }
+      ],
+      "curly": 2,
+      "spaced-comment": 2,
+      "strict": 0,
+      "wrap-iife": 0,
+      "key-spacing": 0,
+      "consistent-return": 0
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/grantHarris/leaflet-popup-angular.git"
+  },
+  "keywords": [
+    "gis",
+    "map"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/grantHarris/leaflet-popup-angular",
+  "_release": "1.0.3",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.0.3",
+    "commit": "339b3b02f9055c70c67621a59a7033c421817567"
+  },
+  "_source": "https://github.com/grantHarris/leaflet-popup-angular.git",
+  "_target": "^1.0.3",
+  "_originalSource": "leaflet-popup-angular",
+  "_direct": true
+}

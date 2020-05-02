@@ -1,0 +1,43 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        Lines
+        <span id="toggleShowDisabledPhonesButton" style="float:right" ng-click="toggleShowDisabledPhones()">
+            <div ng-hide="disabledPhonesAreVisible">
+                Show Inactive Lines &nbsp;
+                <span class="glyphicon glyphicon-plus"></span>
+            </div>
+            <div ng-show="disabledPhonesAreVisible">
+                Hide Inactive Lines &nbsp;
+                <span class="glyphicon glyphicon-minus"></span>
+            </div>
+        </span>
+    </div>
+    <div class="panel-body">
+        <div class="phonesContainer">
+            <div ng-repeat="phone in telephones track by $index">
+                <div preventDefault class="phone" id="{{phone.ID == getSelectedPhone().ID ? 'selected-phone' : ''}}"  
+                ng-class="{'phone-off-hook':phone.LINE_STATE=='OFF-HOOK','phone-recently-changed':phone.recentlyChanged==true,'phone-ringing':phone.LINE_STATE=='RINGING','phone-on-hook':phone.LINE_STATE=='ON-HOOK','phone-disabled':phone.LINE_STATE=='DISABLED','phone-error':phone.LINE_STATE=='ERROR'}"
+                ng-click="selectPhone(phone)">
+                    <div class="phoneBankText">
+                        <span ng-show="phone.LINE_STATE=='ON-HOOK'" class="glyphicon glyphicon-phone-alt"></span>
+                        <span ng-show="phone.LINE_STATE=='OFF-HOOK'" class="glyphicon glyphicon-earphone"></span>
+                        {{phone.LINE_NAME}}
+                        <br>
+                        {{phone.LINE_NUMBER}}
+                        <br>
+                        {{getStateDisplayName(phone)}}
+                        <br>
+                    </div>
+                    <div class="phoneBankMeter">
+                        <smallvumeter ng-show="enableVuMeter"
+                            rxa="phone.levels.rxAverage"
+                            rxp="phone.levels.rxPeak"
+                            txa="phone.levels.txAverage"
+                            txp="phone.levels.txPeak"
+                        ></smallvumeter>
+                    </div>
+                </div>  
+            </div>
+        </div>
+    </div>
+</div>

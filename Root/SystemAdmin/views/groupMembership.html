@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="titleBar">
+        <div class="title">Group Membership for {{group.LABEL_NAME}}</div>
+        <button class="btn btn-default" ng-click="cancel()"><i class="fa fa-times" aria-hidden="true"></i>&nbsp;Cancel</button>
+        <button class="btn btn-warning" ng-click="save()"><i class="fa fa-check" aria-hidden="true"></i>&nbsp;Save</button>
+    </div>
+
+    <div id="groupMembershipGridsContainer">
+        <div id="leftGrid" class="ag-grid ag-theme-fresh"></div>
+        <div id="buttons">
+            <div ng-hide="isFG">
+                <div>
+                    <button class="btn btn-default" ng-disabled="leftSelected === undefined" ng-click="addNonAssignedSelector('TALK_LISTEN')">Split Talk/Listen&nbsp;<span class="fa fa-arrow-right"></span></button>
+                </div>
+                <div>
+                    <button class="btn btn-default" ng-disabled="leftSelected === undefined" ng-click="addNonAssignedSelector('TALK')">Talk Only&nbsp;<span class="fa fa-arrow-right"></span></button>
+                </div>
+                <div>
+                    <button class="btn btn-default" ng-disabled="leftSelected === undefined" ng-click="addNonAssignedSelector('LISTEN')">Listen Only&nbsp;<span class="fa fa-arrow-right"></span></button>
+                </div>
+            </div>
+            <div ng-show="isFG"> <!-- FG have no notion of TALK/LISTEN or LISTEN_ONLY so we just need one button -->
+                <br>
+                <br>
+                <br>
+                <div>
+                    <button class="btn btn-default" ng-disabled="leftSelected === undefined" ng-click="addNonAssignedSelector()">Add Member&nbsp;<span class="fa fa-arrow-right"></span></button>
+                </div>
+            </div>
+            <div>&nbsp;</div>
+            <div>
+                <div>
+                    <button class="btn btn-default" ng-disabled="rightSelected === undefined" ng-click="removeSelector()"><span class="fa fa-arrow-left"></span>&nbsp;Remove</button>
+                </div>
+                <div>
+                    <button class="btn btn-default" ng-click="clearAllSelectors()">Clear&nbsp;<span class="fa fa-arrow-right"></span></button>
+                </div>
+            </div>
+        </div>
+        <div id="rightGrid" class="ag-grid ag-theme-fresh"></div>
+    </div>
+</div>

@@ -1,0 +1,76 @@
+<div class="modal-header">
+        <h3><span class="fa fa-info-circle"></span>&nbsp;&nbsp;Dial Plan Help</h3>
+    </div>
+    <div class="modal-body">
+
+        <h3>Syntax</h3>
+        <ul class="list-group lightgray">
+            <li class="list-group-item clearfix">
+                <div class="col-xs-2"><strong>Type</strong></div>
+                <div class="col-xs-4"><strong>Value</strong></div>
+                <div class="col-xs-6"><strong>Result</strong></div>
+            </li>
+            <li class="list-group-item clearfix">
+                <div class="col-xs-2">Digit</div>
+                <div class="col-xs-4"><kbd>0</kbd> <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> <kbd>4</kbd> <kbd>5</kbd> <kbd>6</kbd> <kbd>7</kbd> <kbd>8</kbd> or <kbd>9</kbd></div>
+                <div class="col-xs-6">Identifies a specific digit<br>(do not use #)</div>
+            </li>
+            <li class="list-group-item clearfix">
+                <div class="col-xs-2">Wild Card</div>
+                <div class="col-xs-4"><kbd>x</kbd></div>
+                <div class="col-xs-6">Matches any single digit that is dialed</div>
+            </li>
+            <li class="list-group-item clearfix">
+                <div class="col-xs-2">Wild Card</div>
+                <div class="col-xs-4"><kbd>.</kbd> (period)</div>
+                <div class="col-xs-6">Matches an arbitrary number of digits</div>
+            </li>
+            <li class="list-group-item clearfix">
+                <div class="col-xs-2">Timer</div>
+                <div class="col-xs-4"><kbd>T</kbd></div>
+                <div class="col-xs-6">Indicates that an additional timeout period of 4 seconds should take place before automatic dialing starts</div>
+            </li>
+        </ul>
+
+        <h3>Examples</h3>
+        <ul class="list-group lightgray">
+            <li class="list-group-item clearfix">
+                <div class="col-xs-2"><strong>Dial Type</strong></div>
+                <div class="col-xs-7"><strong>Digits Dialed</strong></div>
+                <div class="col-xs-3"><strong>Dial Plan</strong></div>
+            </li>
+            <li class="list-group-item clearfix">
+                <div class="col-xs-2">Internal Extension</div>
+                <div class="col-xs-7">A four digit number</div>
+                <div class="col-xs-3">xxxx</div>
+            </li>
+            <li class="list-group-item clearfix">
+                <div class="col-xs-2">Emergency</div>
+                <div class="col-xs-7">911</div>
+                <div class="col-xs-3">911</div>
+            </li>
+            <li class="list-group-item clearfix">
+                <div class="col-xs-2">Local Operators</div>
+                <div class="col-xs-7">9 (if required for an outside line) then 0</div>
+                <div class="col-xs-3">90T</div>
+            </li>
+            <li class="list-group-item clearfix">
+                <div class="col-xs-2">Local Number</div>
+                <div class="col-xs-7">9 (if required for an outside line) and then a seven digit number</div>
+                <div class="col-xs-3">9xxxxxxxT</div>
+            </li>
+            <li class="list-group-item clearfix">
+                <div class="col-xs-2">Long Distance</div>
+                <div class="col-xs-7">9 (if required), 1, area code and local number</div>
+                <div class="col-xs-3">91xxxxxxxxxx</div>
+            </li>
+            <li class="list-group-item clearfix">
+                <div class="col-xs-2">International</div>
+                <div class="col-xs-7">9 (if required), 011, then any number of additional digits (at least one)</div>
+                <div class="col-xs-3">9011x.T</div>
+            </li>
+        </ul>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" ng-click="close()">Close</button>
+    </div>

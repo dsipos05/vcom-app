@@ -1,0 +1,52 @@
+
+<div id="loginContainer">
+    <div id="versionNumberDisplay">{{versionNumber}}</div>
+    <div id="login" class="well">
+        <form class="login form-horizontal" method="post" action="login" ng-submit="handleFormSubmission($event)">
+            <fieldset>
+                <div id="loginModes">
+                    <div class="title">
+                        Login
+                    </div>
+                    <!-- <button type="button" class="btn btn-default login-guest" ng-click="setGuestMode(!loginAsGuest)">{{loginAsGuest?"Swap to User":"Swap to Guest"}}</button> -->
+                    <toggle-switch ng-show="allowGuestLogin" ng-model="loginAsGuest" labels="Guest,User" classes="btn-success" state-values="true,false"></toggle-switch>
+                </div>
+                <!-- <legend id="loginLegend">Login</legend> -->
+                <hr>
+                <div id="loginInputs">
+                    <div class="form-group">
+                        <label for="username" class="control-label"> {{(loginAsGuest?"Selector Name":"Login Name")+":&nbsp;"}} </label>
+                        <div>
+                            <input ng-model="userName" id="login2" autocapitalize="none" autocorrect="off" autocomplete="username" class="form-control" type="text" name="username">
+                        </div>
+                    </div>
+                    <div class="form-group" ng-show="!loginAsGuest">
+                        <label for="password" class="control-label"> Login Password:&nbsp; </label>
+                        <div>
+                            <input ng-model="password" id="password2" autocapitalize="none" autocorrect="off" autocomplete="current-password" class="form-control" type="password" name="password">
+                        </div>
+                    </div>
+                    <div class="form-group login-submit">
+                        <label class="control-label"></label>
+                        <div>
+                            <input type="submit" class="btn btn-primary login-submit" ng-value="getLoginAsUserButtonText()" ng-disabled="isAuthenticating">
+                            <button type="button" class="btn btn-default login-configuration" ng-click="showConfiguration()">Configuration</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="autoLoginState" class="control-label">Auto-Login:&nbsp;</label>
+                        <toggle-switch ng-model="autoLoginState" labels="On,Off" stateValues="ON,OFF"></toggle-switch>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+
+        <!-- <div id="testGrid" class="ag-theme-fresh ag-grid"></div> -->
+
+        <!-- Hidden Login form that is submitted in order to trigger chrome's prompt to save password -->
+        <form name="login-form" id="login-form" method="post" action="" style="display: none;">
+            <input name="login" id="login-login" type="text">
+            <input name="password" id="login-password" type="password">
+        </form>
+    </div>
+</div>

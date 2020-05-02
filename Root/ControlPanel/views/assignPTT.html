@@ -1,0 +1,51 @@
+<div id="assignPTT" class="formModal">
+    <div class="modal-header formModal-header">
+        <strong>Push To Talk</strong>
+    </div>
+    <form class="modal-body formModal-body">
+        <div class="center-div">
+            Press any key on your device....
+        </div>
+        <br>
+        <div class="form-group">
+            <label class="control-label formModal-label">PTT Button:</label>
+            <span class="formModal-input">
+                <input id="keylistener" type="text" value="{{lastPressed.label}}" disabled>
+            </span>
+        </div>
+        <div ng-show="lastPressed.value" class="form-group">
+            <label class="control-label formModal-label"></label>
+            <span class="formModal-input">
+                <button type="button" ng-click="clearButton()">Clear</button>
+            </span>
+        </div>
+        <br>
+
+        <div class="form-group">
+            <label class="control-label formModal-label">Selector:</label>
+            <span class="formModal-input">
+                <selectorchooser ng-model="chosenSelector" filter="selectorFilter"></selectorchooser>
+            </span>
+        </div>
+        <div ng-show="chosenSelector" class="form-group">
+            <label class="control-label formModal-label"></label>
+            <span class="formModal-input">
+                <button type="button" ng-click="clearSelector()">Clear</button>
+            </span>
+        </div>
+        <br>
+        <div class="form-group">
+            <label class="control-label formModal-label">Verbose Mode:</label>
+            <span class="formModal-input">
+                <toggle-switch ng-model="verbose"></toggle-switch>
+            </span>
+        </div>
+
+
+        <hr>
+        <button class="formModal-btn btn btn-primary" ng-click="submit()">Submit</button>
+        <button class="formModal-btn btn btn-default" ng-click="cancel()">Cancel</button>
+
+        <br>
+    </form>
+</div>

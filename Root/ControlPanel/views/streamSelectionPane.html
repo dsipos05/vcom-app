@@ -1,0 +1,124 @@
+<div id="streamSelectionPane" class="selectorsPane">
+    <div id="bankDropzone" class="dropzone dropzone-highlight" ng-drop="true" ng-drop-success="onBankDrop($data,$event,0)">
+        <!-- <div ng-if="selectorsToNotPublish.length < 1" class="dropzone-dotted-outline">
+
+        </div> -->
+        <!-- <div ng-if="selectorsToNotPublish.length < 1" class="dropzone-placeholder-label">
+            &lt;Drag selectors here&gt;
+        </div> -->
+    </div>
+
+    <div id="publishDropzone" ng-if="selectorsToPublish.length < 1" class="dropzone dropzone-highlight" ng-drop="true" ng-drop-success="onPublishDrop($data,$event,0)">
+        <!-- <div class="dropzone-dotted-outline">
+
+        </div> -->
+        <!-- <div class="dropzone-placeholder-label">
+            &lt;Drag selectors here&gt;
+        </div> -->
+    </div>
+
+    <div id="notToBePublished">
+        <div class="streamSelectionLabel">Unpublished Streams</div>
+        <div class="selectorBankContainer">
+            <!-- <div class="dropzone dropzone-highlight dropzone-placeholder selectorBank" ng-drop="true" ng-drop-success="onBankDrop($data,$event,0)">
+                <div ng-if="selectorsToNotPublish.length < 1" class="dropzone-dotted-outline">
+        
+                </div>
+                <div ng-if="selectorsToNotPublish.length < 1" class="dropzone-placeholder-label">
+                    &lt;Drag selectors here&gt;
+                </div>
+            </div> -->
+            <div class="dropzone-magnet"></div>
+            <div class="scrollContainer">
+                <div id="selectors" class="streamSelection">
+                    <div ng-repeat="selector in selectorsToNotPublish" ng-show="selector.visible" id="{{selector.ID + '-videoBank'}}" class="selector videoSelector" ng-drag="true" ng-drag-start="onDragStart(selector.ID)" ng-drag-data="{selector:selector,ID:selector.ID,allowClone:true}" ng-class="{
+                        'offline':selector.offline,
+                        'active':selector.active,
+                        'inactive':!selector.active, 
+                        'listenActive':selector.listenActive,
+                        'listenHalfway':selector.listenHalfway,
+                        'videoActive':selector.videoActive,
+                        'talkActive':selector.talkActive,
+                        'talkHalfway':selector.talkHalfway,
+                        'streaming':selector.isStreaming
+                    }">
+                        <div class="selector-bg">
+                        </div>
+                        <!-- <div class="selector-left-clickable dropzone dropzone-highlight" ng-drop="true" ng-drop-success="onBankDrop($data,$event,$index)"></div>
+                        <div class="selector-right-clickable dropzone dropzone-highlight" ng-drop="true" ng-drop-success="onBankDrop($data,$event,$index+1)"></div> -->
+                        <div class="selector-left center-div {{selector.leftType}}">
+                            <i aria-hidden="true" class="{{selector.leftIconClass}}"></i>
+                        </div>
+                        <div class="selector-right center-div {{selector.rightType}}">
+                            <i aria-hidden="true" class="{{selector.rightIconClass}}"></i>
+                        </div>
+                        <div class="selector-name center-div">
+                            <div>{{selector.name}}</div>
+                        </div>
+                        <!-- <div class="selector-streaming-clickable" ng-click="toggleStreamWindow(selector.ID)"></div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+<!-- <div id="streamBox"> -->
+    <div id="toBePublished">
+        <div id="toBePublishedBackground"></div>
+        <!-- <div id="videoPreviews"></div> -->
+        <div class="streamSelectionLabel">Streams to Publish <button ng-show="selectorsToPublish.length > 0" class="btn btn-primary" ng-click="publish()">Publish Streams</button> </div>
+        <div class="dropzone-magnet"></div>
+        <!-- <div ng-if="selectorsToPublish < 1" class="dropzone dropzone-highlight dropzone-placeholder" ng-drop="true" ng-drop-success="onPublishDrop($data,$event,0)">
+            <div class="dropzone-dotted-outline">
+    
+            </div>
+            <div class="dropzone-placeholder-label">
+                &lt;Drag selectors here&gt;
+            </div>
+        </div> -->
+        <div class="scrollContainer">
+            <div id="selectors" class="streamSelection">
+                <div ng-repeat="selector in selectorsToPublish" ng-show="selector.visible" id="{{selector.ID + '-preview'}}"class="selector videoSelector" ng-drag="true" ng-drag-start="onDragStart(selector.ID)" ng-drag-data="{selector:selector,ID:selector.ID,allowClone:true}" ng-class="{
+                    'offline':selector.offline,
+                    'active':selector.active,
+                    'inactive':!selector.active,
+                    'listenActive':selector.listenActive,
+                    'listenHalfway':selector.listenHalfway,
+                    'videoActive':selector.videoActive,
+                    'talkActive':selector.talkActive,
+                    'talkHalfway':selector.talkHalfway,
+                    'streaming':selector.isStreaming
+                }">
+                <div class="selector-body">
+                    <div class="selector-bg"></div>
+                    <div class="selector-logo">
+                        <img class="selector-image" ng-src='{{selector.label.IMAGE_URL}}'>
+                    </div>
+                    <div class="selector-left-clickable dropzone dropzone-highlight" ng-drop="true" ng-drop-success="onPublishDrop($data,$event,$index)"></div>
+                    <div class="selector-right-clickable dropzone dropzone-highlight" ng-drop="true" ng-drop-success="onPublishDrop($data,$event,$index+1)"></div>
+                    <div class="selector-left center-div {{selector.leftType}}">
+                        <i aria-hidden="true" class="{{selector.leftIconClass}}"></i>
+                    </div>
+                    <div class="selector-right center-div {{selector.rightType}}">
+                        <i aria-hidden="true" class="{{selector.rightIconClass}}"></i>
+                    </div>
+                    <div class="selector-name center-div">
+                        <div>{{selector.name}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="dropzone dropzone-highlight dropzone-remainder" ng-drop="true" ng-drop-success="onPublishDrop($data,$event)">
+                    
+            </div>
+            <!-- <div id="streamBoxButtons">
+                <button ng-show="selectorsToPublish.length > 0" class="btn btn-primary" ng-click="publish()">Publish Streams</button>
+            </div> -->
+        </div>
+    </div>
+
+    
+    
+</div>
+
+

@@ -1,0 +1,23 @@
+
+<div class="panel panel-primary">
+    <div class="panel-body">
+        <!-- <form> -->
+            <label>From:</label>
+            <input type="text" ng-show="getPhone()" value="{{getPhone().LINE_NAME}}" readonly />
+            <input type="text" ng-hide="getPhone()" placeholder="Click a phone to choose it" readonly/>
+            <br>
+            <form ng-submit="placeCall()">
+                <label>To:</label>
+                <input type="text" name="tel" phone-input ng-model="phoneNumber">
+                <button type="submit" ng-class="{'disabled':!canPlaceCall()}" ng-disabled="!canPlaceCall()" ng-click="placeCall()">Place Call </button>
+            </form>
+            <form ng-show="showExtension()" ng-submit="sendExtension()">
+                <label>Send DTMF:</label>
+                <input type="text" ng-model="dtmf">
+                <button type="submit" ng-click="sendDTMF()">Send</button>
+            </form>
+            <span class="phoneError" >{{advice()}}</span>
+        <!-- </form> -->
+        <button ng-click="hangUp()" ng-class="{'disabled':!canHangUp()}" ng-disabled="!canHangUp()"> Hang Up </button>
+    </div>
+</div>

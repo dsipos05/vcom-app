@@ -1,0 +1,42 @@
+<div class="container">
+    <!-- Page Controls -->
+    <div class="row">
+        <div class="col-xs-12">
+            <span class="pull-left">
+                <button class="btn btn-default" ng-click="resetStatistics()"><span class="glyphicon glyphicon-refresh"></span>&nbsp;Reset Statistics</button>&nbsp;
+                <button class="btn btn-default" ng-click="showLegend()"><span class="fa fa-info"></span>&nbsp;Column Legend</button>
+            </span>
+            <!-- <span>
+                <i ng-show="showSpinner" class="fa fa-refresh fa-spin" style="font-size:20px"></i>
+            </span> -->
+            <span>
+                <span class="pull-left clientStatisticsButton">
+                    Unused Clients:
+                </span>
+                <toggle-switch ng-model="showUnusedClients" labels="Show,Hide"></toggle-switch>
+            </span>
+            <span>
+                <span class="pull-left clientStatisticsButton">
+                    Control Panels:
+                </span>
+                <toggle-switch ng-model="showControlPanels" labels="Show,Hide"></toggle-switch>
+            </span>
+            <span>
+                <span class="pull-left clientStatisticsButton">
+                    Device Interface:
+                </span>
+                <toggle-switch ng-model="showDeviceInterfaces" labels="Show,Hide"></toggle-switch>
+            </span>
+            <span>
+                <span class="pull-left clientStatisticsButton">
+                    SIP Devices:
+                </span>
+                <toggle-switch ng-model="showSIPDevices" labels="Show,Hide"></toggle-switch>
+            </span>
+        </div>
+    </div>
+    <!-- End Page Controls -->
+    <br>
+
+    <div id="clientStatisticsGrid" class="ag-theme-fresh ag-grid ag-grid-fullscreen"></div>    
+</div>

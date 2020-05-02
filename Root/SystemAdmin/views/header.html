@@ -1,0 +1,242 @@
+<div class="navbar navbar-default">
+    <div class="navbar-header">
+        <button ng-show="showDropdown()" type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="hidden-xs hidden-sm navbar-brand" style="margin-top: -15px">
+<!--            <img src="../../img/IntraCom_Logo_Black_189_50.png" border="0">&nbsp;-->
+            <img id="logoImage" ng-show="BrandingService.getLogo()" ng-src="{{ BrandingService.getLogo() }}" border="0">&nbsp;
+        </a>
+        <span class="navbar-brand" style="padding-top: 38px;">{{ BrandingService.getProductName() }} - System Administration</span>
+    </div>
+    <div style="height: 1px;" aria-expanded="false" class="navbar-collapse navbar-responsive-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                <a href="" ng-show="showDropdown()" class="dropdown-toggle" data-toggle="dropdown">{{ userName }}<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+<!--                    <li><a href="" ng-click="changePassword()">Change Password</a></li>-->
+                    <li><a href="" ng-click="logout()">Logout</a></li>
+                    <li class="dev-only" ng-show="showDev()" ng-repeat="item in testFunctions"><a href="" ng-click="item.label()">{{item.value}}</a></li>
+                </ul>
+            </li>
+<!-- Mobile Navigation -->
+            <!-- Advanced Settings -->
+            <li ng-show="isSimpleTIF()" class="dropdown hidden-sm hidden-md hidden-lg"><a href="" ng-click="showAdvancedSettings()">Show Advanced Settings&nbsp;<span class="glyphicon glyphicon-triangle-right"></span></a></li>
+            <!-- System Maintenance -->
+            <li class="dropdown hidden-sm hidden-md hidden-lg" ng-show="showSystemMaintenance()">
+                <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                    <span class="glyphicon glyphicon-wrench pull-left"></span>&nbsp;
+                    System Maintenance<b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li ng-show="showRestartSystem()"><a href="" ng-click="restartSystem()"><span class="glyphicon glyphicon-play-circle"></span>&nbsp;Restart System</a></li>
+                    <li ng-show="showFailover()"><a href="" ng-click="forcedFailover()"><span class="glyphicon glyphicon-random"></span>&nbsp;Force Failover</a></li>
+                    <li ng-show="showLicense()"><a href="" ng-click="license()"><span class="glyphicon glyphicon-cog"></span>&nbsp;License</a></li>
+                    <li ng-show="showSSL()"><a href="" ng-click="ssl()"><span class="glyphicon glyphicon-lock"></span>&nbsp;SSL Certificate</a></li>
+                </ul>
+            </li>
+            <!--System Configuration -->
+            <li class="dropdown hidden-sm hidden-md hidden-lg" ng-show="showSystemConfiguration()">
+                <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                    <span class="glyphicon glyphicon-cog pull-left"></span>&nbsp;
+                    System Configuration<b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="" ng-show="showSystemSettings()" ng-click="systemSettings()"><span class="glyphicon glyphicon-cog"></span>&nbsp;System Settings</a></li>
+                    <li><a href="" ng-show="showClientConfigurationList()" ng-click="clientConfigurationList()"><span class="glyphicon glyphicon-cog"></span>&nbsp;Client Configuration</a></li>
+                    <li><a href="" ng-show="showGroupConfigurationList()" ng-click="groupConfigurationList()"><span class="glyphicon glyphicon-cog"></span>&nbsp;Group Configuration</a></li>
+                    <li><a href="" ng-show="showRemoteConfiguration()" ng-click="remoteConfigurationList()"><span class="glyphicon glyphicon-cog"></span>&nbsp;Remote Configuration</a></li>
+                    <li><a href="" ng-show="showUserInterfaceSettings()" ng-click="userInterfaceSettings()"><span class="glyphicon glyphicon-cog"></span>&nbsp;User Interface Settings</a></li>
+                    <li><a href="" ng-show="showVirtualRealityConfiguration()" ng-click="virtualRealityConfiguration()"><span class="glyphicon glyphicon-cog"></span>&nbsp;VR / 360 UI Configuration</a></li>
+                </ul>
+            </li>
+            <!-- System Information -->
+            <li class="dropdown hidden-sm hidden-md hidden-lg" ng-show="showSystemInformation()">
+                <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                    <span class="glyphicon glyphicon-info-sign pull-left"></span>&nbsp;
+                    System Information<b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="" ng-show="showSystemStatus()" ng-click="systemStatus()"><span class="glyphicon glyphicon-stats pull-left"></span>&nbsp;System Status</a></li>
+                    <li><a href="" ng-show="showClientStatistics()" ng-click="clientStatistics()"><span class="glyphicon glyphicon-stats"></span>&nbsp;Client Statistics</a></li>
+                    <li><a href="" ng-show="showSipRegistrations()" ng-click="sipRegistrations()"><span class="glyphicon glyphicon-user"></span>&nbsp;SIP Registrations</a></li>
+                    <li><a href="" ng-show="showGeolocation()" ng-click="geo()"><span class="glyphicon glyphicon-globe pull-left"></span>&nbsp;Geolocation</a></li>
+                    <li><a href="" ng-show="showActivityLog()" ng-click="activityLog()"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;Activity Log</a></li>
+                </ul>
+            </li>
+<!-- End Mobile Navigation -->
+        </ul>
+    </div>
+</div>
+
+<!-- Normal Navigation -->
+<div id="header-container" ng-show="showDefaultHeader()" class="container-fluid hidden-xs">
+    <ul class="hidden-xs nav navbar-nav">
+        <!-- Home -->
+        <li>
+            <a href="" ng-click="systemStatus()"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;System Status</a>
+        </li>
+        <!-- System Maintenance -->
+        <li class="dropdown" ng-show="showSystemMaintenance()">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="">
+                <span class="glyphicon glyphicon-wrench pull-left"></span>&nbsp;
+                System Maintenance<span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li ng-show="showRestartSystem()"><a href="" ng-click="restartSystem()"><span class="glyphicon glyphicon-play-circle"></span>&nbsp;Restart System</a></li>
+                <li ng-show="showFailover()"><a href="" ng-click="forcedFailover()"><span class="glyphicon glyphicon-random"></span>&nbsp;Force Failover</a></li>
+                <li ng-show="showLicense()"><a href="" ng-click="license()"><span class="glyphicon glyphicon-cog pull-left"></span>&nbsp;License</a></li>
+                <li ng-show="showSSL()"><a href="" ng-click="ssl()"><span class="glyphicon glyphicon-lock"></span>&nbsp;SSL Certificate</a></li>
+            </ul>
+        </li>
+        <!-- System Configuration -->
+        <li class="dropdown" ng-show="showSystemConfiguration()">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="">
+                <span class="glyphicon glyphicon-cog pull-left"></span>&nbsp;
+                System Configuration<span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="" ng-show="showSystemSettings()" ng-click="systemSettings()"><span class="glyphicon glyphicon-cog pull-left"></span>&nbsp;System Settings</a></li>
+                <li><a href="" ng-show="showClientConfigurationList()" ng-click="clientConfigurationList()"><span class="glyphicon glyphicon-cog pull-left"></span>&nbsp;Client Configuration</a></li>
+                <li><a href="" ng-show="showGroupConfigurationList()" ng-click="groupConfigurationList()"><span class="glyphicon glyphicon-cog pull-left"></span>&nbsp;Group Configuration</a></li>
+                <li><a href="" ng-show="showRemoteConfiguration()" ng-click="remoteConfigurationList()"><span class="glyphicon glyphicon-cog"></span>&nbsp;Remote Configuration</a></li>
+                <li><a href="" ng-show="showUserInterfaceSettings()" ng-click="userInterfaceSettings()"><span class="glyphicon glyphicon-cog pull-left"></span>&nbsp;User Interface Settings</a></li>
+                <li><a href="" ng-show="showVirtualRealityConfiguration()" ng-click="virtualRealityConfiguration()"><span class="glyphicon glyphicon-cog pull-left"></span>&nbsp; VR / 360 UI Configuration</a></li>
+            </ul>
+        </li>
+        <!-- System Information -->
+        <li class="dropdown" ng-show="showSystemInformation()">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="">
+                <span class="glyphicon glyphicon-info-sign pull-left"></span>&nbsp;
+                System Information<span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="" ng-show="showClientStatistics()" ng-click="clientStatistics()"><span class="glyphicon glyphicon-stats pull-left"></span>&nbsp;Client Statistics</a></li>
+                <li><a href="" ng-show="showSipRegistrations()" ng-click="sipRegistrations()"><span class="glyphicon glyphicon-user pull-left"></span>&nbsp;SIP Registrations</a></li>
+                <li><a href="" ng-show="showGeolocation()" ng-click="geo()"><span class="glyphicon glyphicon-globe pull-left"></span>&nbsp;Geolocation</a></li>
+                <li><a href="" ng-show="showActivityLog()" ng-click="activityLog()"><span class="glyphicon glyphicon-list-alt pull-left"></span>&nbsp;Activity Log</a></li>
+                <li><a href="" ng-show="showDebugLog()" ng-click="debugLog()"><span class="glyphicon glyphicon-list-alt pull-left"></span>&nbsp;Debug Log</a></li>
+            </ul>
+        </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            <a href="">
+                <span class="glyphicon glyphicon-info-sign"></span>
+                Current Location: 
+                <span id="currentLocation">{{getCurrentState()}}</span>
+            </a>
+        </li>
+    </ul>
+</div>
+
+<!-- TIF header -->
+<div id="header-container" ng-show="showTIFHeader()" class="container-fluid hidden-xs">
+    <ul class="hidden-xs nav navbar-nav">
+        <!-- Home -->
+        <li>
+            <a href="" ng-click="telephoneInterface()"><span class="glyphicon glyphicon-earphone"></span>&nbsp;&nbsp;Lines</a>
+        </li>
+        <!-- Show Advanced Settings -->
+        <li ng-show="isSimpleTIF()" class="dropdown">
+            <a href="" ng-click="showAdvancedSettings()">Show Advanced Settings&nbsp;<span class="glyphicon glyphicon-triangle-right"></span></a>
+        </li>
+        <!-- System Maintenance -->
+        <li ng-show="showSystemMaintenance()" class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="">
+                <span class="glyphicon glyphicon-wrench pull-left"></span>&nbsp;
+                System Maintenance<span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li ng-show="showRestartSystem()">  <a href="" ng-click="restartSystem()"><span class="glyphicon glyphicon-play-circle"></span>&nbsp;Restart System</a></li>
+                <li ng-show="showFailover()">       <a href="" ng-click="forcedFailover()"><span class="glyphicon glyphicon-random"></span>&nbsp;Force Failover</a></li>
+                <li ng-show="showLicense()" >       <a href="" ng-click="license()"><span class="glyphicon glyphicon-cog pull-left"></span>&nbsp;License</a></li>
+                <li ng-show="showSSL()">            <a href="" ng-click="ssl()"><span class="glyphicon glyphicon-lock"></span>&nbsp;SSL Certificate</a></li>
+            </ul>
+        </li>
+        <!-- System Configuration -->
+        <li ng-show="showSystemConfiguration()" class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="">
+                <span class="glyphicon glyphicon-cog pull-left"></span>&nbsp;
+                System Configuration<span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="" ng-show="showSystemSettings()" ng-click="systemSettings()"><span class="glyphicon glyphicon-cog pull-left"></span>&nbsp;System Settings</a></li>
+                <li><a href="" ng-show="showClientConfigurationList()" ng-click="clientConfigurationList()"><span class="glyphicon glyphicon-cog pull-left"></span>&nbsp;Client Configuration</a></li>
+                <li><a href="" ng-show="showGroupConfigurationList()" ng-click="groupConfigurationList()"><span class="glyphicon glyphicon-cog pull-left"></span>&nbsp;Group Configuration</a></li>
+                <li><a href="" ng-show="showRemoteConfiguration()" ng-click="remoteConfigurationList()"><span class="glyphicon glyphicon-cog"></span>&nbsp;Remote Configuration</a></li>
+                <li><a href="" ng-show="showUserInterfaceSettings()" ng-click="userInterfaceSettings()"><span class="glyphicon glyphicon-cog pull-left"></span>&nbsp;User Interface Settings</a></li>
+                <li><a href="" ng-show="showVirtualRealityConfiguration()" ng-click="virtualRealityConfiguration()"><span class="glyphicon glyphicon-cog pull-left"></span>&nbsp; VR / 360 UI Configuration</a></li>
+            </ul>
+        </li>
+        <!-- System Information -->
+        <li ng-show="showSystemInformation()" class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="">
+                <span class="glyphicon glyphicon-info-sign pull-left"></span>&nbsp;
+                System Information<span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="" ng-show="showSystemStatus()" ng-click="systemStatus()"><span class="glyphicon glyphicon-stats pull-left"></span>&nbsp;System Status</a></li>
+                <li><a href="" ng-show="showClientStatistics()" ng-click="clientStatistics()"><span class="glyphicon glyphicon-stats pull-left"></span>&nbsp;Client Statistics</a></li>
+                <li><a href="" ng-show="showSipRegistrations()" ng-click="sipRegistrations()"><span class="glyphicon glyphicon-user pull-left"></span>&nbsp;SIP Registrations</a></li>
+                <li><a href="" ng-show="showGeolocation()" ng-click="geo()"><span class="glyphicon glyphicon-globe pull-left"></span>&nbsp;Geolocation</a></li>
+                <li><a href="" ng-show="showActivityLog()" ng-click="activityLog()"><span class="glyphicon glyphicon-list-alt pull-left"></span>&nbsp;Activity Log</a></li>
+                <li><a href="" ng-show="showDebugLog()" ng-click="debugLog()"><span class="glyphicon glyphicon-list-alt pull-left"></span>&nbsp;Debug Log</a></li>
+            </ul>
+        </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            <a href="">
+                <span class="glyphicon glyphicon-info-sign"></span>
+                Current Location: 
+                <span id="currentLocation">{{getCurrentState()}}</span>
+            </a>
+        </li>
+    </ul>
+</div>
+ 
+<!-- This shows the current location on its own line in the case of a very small screen.
+Otherwise it is hidden with the rest of the bar that collapses-->
+<div id="extraSmallCurrentLocation" class="container-fluid hidden-sm hidden-md hidden-lg hidden-xl">
+    <ul class="nav navbar-nav">
+        <li>
+            <a href="">
+                <span class="glyphicon glyphicon-info-sign"></span>
+                Current Location: 
+                <span id="currentLocation">{{getCurrentState()}}</span>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+
+<!-- Notifications -->
+<div class="notificationContainer" >
+    <div ng-repeat="n in notifications" class="notification alert alert-{{n.type}}" >
+        {{n.message}}
+        <span class='glyphicon glyphicon-remove pull-right clickable' ng-click='n.clearFn()'></span>
+    </div>
+</div>
+
+<!-- Progress Bar -->
+<div ng-show="showProgressBar" id="headerProgressBar">
+    <img class="progressBarLoader" ng-show="progressBarStatus=='pending'" src="../img/loader2.gif">
+    <div class="progressBarSuccess" ng-show="progressBarStatus=='success'" style="color:green;"><i class="fa fa-check" aria-hidden="true"></i> Success!</div>
+    <pre class="progressBarFailure" ng-show="progressBarStatus=='failure'" style="color:red;"  ><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Error.</pre>
+</div>
+<!-- Spinner -->
+<i ng-show="showSpinner" id="headerSpinner" class="fa fa-refresh fa-spin"></i>
+
+<!-- Connection Status -->
+<div id="connectionStatus" ng-show="failureLevel > 0" class="connectionStatus-{{failureLevel}}">
+    <i class="fa fa-exclamation-triangle"></i>
+</div>
+
+<!-- Debug Status -->
+<div id=debugStatus ng-show="isDebug()">
+    Debug Enabled
+</div>

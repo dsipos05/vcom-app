@@ -1,0 +1,74 @@
+<div class="modal-header">
+    <h3>Delete Selector Assignments</h3>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-xs-12 selector-choice-container">
+            <div class="col-xs-5">
+                <h3> Select System(s): </h3>
+                <!-- System Selection Grid -->
+                <div id="mygrid" class="ag-theme-fresh ag-grid" style="height: 300px"></div>
+                <br>
+                <p> Hold <kbd>Ctrl</kbd> to select additional items, or hold <kbd>Shift</kbd> to select several in a row </p>
+            </div>
+            <div class="col-xs-7">
+                <h3> Select Deletion Criteria: </h3>
+                <!-- Delete Normal -->
+                <label style="font-weight:normal;">
+                    <input ng-disabled="noTarget()" ng-model="removalMode" type="radio" value="normal">
+                    Delete <strong>all</strong> Selector Assignments which are associated with the selected Intercom(s) (<strong>{{getSelectedIntercomsString()}}</strong>).
+                </label>
+                <!-- Delete Restricted from assignment-->
+                <label style="font-weight:normal;">
+                    <input ng-disabled="noTarget()" ng-model="removalMode" type="radio" value="assignmentRestricted">
+                    Delete all Selector Assignments <strong>which are restricted from assignment</strong> and are associated with the selected Intercom(s) (<strong>{{getSelectedIntercomsString()}}</strong>).                    
+                </label>
+                <br>
+                <button class="btn btn-primary" ng-disabled="noTarget()" ng-click="previewDeletion()">Preview Selectors to be Deleted </button>
+                <progress-bar
+                    status="previewLoaderStatus",
+                    message="previewLoaderMessage">
+                </progress-bar>
+                <br>
+            </div>
+            <!-- Preview -->
+            <div class="col-xs-12" ng-show="previewComplete">
+                <div>
+                    <h3>Selector Assignments to be deleted {{numToDelete?"("+numToDelete+")":""}}</h3>
+                    <!-- Preview Grid -->
+                    <div id="previewGrid" class="ag-theme-fresh ag-grid" style="height:300px"></div>
+                </div>
+            </div>
+            <br>
+            <!-- Delete Button and results -->
+            <div class="col-xs-12" ng-show="previewComplete">
+                <button ng-disabled="!ableToDelete" class="btn btn-warning" ng-click="confirmDelete()" >Delete</button>                        
+                <progress-bar
+                    status="deleteLoaderStatus",
+                    message="deleteLoaderMessage">
+                </progress-bar>
+                <div ng-show="showDeletionResults" class="success">
+                    {{numKeysDeleted}} keys have been deleted from {{numPanelsWithDeletions}} panels...
+                </div>
+                <div ng-show="showDeletionResults && numPanelsWithErrorsDeleting" class="failure">
+                    {{numKeysWithErrorsDeleting}} keys failed to be deleted from {{numPanelsWithErrorsDeleting}} panels...
+                </div>
+            </div>
+            <br>
+            &nbsp;
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal-footer">
+    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+        <!-- <div class="btn btn-primary" ngf-select="upload($file)"><span class="fa fa-upload"></span>&nbsp;Upload SSL certificate</div> -->
+    </div>
+    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+    </div>
+    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+        <button class="btn btn-default" ng-click="close()">Close</button>
+    </div>
+</div>

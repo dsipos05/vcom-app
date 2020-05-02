@@ -1,0 +1,14 @@
+<div ng-controller="DialPadController" class="dialPad">
+    <i class="dialPad-call dialPad-btn fa fa-phone" ng-if="canPlaceCall()" ng-click="call()"></i>
+    <i class="dialPad-hang dialPad-btn fa fa-phone" ng-if="canHangUp()"    ng-click="hangUp()"></i>
+    <select class="dialPad-lineChooser form-control" ng-model="lineSelect.selected" ng-options="v.label for v in lineSelect.options">
+    </select>
+    <input class="dialPad-display" type="text" ng-model="dialValue" placeholder="Dial a number">
+    <div class="dialPad-delete dialPad-btn" ng-click="backspace()">
+        <i class="fa fa-mail-reply"></i>
+    </div>
+    <div ng-repeat="btn in buttons" class="dialPad-button dialPad-btn {{btn.class}}" ng-click="type(btn.value)">
+        <!-- <i ng-show="btn.icon!==undefined" class="fa {{btn.icon}}"></i> -->
+        {{btn.label}}
+    </div>
+</div>

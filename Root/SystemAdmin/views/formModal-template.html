@@ -1,0 +1,15 @@
+<div class="formModal">
+    <div class="modal-header formModal-header">
+        <strong>{{params.title}}</strong>
+    </div>
+    <form class="modal-body formModal-body">
+        <!-- <br> -->
+        <myform formdata="params.form" models="params.models" class="formModal-content"></myform>
+        <hr>
+        <button ng-if="params.hasSubmit" class="formModal-btn btn btn-primary" ng-click="submit()">Submit</button>
+        <button class="formModal-btn btn btn-default" ng-click="cancel()">Cancel</button>
+        <button ng-repeat="button in params.buttons" class="btn btn-default formModal-auxillary-btn" ng-click="button.fn(params)">{{button.label}}</button>
+
+        <br>
+    </form>
+</div>

@@ -1,0 +1,30 @@
+{
+  "name": "SystemAdmin",
+  "version": "0.0.0",
+  "description": "VCOM System Administration",
+  "main": "index.html",
+  "authors": [
+    "Kevin Gorelick"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-bootstrap": "~0.14.3",
+    "angular-ui-router": "~0.2.15",
+    "angular-route": "~1.4.7",
+    "jquery": "~2.1.4",
+    "ui-select": "angular-ui-select#~0.13.2",
+    "angular-slider": "venturocket-angular-slider#~0.3.2",
+    "angular-minicolors": "~0.0.7",
+    "font-awesome": "fontawesome#~4.5.0",
+    "blob-polyfill": "^1.0.20150320",
+    "ng-file-upload": "^12.2.13",
+    "ag-grid": "^16.0.0"
+  }
+}

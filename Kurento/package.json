@@ -1,0 +1,19 @@
+{
+  "name": "vcom-knas",
+  "version": "1.0.0",
+  "description": "",
+  "dependencies": {
+    "express": "^4.17.1",
+    "kurento-client": "^6.12.0",
+    "websocket-stream": "^5.5.0",
+    "winston": "^3.2.1",
+    "winston-loggly-bulk": "^3.0.1",
+    "ws": "^7.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node kurentoNodeServer.js"
+  },
+  "author": "Steven Love",
+  "license": "ISC"
+}

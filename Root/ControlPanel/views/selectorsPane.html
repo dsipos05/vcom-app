@@ -1,0 +1,48 @@
+<div id="selectorsPane" class="selectorsPane">
+    <div class="scrollContainer">
+        <div id="selectors" class="original">
+            <!-- track by selector.randID had to be added to prevent a dupes error that occurred when a temporary selector is created
+            then we logout, and log back in as another user with two of that same temporary selector assigned to them... -->
+            <div ng-repeat="selector in selectors track by selector.randID" class="selector noSelect {{'selector-'+selector.randID}}" ng-show="selector.visible" ng-class="{
+                'offline':selector.offline,
+                'voiceActive':selector.voiceActive,
+                'tally':selector.tallyVisible,
+                'listenActive':selector.listenActive,
+                'listenHalfway':selector.listenHalfway,
+                'videoActive':selector.videoActive,
+                'talkActive':selector.talkActive,
+                'talkHalfway':selector.talkHalfway,
+                'selected': selector.selected,
+                'noLevels':selector.noLevels,
+                'streaming':selector.isStreaming
+            }">
+                <div class="selector-body">
+                    <div class="selector-bg"></div>
+                    <div class="selector-logo">
+                        <img class="selector-image" ng-src='{{selector.label.IMAGE_URL}}'>
+                    </div>
+                    <div class="selector-left-clickable"  hm-tap="onTap($event,selector.randID,'left')"  hm-press="onPressDown($event,selector.randID,'left')" hm-tap="onTapDown($event,selector.randID,'left')" hm-recognizer-options='[{"time":150},{"threshold":6}]'></div>
+                    <div class="selector-right-clickable" hm-tap="onTap($event,selector.randID,'right')"  hm-press="onPressDown($event,selector.randID,'right')" hm-tap="onTapDown($event,selector.randID,'right')" hm-recognizer-options='[{"time":150},{"threshold":6}]'></div>
+                    <div class="selector-left selector-side center-div {{selector.leftType}}">
+                        <i aria-hidden="true" class="{{selector.leftIconClass}}"></i>
+                    </div>
+                    <div class="selector-right selector-side center-div {{selector.rightType}}">
+                        <i aria-hidden="true" class="{{selector.rightIconClass}}"></i>
+                    </div>
+                    <div class="selector-name center-div">
+                        <div>{{selector.name}}</div>
+                    </div>
+                    <!-- <div class="selector-streaming-clickable" ng-click="toggleStreamWindow(selector.ID)"></div> -->
+                    <div class="selector-streaming-notification" ng-click="toggleStreamWindow(selector.ID)">Live</div>
+                </div>
+                <div class="selector-levels">
+                    <input type="range" ng-model="selector.levels" min={{levelsMin}} max={{levelsMax}} step={{levelsStep}} ng-change="onLevelChanged(selector)">
+                </div>
+            </div>
+        </div>
+        <!-- <div id="selectors-level-control">
+            <input type="range" ng-model="levelsModel" min={{levelsMin}} max={{levelsMax}} step={{levelsStep}} ng-change="onLevelChanged($event)">
+            <button ng-click="adjustVolume()">Adjust Volume</button>
+        </div> -->
+    </div>
+</div>

@@ -1,0 +1,38 @@
+<div>
+    <form class="form-horizontal" name="{{ctrl.formdata.name}}">
+        <div ng-repeat="field in ctrl.formdata.get()" class="formModal-row">
+            <ng-form name="innerForm">
+                <div class="form-group" ng-class="{'has-error':innerForm.foo.$error.required}">
+                    <label class="control-label formModal-label">{{field.required?"*"+field.label:field.label}}:</label>
+                    <span class="formModal-input">
+                        <select name="foo" ng-if="field.type=='select'" ng-model="ctrl.models[field.modelName]" ng-disabled="field.disabled" ng-required="field.required">
+                            <!-- <optgroup> -->
+                                <option ng-repeat="op in field.selectOptions" value="{{op.value}}">
+                                    {{op.label}}
+                                </option>
+                            <!-- </optgroup> -->
+                        </select>
+                        <button             name="foo"   ng-if="field.type=='button'"                                                     ng-disabled="field.disabled"                              ng-click="field.fn(ctrl.models)">{{field.buttonLabel?field.buttonLabel:field.label}}</button>
+                        <input              name="foo"   ng-if="['text','password'].includes(field.type)"               
+                                                                                                  ng-model="ctrl.models[field.modelName]" ng-disabled="field.disabled" ng-required="field.required" id="{{field.modelName + '_id_for_myform'}}" spellcheck="{{field.spellcheck}}" class="form-control" type="{{field.type}}" placeholder="{{field.placeholder}}">
+                        <textarea           name="foo"   ng-if="field.type=='textarea'"           ng-model="ctrl.models[field.modelName]" ng-disabled="field.disabled" ng-required="field.required" rows="{{field.rows}}" cols="{{field.cols}}" spellcheck="{{field.spellcheck}}"></textarea>
+                        <toggle-switch      name="foo"   ng-if="field.type=='toggleSwitch'"       ng-model="ctrl.models[field.modelName]" ng-disabled="field.disabled" ng-required="field.required" ></toggle-switch>
+                        <selectorchooser    name="foo"   ng-if="field.type=='selectorchooser'"    ng-model="ctrl.models[field.modelName]" ng-disabled="field.disabled" ng-required="field.required"></selectorchooser>
+                        <audiofilechooser   name="foo"   ng-if="field.type=='audiofile'"          ng-model="ctrl.models[field.modelName]" ng-disabled="field.disabled" ng-required="field.required"></audiofilechooser>
+                        <imagefilechooser   name="foo"   ng-if="field.type=='imagefile'"          ng-model="ctrl.models[field.modelName]" ng-disabled="field.disabled" ng-required="field.required"></imagefilechooser>
+                    </span>
+                </div>
+            </ng-form>
+        </div>
+    </form>
+    <!-- <div ng-show="ctrl.formdata.get().some(function(field){return field.required})">Fields marked with an asterisk (*) are required.</div> -->
+</div>
+
+
+<!-- <div class="form-group" ng-class="{'has-error':EditForm.SelectorName.$error.required}">
+    <label for="selectorTalkListenName" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 control-label">Selector Talk/Listen Name {{isRequiredProperty("SELECTOR_NAME")?"*":""}}</label>
+    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+        <input type="text" id="selectorTalkListenName" name="SelectorName"
+        ng-model="client.SELECTOR_NAME" class="form-control" ng-required="isRequiredProperty('SELECTOR_NAME')">
+    </div>
+</div> -->

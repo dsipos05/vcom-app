@@ -1,0 +1,150 @@
+<div class="panel panel-primary">
+    <div class="panel-body">
+        <fieldset>
+            <div class="form-group">
+                <label for="loginName" class="col-md-5 col-lg-5 control-label">Login Name:</label>
+                <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                    <input type="text" class="form-control" id="loginName" placeholder="Login Name" ng-model="systemSettings.SYSTEM_ADMINISTRATOR_LOGIN_NAME" ng-disabled="userInfo.auths.allowSystemSettingsChanges == false">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="loginPassword" class="col-md-5 col-lg-5 col-lg-5 control-label">Login Password:</label>
+                <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                    <input type="{{ (userInfo.auths.allowPasswordDisplay == true) ? 'text' : 'password' }}" class="form-control" id="loginPassword" placeholder="Login Password" ng-model="systemSettings.SYSTEM_ADMINISTRATOR_LOGIN_PASSWORD" ng-disabled="userInfo.auths.allowSystemSettingsChanges == false">
+                </div>
+            </div>
+        </fieldset>
+        <div class="row">&nbsp;</div>
+        <!-- Server IP Address (Local Network Interface) -->
+        <fieldset>
+            <div class="form-group">
+                <label for="telexServerIP" class="col-md-5 col-lg-5 col-lg-5 control-label">Server IP Address (Local Network Interface)</label>
+                <div class="col-xs-12 col-sm-7 col-md-7 col-lg-7">
+                    <ui-select ng-if="!isFailedOver()" ng-model="$parent.systemSettings.IP_ADDRESS_OF_INTERFACE_FOR_TELEX_TIF_MASTER" theme="bootstrap">
+                        <ui-select-match allow-clear="true">{{ $select.selected }}</ui-select-match>
+                        <ui-select-choices repeat="address in validIpAddresses " >
+                            <div ng-bind-html="trustAsHtml(( address | highlight: $select.search ))"></div>
+                        </ui-select-choices>
+                    </ui-select>
+                    <!-- If we're failed over, show an editable field instead of a dropdown -->
+                    <div ng-if="isFailedOver()">
+                            <input type="text" class="form-control" ng-model="$parent.systemSettings.IP_ADDRESS_FOR_PRIMARY_SERVER" ng-disabled="userInfo.auths.allowSystemSettingsChanges == false">
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <div class="row">&nbsp;</div>
+        <!-- RTS Master Controller Main IP, Main Port, Backup IP, Backup Port -->
+        <fieldset>
+            <div class="form-group col-xs-12">
+                <label class="control-label">RTS Master Controller Main IP/Port</label>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-7">
+                        <input type="text" class="form-control" id="telexMastControllerMainIP" placeholder="" ng-model="systemSettings.IP_ADDRESS_FOR_TELEX_TIF_MASTER" ng-disabled="userInfo.auths.allowSystemSettingsChanges == false">
+                    </div>
+                    <div class="col-sm-1 hidden-xs nopadding">
+                        :
+                    </div>
+                    <div class="col-xs-12 col-sm-4">
+                        <input type="number" class="form-control" id="telexMastControllerMainPort" placeholder="" ng-model="systemSettings.IP_PORT_FOR_TELEX_TIF_MASTER_DATA" ng-disabled="userInfo.auths.allowSystemSettingsChanges == false">
+                    </div>
+                </div>
+                <!-- <div class="row">
+                    <div class="col-xs-12 col-sm-5">
+                        <label class="control-label">Main Port</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-7">
+                        <input type="number" class="form-control" id="telexMastControllerMainPort" placeholder="" ng-model="systemSettings.IP_PORT_FOR_TELEX_TIF_MASTER_DATA" ng-disabled="userInfo.auths.allowSystemSettingsChanges == false">
+                    </div>
+                </div> -->
+                <label class="control-label">RTS Master Controller Backup IP/Port</label>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-7">
+                        <input type="text" class="form-control" id="telexMastControllerBackupIP" placeholder="" ng-model="systemSettings.IP_ADDRESS_FOR_TELEX_TIF_MASTER_BACKUP" ng-disabled="userInfo.auths.allowSystemSettingsChanges == false">
+                    </div>
+                    <div class="col-sm-1 hidden-xs nopadding">
+                        :
+                    </div>
+                    <div class="col-xs-12 col-sm-4">
+                        <input type="number" class="form-control" id="telexMastControllerBackupPort" placeholder="" ng-model="systemSettings.IP_PORT_FOR_TELEX_TIF_MASTER_BACKUP" ng-disabled="userInfo.auths.allowSystemSettingsChanges == false">
+                    </div>
+                </div>
+                <!-- <div class="row">
+                    <div class="col-xs-12 col-sm-5">
+                        <label class="control-label">Backup Port</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-7">
+                        <input type="number" class="form-control" id="telexMastControllerBackupPort" placeholder="" ng-model="systemSettings.IP_PORT_FOR_TELEX_TIF_MASTER_BACKUP" ng-disabled="userInfo.auths.allowSystemSettingsChanges == false">
+                    </div>
+                </div> -->
+            </div>
+        </fieldset>
+        <div class="row">&nbsp;</div>
+        <!-- PBX Connect Method: (Registered Trunk or Direct IP Trunk) -->
+        <fieldset>
+            <div class="form-group col-xs-12 col-sm-5">
+                <label class="control-label">PBX Connect Method <button class="btn btn-warning btn-xs" ng-click="showPBXHelp()">?</button></label>
+                <span>({{numRegistered}}/{{numUnregistered+numRegistered}} Registered)</span>
+            </div>
+            <div class="col-xs-12 col-sm-7";>
+                <select class="form-control" ng-model="pbxSelect.selected" ng-init="pbxSelect.selected=pbxSelect.options[0]" ng-options="v.label for v in pbxSelect.options">
+                </select>
+            </div>
+        </fieldset>
+        <div class="row">&nbsp;</div>
+        <!-- PBX Primary Hostname -->
+        <fieldset>
+            <div class="form-group col-xs-12">
+                <label class="control-label">PBX Hostnames</label>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-5">
+                        <label class="control-label">Primary</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-7">
+                        <input type="text" class="form-control" ng-model="systemSettings.PBX_PRIMARY_HOST_NAME" ng-disabled="userInfo.auths.allowSystemSettingsChanges == false">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-5">
+                        <label class="control-label">Secondary</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-7">
+                        <input type="text" class="form-control" ng-model="systemSettings.PBX_SECONDARY_HOST_NAME" ng-disabled="userInfo.auths.allowSystemSettingsChanges == false">
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <div class="row">&nbsp;</div>
+        <fieldset>
+            <div class="form-group col-xs-12 col-sm-5">
+                <label class="control-label">Disable Domain Authentication</label>
+            </div>
+            <div class="col-xs-12 col-sm-7">
+                <toggle-switch ng-model="disableDomainAuthenticationOnOff">
+                        <div class="btn-group pull-right" ng-model="ngModel">
+                            <button class="btn btn-sm btn-default btn-on ng-\">ON</button>
+                            <button class="btn btn-sm btn-default btn-off ng-binding btn-warning">OFF</button>
+                        </div>
+                </toggle-switch>
+            </div>
+        </fieldset>
+        <div class="row">&nbsp;</div>
+        <fieldset>
+            <div class="form-group col-xs-12 col-sm-5">
+                <label class="control-label">SIP Domain Name</label>
+            </div>
+            <div class="col-xs-12 col-sm-7">
+                <input type="text" class="form-control" ng-model="systemSettings.SIP_DOMAIN_NAME" ng-disabled="userInfo.auths.allowSystemSettingsChanges == false">
+            </div>
+        </fieldset>
+        <div class="row">&nbsp;</div>
+        <!-- Save and Cancel buttons -->
+        <fieldset>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
+                <button class="btn btn-primary" ng-click="save()" ng-disabled="userInfo.auths.allowSystemSettingsChanges == false"><span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;Save</button>&nbsp;
+                <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+                <span ng-show="changesSaved"> Changes Saved! </span>
+            </div>
+        </fieldset>
+    </div>
+</div>

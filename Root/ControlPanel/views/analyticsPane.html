@@ -1,0 +1,48 @@
+<div id="analyticsPane" class="selectorsPane">
+    <div class="scrollContainer">
+        <div id="selectors" class="detailed">
+            <div ng-repeat="selector in selectors track by selector.randID" class="selector noSelect {{'selector-'+selector.randID}}" ng-class="{
+                'offline':selector.offline,
+                'active':selector.active,
+                'inactive':!selector.active,
+                'listenActive':selector.listenActive,
+                'listenHalfway':selector.listenHalfway,
+                'videoActive':selector.videoActive,
+                'talkActive':selector.talkActive,
+                'talkHalfway':selector.talkHalfway,
+                'streaming':selector.isStreaming
+            }">
+                <div class="selector-bg">
+                    <img class="selector-bg-image" ng-src='{{selector.label.IMAGE_URL}}'>
+                </div>
+                <!-- <div class="selector-bg">
+                    <img class="selector-image" ng-src='{{selector.label.IMAGE_URL}}'>
+                </div> -->
+                <div class="selector-left-clickable"  hm-tap="onTap($event,selector.randID,'left')"  hm-press="onPressDown($event,selector.randID,'left')" hm-tap="onTapDown($event,selector.randID,'left')" hm-recognizer-options='[{"time":150},{"threshold":1}]'></div>
+                <div class="selector-right-clickable" hm-tap="onTap($event,selector.randID,'right')"  hm-press="onPressDown($event,selector.randID,'right')" hm-tap="onTapDown($event,selector.randID,'right')" hm-recognizer-options='[{"time":150},{"threshold":1}]'></div>
+                <div class="selector-left center-div {{selector.leftType}}">
+                    <i aria-hidden="true" class="{{selector.leftIconClass}}"></i>
+                </div>
+                <div class="selector-right center-div {{selector.rightType}}">
+                    <i aria-hidden="true" class="{{selector.rightIconClass}}"></i>
+                </div>
+                <div class="selector-info-bg">
+                    <div class="selector-info">
+                        <!-- <div>ID:{{selector.ID}}</div> -->
+                        <div ng-show="getStats(selector.ID).CONNECTION_STATE_DURATION">Duration: {{getStats(selector.ID).CONNECTION_STATE_DURATION}}</div>
+                        <div ng-show="getStats(selector.ID).IP_ADDRESS">IP: {{getStats(selector.ID).IP_ADDRESS}}</div>
+                        <div ng-show="getStats(selector.ID).CPU_STRING">CPU: {{getStats(selector.ID).CPU_STRING}}</div>
+                        <div ng-show="getStats(selector.ID).SOFTWARE_VERSION">Version: {{getStats(selector.ID).SOFTWARE_VERSION}}</div>
+                        <div ng-show="selector.label.GPS_STRING != 'Unknown'">GPS: {{selector.label.GPS_STRING}}</div>
+                        <div ng-show="selector.label.DESCRIPTION">Desc: {{selector.label.DESCRIPTION}}</div>
+                    </div>
+                </div> 
+                <div class="selector-name center-div">
+                    <div>{{selector.name}}</div>
+                </div>
+                <!-- <div class="selector-streaming-clickable" ng-click="toggleStreamWindow(selector.ID)"></div> -->
+                <div class="selector-streaming-notification" ng-click="toggleStreamWindow(selector.ID)">Live</div>
+            </div>
+        </div>
+    </div>
+</div>

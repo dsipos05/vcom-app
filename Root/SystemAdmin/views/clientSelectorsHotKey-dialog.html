@@ -1,0 +1,46 @@
+<div class="modal-header">
+	<h3>Selector Hot Key</h3>
+</div>
+<div class="modal-body">
+	<form class="form-horizontal">
+        <div class="row">
+            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 text-right" style="height: 25px;">
+                Alt
+            </div>
+            <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8" style="height: 25px;" >
+                <input type="checkbox" ng-model="ALT">
+            </div>
+            
+            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 text-right" style="height: 25px;">
+                Control
+            </div>
+            <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8" style="height: 25px;">
+                <input type="checkbox" ng-model="CTRL">
+            </div>
+            
+            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 text-right" style="height: 25px;">
+                Shift
+            </div>
+            <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8" style="height: 25px;">
+                <input type="checkbox" ng-model="SHIFT">
+            </div>
+            
+            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 text-right" style="height: 25px;">
+                Key
+            </div>
+            <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8" style="height: 25px;">
+                <ui-select id="key" ng-model="hotKey.KEY">
+                    <ui-select-match>{{ $select.selected.label }}</ui-select-match>
+                    <ui-select-choices repeat="key.value as key in keys | filter: $select.search">
+                        <div ng-bind-html="trustAsHtml(( key.label | highlight: $select.search ))"></div>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+        </div>
+	</form>
+	
+</div>
+<div class="modal-footer">
+	<button class="btn btn-primary" data-ng-click="ok()">Ok</button>
+	<button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>

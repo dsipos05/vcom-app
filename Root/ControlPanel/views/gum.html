@@ -1,0 +1,19 @@
+<div ng-controller="GumController" class="gum">
+    <div class="gum-header">
+        <div class="gum-controls">
+            <div class="gum-stream-options" ng-click="showOptions()">
+                <span class="fa fa-cog"></span>
+            </div>
+            <div class="gum-camera-switch" ng-click="onClickSwitchCamera()">
+                <span class="fa fa-video-camera"></span>
+                <span class="fa fa-rotate-left"></span>
+            </div>
+        </div>
+        <div class="gum-record-button">
+            <tricircle ng-click="clickRecordButton()" ng-model="tricircleState" ng-disabled="!videoCaptured"></tricircle>
+        </div>
+    </div>
+    <div class="gum-video-container">
+
+    </div>
+</div>

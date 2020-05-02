@@ -1,0 +1,63 @@
+<div class="modal-header">
+	<h3><span class="fa fa-info-circle"></span>&nbsp;&nbsp;Client Statistics Legend</h3>
+</div>
+<div class="modal-body">	
+    <ul class="list-group">
+        <li class="list-group-item" style="height: 35px;">
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">DEC:</div>
+            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">Disconnect Event Count</div>
+        </li>
+        <li class="list-group-item" style="height: 35px;">
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 ">DSCD:</div>
+            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">Disconnect State Cumulative Duration</div>
+        </li>
+        <li class="list-group-item" style="height: 35px;">
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 ">SARAE:</div>
+            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">Send Audio Rate After Encoding (Kbps)</div>
+        </li>
+        <li class="list-group-item" style="height: 35px;">
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 ">SAPLLS:</div>
+            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">Send Audio Packet Loss Last Second (%)</div>
+        </li>
+        <li class="list-group-item" style="height: 35px;">
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 ">SAPLLM:</div>
+            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">Send Audio Packet Loss Last Minute (%)</div>
+        </li>
+        <li class="list-group-item" style="height: 35px;">
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 ">SAPLSL:</div>
+            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">Send Audio Packet Loss Since Login (%)</div>
+        </li>
+        <li class="list-group-item" style="height: 35px;">
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 ">SA Jitter:</div>
+            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">Send Audio Packet Jitter (ms)*</div>
+        </li>
+        <li class="list-group-item" style="height: 35px;">
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 ">RARBD:</div>
+            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">Receive Audio Rate Before Decoding (Kbps)</div>
+        </li>
+        <li class="list-group-item" style="height: 35px;">
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 ">RAPLLS:</div>
+            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">Receive Audio Packet Loss Last Second (%)</div>
+        </li>
+        <li class="list-group-item" style="height: 35px;">
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 ">RAPLLM:</div>
+            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">Receive Audio Packet Loss Last Minute (%)</div>
+        </li>
+        <li class="list-group-item" style="height: 35px;">
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 ">RAPLSL:</div>
+            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">Receive Audio Packet Loss Since Login (%)</div>
+        </li>
+        <li class="list-group-item" style="height: 35px;">
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 ">RA Jitter:</div>
+            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">Receive Audio Packet Jitter(ms)*</div>
+        </li>
+    </ul>
+
+    <div >
+        * The first jitter value is the highest network jitter recorded in the last second and the second jitter value is the current jitter buffer size.
+    </div>
+	
+</div>
+<div class="modal-footer">
+	<button class="btn" data-ng-click="close()">Close</button>
+</div>

@@ -1,0 +1,148 @@
+.dropdown-menu > li > a{
+   font-size:20px;
+}
+#logo-container{
+    padding:1px;
+    /* min-width:150px; */
+    vertical-align: initial;
+    height:100%;
+}
+#logoImage{
+    height:100%;
+}
+
+#header{
+    /* height:100%; */
+    width:100%;
+    background-color:#f8f8f8;
+    display:flex;
+    flex-direction:row;
+    height:40px;
+    /* grid-template-columns: auto 1fr auto auto;
+    grid-template-rows: 40px; */
+}
+#header .btn-group{
+    height:100%;
+    float:right;
+}
+#headerExpander,#headerControls{
+    height:100%;
+    position:absolute;
+    top:0;
+    right:0;
+}
+#header .btn-group button{
+    height:98%;
+    margin-top:1%;
+    font-size:16px;
+    padding-left:1vh;
+    padding-right:1vh;
+    padding-top:0.7vh;
+    padding-bottom:0.7vh;
+}
+.header-brandingAndTitle{
+    position:absolute;
+    left:10px;
+    height:100%;
+    overflow:hidden;
+    padding:2px;
+}
+.header-branding{
+    height:100%;
+    /* margin-top:2px; */
+    /* height:8vh; */
+}
+.header-title{
+    padding-left:10px;
+    font-size:15px;
+    height:100%;
+    color:rgb(140,140,140);
+    position:relative;
+    flex: 2 1 auto;
+    width:200px;
+}
+.header-title-inner{
+    bottom:0px;
+    position:absolute;
+    /* word-wrap:break-word; */
+}
+@media only screen and (min-width:992px){
+    .header-title.mobile{
+        visibility:hidden;
+        position:absolute;
+    }
+    .header-title.desktop{
+        position:relative;
+        visibility:visible;
+    }
+}
+
+#headerControls .btn-group{
+    z-index:10;
+}
+#headerExpander{
+    position:absolute;
+    right:0;
+}
+#headerControls,#headerExpander{
+    transition: opacity .7s ease;
+}
+#header{
+    z-index:1001; /* Otherwise, Geolocation pane ends up in front of header dropdowns */
+    position:relative; /* z-index only has an effect if position is set to something */
+}
+
+@media only screen and (min-width: 992px){
+    #header .btn-group .text{
+        display:inline-block;
+    }
+    #headerExpander{
+        opacity:0;
+    }
+}
+
+
+
+/* Mobile Menu */
+.mobileMenu-container{
+    position:fixed;
+    z-index:1001; /* To match header */
+    top:0;
+    left:0;
+    width:100vw;
+    height: 100vh;
+    overflow-y:scroll;
+}
+.mobileMenu{
+    display:grid;
+    grid-auto-rows:auto;
+    max-height:calc(100% - 30px); /* leave room at the bottom to close the menu */
+    width:100%;
+}
+.mobileMenu-collapser{
+    position:fixed;
+    width:100vw;
+    height:100vh;
+    background-color:rgba(200,200,200,0.9);
+}
+.mobileMenu>div{
+    width:100%;
+    text-align:center;
+    font-size:30px;
+    z-index:10; /* to be more than header collapser */
+}
+
+#bottom-menu{
+    cursor:pointer;
+    padding:5px;
+    width:100%;
+    text-align:center;
+    position:fixed;
+    height:30px;
+    bottom:0;
+    z-index:4;
+    background-color:rgba(255,255,255,0.8);
+}
+#bottom-menu:hover{
+    background-color:white;
+}

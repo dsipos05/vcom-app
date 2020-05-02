@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="titleBar">
+        <div class="title">Activity Log</div>
+        <div style="margin-left:auto">
+            <span>
+                <!-- An invisible spinner keeps the page from jumping when the spinner becomes visible and increases the size of the title bar-->
+                <i ng-hide="showSpinner" class="fa fa-refresh fa-spin" style="font-size:20px;visibility:hidden;"></i>
+                <i ng-show="showSpinner" class="fa fa-refresh fa-spin" style="font-size:20px"></i>
+            </span>
+            <label>Auto Refresh:
+                <button class="btn btn-primary" ng-click="incrementAutoRefresh()" style="width:6em;">
+                    <span ng-show="[0,1,2].includes(getAutoRefresh())">ON</span>
+                    <span ng-show="[3].includes(getAutoRefresh())">OFF</span>
+                    <i ng-show="[0,2].includes(getAutoRefresh())" class="fa fa-arrow-up"></i>
+                    <i ng-show="[0,1].includes(getAutoRefresh())" class="fa fa-arrow-down"></i>
+                </button>
+            </label>
+            <label>Search:
+                <input type="text" id="searchBox" ng-model="searchText" ng-change="search()"/>
+            </label>
+            <button class="btn btn-primary" ng-click="copy()">Copy</button>
+        </div>
+    </div>
+    <div id="activityLogGrid" class="ag-theme-bootstrap ag-grid ag-grid-fullscreen"></div>
+</div>

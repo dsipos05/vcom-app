@@ -1,0 +1,24 @@
+    <div class="videoWall">
+        <div class="scrollContainer">
+
+            <div ng-repeat="selector in videoWall" id="videoWall-{{selector.ID}}" class="video">
+                <div class="videoWall-videoContainer {{selector.videoWallSelected?'selected':''}}" ng-click="selectVideoWall(selector.ID)">
+                    <video autoplay playsinline></video>
+                    <i class="fa fa-refresh fa-spin wowza-spinner {{wowzaSpinnerStatus}}"></i>
+                </div>
+                <div class="center-div">
+                    <div>{{selector.name}}</div>
+                </div>
+            </div>
+        </div>
+        <div id="videoWallPublisher">
+            <button ng-show="videoWallAtLeastOneSelected()" class="btn btn-default" ng-click="videoWallPublish()">
+                <tricircle  ng-model="tricircleState" color="green"></tricircle>
+                <span >&nbsp;{{"Publish " + getNamesToBePublished()}}</span>
+            </button>
+            <div ng-show="!videoWallAtLeastOneSelected()">
+                <span>Select a stream to be published</span>
+            </div>
+        </div>
+    </div>
+</div>

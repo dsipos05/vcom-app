@@ -1,0 +1,31 @@
+<div class="modal-header">
+        <h3><span class="fa fa-info-circle"></span>&nbsp;&nbsp;PBX Connect Method Help</h3>
+    </div>
+    <div class="modal-body">
+        <h4>
+            There are two possibilities for the VLink TIF server to connect to a Phone Switch or PBX:
+        </h4> 
+        <h3>1. Registered Trunk</h3>
+        <p>
+            In a <i>Registered Trunk</i> connection, a
+            username and password are required to register a SIP Client to the PBX and then
+            receive and initiate calls via SIP Invites to/from the PBX in the same
+            manner as a SIP client.
+        </p>
+
+        <h3>2. Direct IP Trunk</h3>
+        <p>
+            In a <i>Direct IP Trunk</i> or non-registered connection, only the user name is necessary
+            to receive and initiate calls via the PBX. There is no registration or 
+            authentication, only SIP Invites to/from the PBX. At some 
+            installations, this method is used to install a <i>SIP Trunk</i> between the VLink TIF
+            server and an offsite 3rd Party provider for the phone line access.
+        </p>
+        <p>
+            Note, if using option #2 be sure to set <i>Disable Domain
+            Authentication</i> to <i>On</i>.
+        </p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" ng-click="close()">Close</button>
+    </div>

@@ -1,0 +1,127 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+            <div class="row">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">System Information<span class="glyphicon glyphicon-info-sign pull-right"></span></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-5"><strong>Licensee:</strong></div>
+                            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-7">
+                                <div class="sysInfo {{ 'sysInfo-' + systemStatus.LICENSEE.STATUS }}" >{{ systemStatus.LICENSEE.TEXT }}</div>
+                            </div>
+                        </div>
+                        <div class="spacer7">&nbsp;</div>
+                        <div class="row altRow">
+                            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-5"><strong>Licensed Connections:</strong></div>
+                            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-7">
+                                <div class="sysInfo {{ 'sysInfo-' + systemStatus.LICENSED_CONNECTIONS.STATUS }}">{{ systemStatus.LICENSED_CONNECTIONS.TEXT }}</div>
+                            </div>
+                        </div>
+                        <div class="spacer7">&nbsp;</div>
+                        <div class="row">
+                            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-5"><strong>License Expiration:</strong></div>
+                            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-7">
+                                <div class="sysInfo {{ 'sysInfo-' + systemStatus.LICENSE_EXPIRATION.STATUS }}">{{ systemStatus.LICENSE_EXPIRATION.TEXT }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Telex Trunking -->
+            <div class="row" ng-if="hasTrunking == true">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Trunking Status<span class="glyphicon glyphicon-info-sign pull-right"></span></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-5"><strong>Trunking Status:</strong></div>
+                            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-7">
+                                <div class="sysInfo {{ 'sysInfo-' + systemStatus.TRUNKING_STATUS.STATUS }}">{{ systemStatus.TRUNKING_STATUS.TEXT }}</div>
+                            </div>
+                        </div>
+                        <div class="spacer7">&nbsp;</div>
+                        <div class="row altRow">
+                            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-5"><strong>Active Trunks:</strong></div>
+                            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-7">
+                                <div class="sysInfo {{ 'sysInfo-' + systemStatus.ACTIVE_TRUNKS.STATUS }}">{{ systemStatus.ACTIVE_TRUNKS.TEXT }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- MC Status -->
+            <div ng-if="isTIF" class="row" >
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Telephone Interface<span class="glyphicon glyphicon-info-sign pull-right"></span></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-7 col-lg-5"><strong>Telephone Interface Status:</strong></div>
+                            <div class="col-xs-5 col-lg-7">
+                                <div class="sysInfo {{ 'sysInfo-' + TIF.STATUS }}">{{TIF.TEXT}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hidden-xs hidden-sm col-md-2 col-lg-2">&nbsp;</div>
+        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+            <div class="row">
+                <div id="systemStatusPanel" class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">System Status<span class="glyphicon glyphicon-stats pull-right"></span></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-5"><strong>System Up Time:</strong></div>
+                            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-7">
+                                <div class="sysInfo {{ 'sysInfo-' + systemStatus.SYSTEM_UP_TIME.STATUS }}" >{{ systemStatus.SYSTEM_UP_TIME.TEXT }}</div>
+                            </div>
+                        </div>
+                        <div class="spacer7">&nbsp;</div>
+                        <div class="row">
+                            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-5"><strong>Processor Utilization:</strong></div>
+                            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-7">
+                                <div class="sysInfo {{ 'sysInfo-' + systemStatus.PROCESSOR_UTILIZATION.STATUS }}" >{{ systemStatus.PROCESSOR_UTILIZATION.TEXT }}</div>
+                            </div>
+                        </div>
+                        <div class="spacer7" ng-if="supportsFailover == true">&nbsp;</div>
+                        <div class="row" ng-if="supportsFailover == true">
+                            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-5"><strong>Failover Status:</strong></div>
+                            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-7">
+                                <div class="sysInfo {{ 'sysInfo-' + systemStatus.FAILOVER_STATUS.STATUS }}" >{{ systemStatus.FAILOVER_STATUS.TEXT }}</div>
+                            </div>
+                        </div>
+                        <div class="spacer7">&nbsp;</div>
+                        <div class="row">
+                            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-5"><strong>Active Connections:</strong></div>
+                            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-7">
+                                <div class="sysInfo {{ 'sysInfo-' + systemStatus.ACTIVE_CONNECTIONS.STATUS }}" >{{ systemStatus.ACTIVE_CONNECTIONS.TEXT }}</div>
+                            </div>
+                        </div>
+                        <div class="spacer7">&nbsp;</div>
+                        <div class="row">
+                            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-5"><strong>Active Audio Inputs:</strong></div>
+                            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-7">
+                                <div class="sysInfo {{ 'sysInfo-' + systemStatus.ACTIVE_AUDIO_INPUTS.STATUS }}" >{{ systemStatus.ACTIVE_AUDIO_INPUTS.TEXT }}</div>
+                            </div>
+                        </div>
+                        <div class="spacer7">&nbsp;</div>
+                        <div class="row">
+                            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-5"><strong>Active Audio Outputs:</strong></div>
+                            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-7">
+                                <div class="sysInfo {{ 'sysInfo-' + systemStatus.ACTIVE_AUDIO_OUTPUTS.STATUS }}" >{{ systemStatus.ACTIVE_AUDIO_OUTPUTS.TEXT }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

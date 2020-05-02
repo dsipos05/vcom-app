@@ -1,0 +1,242 @@
+<div class="modal-header">
+	<h3>Client Configuration Options</h3>
+</div>
+<div class="modal-body">
+    <div >
+        <strong>Selected Client:</strong>&nbsp;&nbsp;{{ client.LABEL_TYPE + ' / ' + client.SELECTOR_NAME + ' / ' + client.DESCRIPTION }}
+    </div>
+	<form class="form-horizontal">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Control Panel Options</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row" style="margin-right: 10px;">
+                            <fieldset>
+                                <div class="form-group">
+                                    <label for="allowDisableClientLogin" class="col-xs-12 col-sm-12 col-md-8 col-lg-8 control-label">Allow Disable Client Login / Connection</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                        <toggle-switch ng-model="client.ADMINISTRATOR_PRIVELEGES"></toggle-switch>
+                                    </div>
+                                </div> 
+                                <div class="form-group">
+                                    <label for="hideDisabledSelectors" class="col-xs-12 col-sm-12 col-md-8 col-lg-8 control-label">Hide Disabled Selectors</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                        <toggle-switch ng-model="client.HIDE_DISABLED_SELECTORS"></toggle-switch>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="hideSelectorLegends" class="col-xs-12 col-sm-12 col-md-8 col-lg-8 control-label">Hide Selector Legends</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                        <toggle-switch ng-model="client.HIDE_SELECTOR_LEGENDS"></toggle-switch>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="voiceActivityIndication" class="col-xs-12 col-sm-12 col-md-8 col-lg-8 control-label">Voice Activity Indication</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                        <toggle-switch ng-model="client.SHOW_VOICE_ACTIVITY_INDICATION"></toggle-switch>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="splitSelectorCenterZone" class="col-xs-12 col-sm-12 col-md-8 col-lg-8 control-label">Split Selector Center Zone</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                        <toggle-switch ng-model="client.SPLIT_SELECTOR_CENTER_ZONE"></toggle-switch>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="ringToneDisable" class="col-xs-12 col-sm-12 col-md-8 col-lg-8 control-label">Ring Tone Disable</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                        <toggle-switch ng-model="client.RING_TONE_DISABLE"></toggle-switch>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="automaticePageSwitch" class="col-xs-12 col-sm-12 col-md-8 col-lg-8 control-label">Automatic Page Switch on Call Notification</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                        <toggle-switch ng-model="client.AUTOMATIC_PAGE_SWITCH_ON_CALL_NOTIFICATION"></toggle-switch>
+                                    </div>
+                                </div>
+                                <!-- Play Selector Activation Messages -->
+                                <div class="form-group">
+                                    <label class="col-xs-12 col-md-8 control-label">Play Selector Activation Messages</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                        <toggle-switch ng-model="client.PLAY_SELECTOR_ACTIVATION_MESSAGES"></toggle-switch>
+                                    </div>
+                                </div>
+                                <!-- Play Connection Sounds -->
+                                <div class="form-group">
+                                    <label class="col-xs-12 col-md-8 control-label">Play Connection Sounds</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                        <toggle-switch ng-model="client.PLAY_CLIENT_CONNECTION_SOUNDS"></toggle-switch>
+                                    </div>
+                                </div>
+                                <!-- Play Battery Status Messages -->
+                                <div class="form-group">
+                                    <label class="col-xs-12 col-md-8 control-label">Play Battery Status Messages</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                        <toggle-switch ng-model="client.PLAY_BATTERY_STATUS_MESSAGES"></toggle-switch>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Control Panel Function Buttons</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row" style="margin-right: 10px;">
+                            <fieldset>
+                                <div class="form-group">
+                                    <label for="enablePartyLineAssignmentButton" class="col-xs-12 col-sm-12 col-md-8 col-lg-8 control-label">Enable Party Line Assignment Button</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                        <toggle-switch ng-model="client.PARTY_LINE_ASSIGNMENT_BUTTON"></toggle-switch>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="enableSelectorVolumeButtons" class="col-xs-12 col-sm-12 col-md-8 col-lg-8 control-label">Enable Selector Volume Buttons</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                        <toggle-switch ng-model="client.SELECTOR_VOLUME_ADJUSTMENT_BUTTONS"></toggle-switch>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="enableDialPadButtons" class="col-xs-12 col-sm-12 col-md-8 col-lg-8 control-label">Enable Dial Pad Buttons</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                        <toggle-switch ng-model="client.DIAL_PAD_BUTTON"></toggle-switch>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="enableSelectorAssignmentButton" class="col-xs-12 col-sm-12 col-md-8 col-lg-8 control-label">Enable Selector Assignment Button</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                        <toggle-switch ng-model="client.SELECTOR_ASSIGNMENT_BUTTON"></toggle-switch>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="enableSelectorRelocationButton" class="col-xs-12 col-sm-12 col-md-8 col-lg-8 control-label">Enable Selector Relocation Button</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                        <toggle-switch ng-model="client.SELECTOR_RELOCATION_BUTTON"></toggle-switch>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="enableRevealInactiveSelectorsButton" class="col-xs-12 col-sm-12 col-md-8 col-lg-8 control-label">Enable Reveal Inactive Selectors Button</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                        <toggle-switch ng-model="client.REVEAL_HIDDEN_SELECTORS_BUTTON"></toggle-switch>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="enableLaunchGeoMappingButton" class="col-xs-12 col-sm-12 col-md-8 col-lg-8 control-label">Enable Launch Geo Mapping Button</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                        <toggle-switch ng-model="client.GEO_MAPPING_BUTTON"></toggle-switch>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Control Panel for iOS Options</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row" style="margin-right: 10px;">
+                            <fieldset>
+                                <div class="form-group">
+                                    <label for="restartInBackground" class="col-xs-12 col-sm-12 col-md-8 col-lg-8 control-label">Restart in Background if Previously Active</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                        <toggle-switch ng-model="client.RESTART_IN_BACKGROUND"></toggle-switch>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="operateAsABeltpack" class="col-xs-12 col-sm-12 col-md-8 col-lg-8 control-label">Operate as a Beltpack</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                        <toggle-switch ng-model="client.OPERATE_AS_BELTPACK"></toggle-switch>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="headsetOnly" class="col-xs-12 col-sm-12 col-md-8 col-lg-8 control-label">Headset Only (Speakerphone Disabled)</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                        <toggle-switch ng-model="client.DISABLE_INTEGRATED_MICROPHONE_AND_SPEAKER"></toggle-switch>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Control Panel / Device Interface Options</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row" style="margin-right: 10px;">
+                            <fieldset>
+                                <div class="form-group">
+                                    <label for="voiceActivityDetectionTime" class="col-xs-12 col-sm-12 col-md-8 col-lg-8 control-label">Voice Activity Detection Time In Ms</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                        <input type="number" ng-model="client.VOICE_ACTIVITY_DETECTION_TIME_IN_MS" id="voiceActivityDetectionTime">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="connectionTimeout" class="col-xs-12 col-sm-12 col-md-8 col-lg-8 control-label">Connection Timeout in Ms</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                        <input type="number" ng-model="client.CONNECTION_TIMEOUT_IN_MS" id="connectioNTimeout">
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Geo Mapping</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row" style="margin-right: 10px;">
+                            <fieldset>
+                                <div class="form-group">
+                                    <label for="geoMappingDisable" class="col-xs-12 col-sm-12 col-md-8 col-lg-8 control-label">Geo Mapping Disable</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                        <toggle-switch ng-model="client.GEO_MAPPING_DISABLE"></toggle-switch>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="geoMappingLatitude" class="col-xs-12 col-sm-12 col-md-8 col-lg-8 control-label">Geo Mapping Latitude (Fixed Position)</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                        <input type="number" ng-model="client.GEO_MAPPING_LATITUDE" id="geoMappingLatitude">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="geoMappingLongitude" class="col-xs-12 col-sm-12 col-md-8 col-lg-8 control-label">Geo Mapping Longitude (Fixed Position)</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                        <input type="number" ng-model="client.GEO_MAPPING_LONGITUDE" id="geoMappingLongitude">
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+	<button class="btn" data-ng-click="cancel()">Cancel</button>
+	<button class="btn btn-warning" data-ng-click="save()">Save</button>
+</div>

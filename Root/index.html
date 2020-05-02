@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+<!-- Polyfill -->
+<!-- <script src="js/polyfill.js"></script> -->
+<!-- External Scripts -->
+<!-- jQuery -->
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<!-- URI -->
+<script src="../bower_components/URI/uri.js"></script>
+
+<!-- VCOM Custom CSS Class -->
+<link href="splash/css/landing.css" rel="stylesheet">
+
+    <!-- Bootstrap js (dropdowns) -->
+	<link href="css/bootstrap/css/vcom-bootstrap-theme.min.css" rel="stylesheet">
+    <link href="css/bootstrap/css/vcom-bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body ng-app="app">
+    <div id="browserUnsupportedContainer" ng-show="false" style="visibility:hidden">
+        Your browser is unsupported. Please try the latest version of Google Chrome.
+    </div>
+	<div class="container-container">
+		<div id="container-upper" ui-view="upper"></div>
+		<div id="container-middle" ui-view="middle"></div>
+        </div>
+    </div>
+    <!-- Implement Browser Unsupported warning -->
+    <!-- this code must run before the angular script for some reason-->
+    <script>
+        $(document).ready(function(){
+            console.log("DOC READY");
+            $("#browserUnsupportedContainer").css("visibility","visible");
+        })
+    </script>
+</body>
+
+    <!-- Bootstrap and Angular -->
+    <script src="css/bootstrap/js/bootstrap.min.js" ></script>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.min.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="bower_components/angular-route/angular-route.min.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <!-- upload -->
+    <script src="bower_components/ng-file-upload/ng-file-upload-shim.min.js"></script> <!-- for no html5 browsers support -->
+    <script src="bower_components/ng-file-upload/ng-file-upload.min.js"></script>
+    <!-- toggle switch -->
+    <!-- <script src="js/toggleSwitch.js?version=1.00"></script> -->
+
+<!-- Shared scripts
+    <script src="js/env.js"></script>
+    <script src="js/Sorting.js"></script>
+    <script src="js/Util.js"></script>
+    <script src="splash/js/app.js"></script>
+    <script src="js/admin_factory.js"></script>
+    <script src="SystemAdmin/js/appErrorHandling.js"></script>
+<script src="ControlPanel/js/services/AndroidService.js"></script>
+<script src="js/services/EnabledService.js"></script>
+<script src="js/services/DiffUpdatesServices.js"></script> -->
+    <script src="/config/env.js"></script>
+    <script src="bundle-d8a007ef83.js"></script>
+
+<!-- Page Scripts -->
+        <script src="splash/js/HeaderController.js"></script>
+        <script src="splash/js/SplashController.js"></script>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"> 
+<base href="/ControlPanel/">
+<!-- External CSS -->
+    <!-- Bootstrap -->
+    <link href="../css/bootstrap/css/vcom-bootstrap-theme.min.css" rel="stylesheet">
+    <link href="../css/bootstrap/css/vcom-bootstrap.min.css" rel="stylesheet">
+    <!-- Font awesome -->
+    <link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!-- FlowPlayer -->
+    <link rel="stylesheet" href="flow/skin/skin.css">
+    <!-- GoldenLayout -->
+    <link rel="stylesheet" href="goldenlayout/goldenlayout-base.css">
+    <link rel="stylesheet" href="goldenlayout/goldenlayout-dark-theme.css">
+    <!-- on screen keyboard -->
+    <link rel="stylesheet" href="../bower_components/virtual-keyboard/css/keyboard.min.css">
+    <link rel="stylesheet" href="../bower_components/virtual-keyboard/css/keyboard-basic.min.css">
+
+<!-- Shared CSS files -->
+    <link href="../css/header.css" rel="stylesheet">
+    <link href="../css/vcom.css" rel="stylesheet">
+    <link href="../css/login.css" rel="stylesheet">
+    <link href="../css/misc.css" rel="stylesheet">
+    <link href="../directives/css/style.css" rel="stylesheet">
+
+<!-- Control Panel Specific CSS -->
+    <link rel="stylesheet" href="css/misc.css">
+    <link rel="stylesheet" href="css/selectors.css">
+    <link rel="stylesheet" href="css/dialPad.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/pageLayout.css">
+    <link rel="stylesheet" href="css/goldenLayout.css">
+    <link rel="stylesheet" href="css/webrtc.css">
+    <link rel="stylesheet" href="css/gum.css">
+    <link rel="stylesheet" href="css/streamPublishing.css">
+    <link rel="stylesheet" href="css/videoWall.css">
+    <link rel="stylesheet" href="css/dispatch.css">
+    
+    <!-- Themes -->
+    <link rel="stylesheet"           title="dark theme"  href="css/default-theme.css">
+    <link rel="alternate stylesheet" title="light theme" href="css/icons-theme.css">
+
+<!-- External Scripts -->
+    <!-- Loggly logging -->
+    <script type="text/javascript" src="//cloudfront.loggly.com/js/loggly.tracker-latest.min.js"></script>
+    <script>
+        var _LTracker = _LTracker || [];
+        _LTracker.push({'logglyKey': '2bc8118f-8e68-4a53-9d69-3882a846ccb2',
+        'sendConsoleErrors' : true,
+        'tag' : 'loggly-jslogger'  });
+    </script>
+
+    <!-- jQuery -->
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- GoldenLayout -->
+    <script src="./goldenlayout/goldenlayout.js"></script>
+    <!-- Flowplayer -->
+    <script src="flow/hls.min.js"></script>
+    <script src="flow/flowplayer.js"></script> <!-- version 7 -->
+    <!-- webrtc -->
+    <script src="../bower_components/intracomKurentoLib/intracomKurentoLib.js"></script>
+    <!-- URI -->
+    <script src="../bower_components/URI/uri.js"></script>
+    <!-- AG-Grid -->
+    <script src="../bower_components/ag-grid/dist/ag-grid.js"></script>
+
+
+</head>
+<body ng-app="app">
+    <div id="browserUnsupportedContainer" ng-show="false" style="visibility:hidden">
+        Your browser is unsupported. Please try the latest version of Google Chrome!
+    </div>
+	<div class="container-container">
+		<div id="container-upper" ui-view="upper"></div>
+		<div id="container-middle" ui-view="middle"></div>
+		<div id="container-bottom">
+        </div>
+    </div>
+    <!-- This div helps us test if angular finished loading properly -->
+    <div id="angularTest" ng-show="false">{{1+1}}</div>
+    <!-- Implement Browser Unsupported warning -->
+    <!-- this code must run before the angular script for some reason-->
+    <script>
+        $(document).ready(function(){
+            $("#browserUnsupportedContainer").css("visibility","visible");
+            // test if angular loaded successfully
+            function angularIsLoaded(){
+                return $("#angularTest")[0].textContent == "2";
+            }
+            setTimeout(()=>{
+                if(!angularIsLoaded()){
+                    console.error("Browser Not Supported");
+                    var info={
+                        timeOpened(){return new Date()},
+                        timezone(){return ((new Date()).getTimezoneOffset()/60)},
+                        pageon(){return window.location.pathname},
+                        referrer(){return document.referrer},
+
+                        browserName(){return navigator.appName},
+                        browserEngine(){return navigator.product},
+                        browserVersion1a(){return navigator.appVersion},
+                        browserVersion1b(){return navigator.userAgent},
+                        browserLanguage(){return navigator.language},
+                        browserOnline(){return navigator.onLine},
+                        browserPlatform(){return navigator.platform},
+                        javaEnabled(){return navigator.javaEnabled()},
+                        dataCookiesEnabled(){return navigator.cookieEnabled},
+                        dataCookies1(){return document.cookie},
+                        dataCookies2(){return decodeURIComponent(document.cookie.split(";"))},
+                        dataStorage(){return localStorage},
+                        sessionStorage(){return sessionStorage}
+                    }
+                    Object.keys(info).forEach(k=>{console.error(k,":",info[k]())})
+                }
+            },1000);
+            
+        });
+    </script>
+    <audio>
+    </audio>
+</body>
+
+    <!-- Bootstrap and Angular -->
+    <script src="../css/bootstrap/js/bootstrap.min.js" ></script>
+    <script src="../bower_components/angular/angular.min.js"></script>
+    <script src="../bower_components/angular-touch/angular-touch.min.js"></script>
+    <script src="../bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+    <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="../bower_components/angular-route/angular-route.min.js"></script>
+    <script src="../bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <!-- upload -->
+    <script src="../bower_components/ng-file-upload/ng-file-upload-shim.min.js"></script> <!-- for no html5 browsers support -->
+    <script src="../bower_components/ng-file-upload/ng-file-upload.min.js"></script>
+    <!-- draggable -->
+    <script src="../bower_components/ng-draggable/ngDraggable.js"></script>
+    <!-- mobile touch -->
+    <script src="../bower_components/hammerjs/hammer.min.js"></script>
+    <script src="../bower_components/hammerjs/angular.hammer.min.js"></script>
+    <!-- on screen keyboard -->
+    <script src="../bower_components/virtual-keyboard/js/jquery.keyboard.min.js"></script>
+    <script src="../bower_components/virtual-keyboard/js/jquery.keyboard.extension-all.min.js"></script>
+
+
+<!-- Shared scripts -->
+    <!-- Environment variables -->
+
+    <script src="/config/env.js"></script>
+    <script src="bundle-ae2fd06d4e.js"></script>
+
+    <!-- Geo -->
+    <link rel="stylesheet" href="../Geo/css/MarkerCluster.Default.css">
+    <link rel="stylesheet" href="../Geo/css/MarkerCluster.css">
+    <link rel="stylesheet" href="../Geo/css/leaflet-dist.css">
+    <link rel="stylesheet" href="../bower_components/Leaflet.awesome-markers/dist/leaflet.awesome-markers.css">
+    <link rel="stylesheet" href="../Geo/css/style.css">
+    <script src="../Geo/js/leaflet-dist.js"></script>
+    <script src="../bower_components/Leaflet.awesome-markers/dist/leaflet.awesome-markers.js"></script>
+    <script src="../bower_components/leaflet-popup-angular/src/L.Popup.Angular.js"></script>
+    <script src="../Geo/js/leaflet.markercluster.js"></script>
+    <!-- Prevent Pull Refresh (for mobile) -->
+    <script src="../bower_components/preventPullRefresh/index.min.js"></script>
+
+</html>

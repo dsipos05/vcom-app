@@ -1,0 +1,329 @@
+<div class="modal-header">
+	<h3>Audio Settings</h3>
+</div>
+<div class="modal-body">
+    <div >
+        <strong>Selected Client:</strong>&nbsp;&nbsp;{{ client.LABEL_TYPE + ' / ' + client.SELECTOR_NAME + ' / ' + client.DESCRIPTION }}
+    </div>
+	<form class="form-horizontal">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Audio Quality</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row" style="margin-right: 10px;">
+                            <fieldset>
+                                <div class="form-group">
+                                    <label for="codecOptions" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 control-label">Audio Encoder/Decoder</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                                        <ui-select id="codecOptions" ng-model="$parent.client.AUDIO_CODEC">
+                                            <ui-select-match placeholder="">{{$select.selected.label}}</ui-select-match>
+                                            <ui-select-choices repeat="item in $parent.codecOptions | filter: $select.search">
+                                                <div ng-bind-html="trustAsHtml(( item.label | highlight: $select.search ))"></div>
+                                            </ui-select-choices>
+                                        </ui-select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="encoderSampleRateOptions" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 control-label">Audi Encode Sample Rate</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                                        <ui-select id="encoderSampleRateOptions" ng-model="$parent.client.AUDIO_ENCODE_SAMPLE_RATE_IN_HZ">
+                                            <ui-select-match placeholder="">{{$select.selected.label}}</ui-select-match>
+                                            <ui-select-choices repeat="item in $parent.encoderSampleRateOptions | filter: $select.search">
+                                                <div ng-bind-html="trustAsHtml(( item.label | highlight: $select.search ))"></div>
+                                            </ui-select-choices>
+                                        </ui-select>
+                                    </div>
+                                </div>
+                                <div class="form-group" ng-hide="hideAudioEncodeQuality === true">
+                                    <label for="audioEncodeQuality" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 control-label">Audio Encode Quality</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                                        <span style="width: 80px;float: left;border: 1px solid #000;text-align: center;margin-top: 15px;margin-right: 20px;">{{ getAudioEncodeQualityLabel() }}</span>
+                                        <slider
+                                            id="audioEncodeQuality"
+                                            ng-model="client.AUDIO_ENCODING_QUALITY"
+                                            floor="-8"
+                                            ceiling="2"
+                                            step="1"
+                                            precision="0" 
+                                            showTicksValues="false"
+                                            hideLimitLabels="true"
+                                            style="float: left; width: 350px" >
+                                        </slider>
+                                    </div>
+                                </div>
+                                <div class="form-group" ng-hide="hideAudioEncodeComplexity === true">
+                                    <label for="audioEncodeQuality" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 control-label">Audio Encode Complexity</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                                        <span style="width: 80px;float: left;border: 1px solid #000;text-align: center;margin-top: 15px;margin-right: 20px;">{{ getAudioEncodeComplexityLabel() }}</span>
+                                        <slider
+                                            id="audioEncodeComplexity"
+                                            ng-model="client.AUDIO_ENCODING_COMPLEXITY"
+                                            floor="-1"
+                                            ceiling="8"
+                                            step="1"
+                                            precision="0" 
+                                            showTicksValues="false"
+                                            hideLimitLabels="true"
+                                            style="float: left; width: 350px" >
+                                        </slider>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="variableBitRate" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 control-label">Variable Bit Rate</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                                        <toggle-switch ng-model="client.AUDIO_VARIABLE_BIT_RATE"></toggle-switch>
+                                    </div>
+                                </div>    
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Audio Transmission</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row" style="margin-right: 10px;">
+                            <fieldset>
+                                <div class="form-group">
+                                    <label for="jitterBufferSize" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 control-label">Jitter Buffer Size</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                                        <span style="width: 80px;float: left;border: 1px solid #000;text-align: center;margin-top: 15px;margin-right: 20px;">{{ getJitterBufferSizeLabel() }}</span>
+                                        <slider
+                                            id="jitterBufferSize"
+                                            ng-model="client.AUDIO_JITTER_BUFFER_SIZE_IN_MS"
+                                            floor="0"
+                                            ceiling="200"
+                                            step="20"
+                                            precision="0" 
+                                            showTicksValues="false"
+                                            hideLimitLabels="true"
+                                            style="float: left; width: 350px" >
+                                        </slider>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="silenceSuppressionTime" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 control-label">Silence Suppression Time</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                                        <span style="width: 80px;float: left;border: 1px solid #000;text-align: center;margin-top: 15px;margin-right: 20px;">{{ getSilenceSuppressionTimeLabel() }}</span>
+                                        <slider
+                                            id="silenceSupressionTime"
+                                            ng-model="client.SILENCE_SUPPRESSION_TIME_IN_MS"
+                                            floor="0"
+                                            ceiling="1000"
+                                            step="100"
+                                            precision="0" 
+                                            showTicksValues="false"
+                                            hideLimitLabels="true"
+                                            style="float: left; width: 350px" >
+                                        </slider>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="packetResequencerDepth" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 control-label">Packet Resequencer Depth</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                                        <span style="width: 80px;float: left;border: 1px solid #000;text-align: center;margin-top: 15px;margin-right: 20px;">{{ getPacketResequencerDepthLabel() }}</span>
+                                        <slider
+                                            id="packetResequencerDepth"
+                                            ng-model="client.AUDIO_PACKET_RESEQUENCER_DEPTH"
+                                            floor="1"
+                                            ceiling="10"
+                                            step="1"
+                                            precision="0" 
+                                            showTicksValues="false"
+                                            hideLimitLabels="true"
+                                            style="float: left; width: 350px" >
+                                        </slider>
+                                    </div>
+                                </div>
+                                <div class="form-group" ng-if="debug">
+                                    <label for="audioEncodeQuality" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 control-label">Audio Capture Buffer Size</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                                        <span style="width: 80px;float: left;border: 1px solid #000;text-align: center;margin-top: 15px;margin-right: 20px;">{{ client.AUDIO_CAPTURE_BUFFER_SIZE_IN_MS }}&nbsp;ms</span>
+                                        <slider
+                                            id="audioEncodeQuality"
+                                            ng-model="client.AUDIO_CAPTURE_BUFFER_SIZE_IN_MS"
+                                            floor="5"
+                                            ceiling="50"
+                                            step="5"
+                                            precision="0" 
+                                            showTicksValues="false"
+                                            hideLimitLabels="true"
+                                            style="float: left; width: 350px" >
+                                        </slider>
+                                    </div>
+                                </div>
+                                <div class="form-group" ng-if="debug">
+                                    <label for="audioEncodeQuality" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 control-label">Audio Time Slice Per Packet</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                                        <span style="width: 80px;float: left;border: 1px solid #000;text-align: center;margin-top: 15px;margin-right: 20px;">{{ client.AUDIO_FRAMES_PER_PACKET }}&nbsp;ms</span>
+                                        <slider
+                                            id="audioEncodeQuality"
+                                            ng-model="client.AUDIO_FRAMES_PER_PACKET"
+                                            floor="1"
+                                            ceiling="10"
+                                            step="1"
+                                            precision="0" 
+                                            showTicksValues="false"
+                                            hideLimitLabels="true"
+                                            style="float: left; width: 350px" >
+                                        </slider>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Audio Levels</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row" style="margin-right: 10px;">
+                            <fieldset>
+                                <div class="form-group">
+                                    <label for="variableBitRate" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 control-label">Automatic Gain Control</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                                        <toggle-switch ng-model="client.AUDIO_AGC_ENABLE"></toggle-switch>
+                                    </div>
+                                </div> 
+                                <div class="form-group">
+                                    <label for="automaticGainControlLevel" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 control-label">Automatic Gain Control Level</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                                        <span style="width: 80px;float: left;border: 1px solid #000;text-align: center;margin-top: 15px;margin-right: 20px;">{{ getAutomaticGainControlLevelLabel() }}</span>
+                                        <slider
+                                            id="automaticGainControlLevel"
+                                            ng-model="client.AUDIO_AGC_THRESHOLD"
+                                            floor="-8"
+                                            ceiling="23"
+                                            step="1"
+                                            precision="0" 
+                                            showTicksValues="false"
+                                            hideLimitLabels="true"
+                                            style="float: left; width: 350px" >
+                                        </slider>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="audioInputLevelGain" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 control-label">Audio Input Level Gain (Pre-Mix)</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                                        <span style="width: 80px;float: left;border: 1px solid #000;text-align: center;margin-top: 15px;margin-right: 20px;">{{ getAudioInputLevelGainLabel() }}</span>
+                                        <slider
+                                            id="audioInputLevelGain"
+                                            ng-model="client.AUDIO_INPUT_LEVEL_GAIN_DB"
+                                            floor="-18"
+                                            ceiling="18"
+                                            step="6"
+                                            precision="0" 
+                                            showTicksValues="false"
+                                            hideLimitLabels="true"
+                                            style="float: left; width: 350px" >
+                                        </slider>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="audioOutputLevelGain" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 control-label">Audio Output Level Gain (Post-Mix)</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                                        <span style="width: 80px;float: left;border: 1px solid #000;text-align: center;margin-top: 15px;margin-right: 20px;">{{ getAudioOutputLevelGainLabel() }}</span>
+                                        <slider
+                                            id="audioOutputLevelGain"
+                                            ng-model="client.AUDIO_OUTPUT_LEVEL_GAIN_DB"
+                                            floor="-18"
+                                            ceiling="18"
+                                            step="6"
+                                            precision="0" 
+                                            showTicksValues="false"
+                                            hideLimitLabels="true"
+                                            style="float: left; width: 350px" >
+                                        </slider>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="speakerDimReduction" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 control-label">Speakerphone Speaker Dim Reduction</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                                        <span style="width: 80px;float: left;border: 1px solid #000;text-align: center;margin-top: 15px;margin-right: 20px;">{{ getSpeakerDimReductionLabel() }}</span>
+                                        <slider
+                                            id="speakerDimReduction"
+                                            ng-model="client.SPEAKER_DIM_REDUCTION_STEP"
+                                            floor="-42"
+                                            ceiling="0"
+                                            step="6"
+                                            precision="0" 
+                                            showTicksValues="false"
+                                            hideLimitLabels="true"
+                                            style="float: left; width: 350px" >
+                                        </slider>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Audio Processing</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row" style="margin-right: 10px;">
+                            <fieldset>
+                                <div class="form-group">
+                                    <label for="echoCancellation" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 control-label">Echo Cancellation</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                                        <toggle-switch ng-model="client.AUDIO_ECHO_CANCELLATION"></toggle-switch>
+                                    </div>
+                                </div> 
+                                <div class="form-group">
+                                    <label for="echoCancellationTailLength" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 control-label">Echo Cancellation Tail Length</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                                        <span style="width: 80px;float: left;border: 1px solid #000;text-align: center;margin-top: 15px;margin-right: 20px;">{{ getEchoCancellationTailLengthLabel() }}</span>
+                                        <slider
+                                            id="echoCancellationTailLength"
+                                            ng-model="client.AUDIO_ECHO_CANCELLATION_TAIL_LENGTH"
+                                            floor="50"
+                                            ceiling="300"
+                                            step="50"
+                                            precision="0" 
+                                            showTicksValues="false"
+                                            hideLimitLabels="true"
+                                            style="float: left; width: 350px" >
+                                        </slider>
+                                    </div>
+                                </div>
+                                <div class="form-group" ng-show="supportsAudioEncryption">
+                                    <label for="audioEncryption" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 control-label">Audio Encryption</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                                        <ui-select id="audioEncryption" ng-model="$parent.client.AUDIO_ENCRYPTION_METHOD">
+                                            <ui-select-match placeholder="">{{$select.selected.label}}</ui-select-match>
+                                            <ui-select-choices repeat="item in $parent.audioEncryptionOptions | filter: $select.search">
+                                                <div ng-bind-html="trustAsHtml(( item.label | highlight: $select.search ))"></div>
+                                            </ui-select-choices>
+                                        </ui-select>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+	<button class="btn" data-ng-click="cancel()">Cancel</button>
+	<button class="btn btn-warning" data-ng-click="save()">Save</button>
+</div>

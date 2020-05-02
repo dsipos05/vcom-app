@@ -1,0 +1,42 @@
+<div class="modal-header">
+	<h3>Templates</h3>
+</div>
+<div class="modal-body">    
+    <div class="container-fluid" id="mainContent">
+        <div class="row">
+            <ul ng-show="showHelp"> <!-- explanation -->
+                <li>You must select two or more clients to link them </li>
+                <li>If none of the selected clients have a template of the chosen type*, then use the first client selected as the base template</li>
+                <li>If exactly one selected client has a template of the chosen type*, then use that template as the base template</li>
+                <li>If multiple clients have the same template of the chosen type*, then use that template as the base template</li>
+                <li>If multiple clients have different templates of the chosen type*, then no linking can happen.</li>
+                <p style="font-size:.9em">*: There are three template types (Selector Assignments, Audio Settings, and Options)</p>
+            </ul>
+        </div>
+        <!-- Options -->
+        <div class="row">
+            <button class="btn btn-default" ng-click="linkTemplate('SELECTOR_ASSIGNMENTS')" ng-mouseover="hoverIn('SELECTOR_ASSIGNMENTS')" ng-mouseleave="hoverOut()" ng-disabled="isDisabled('SELECTOR_ASSIGNMENTS')">Link Selector Assignments</button>&nbsp;
+            <button class="btn btn-default" ng-click="linkTemplate('AUDIO_SETTINGS')" ng-mouseover="hoverIn('AUDIO_SETTINGS')" ng-mouseleave="hoverOut()"ng-disabled="isDisabled('AUDIO_SETTINGS')">Link Audio Settings</button>
+            <button class="btn btn-default" ng-click="linkTemplate('OPTIONS')" ng-mouseover="hoverIn('OPTIONS')" ng-mouseleave="hoverOut()"ng-disabled="isDisabled('OPTIONS')">Link Options</button>
+            <button class="btn btn-default" ng-click="showHelp=!showHelp">?</button>
+            <!-- <p ng-show="allLinksDisabled()">In order to link clients with templates, you must select at least two clients, and your selection cannot include multiple different templates of the same type.</p> -->
+        </div>
+        <div class="row">&nbsp;</div>
+        <div class="row">
+            <button class="btn btn-default" ng-click="unlinkTemplates('SELECTOR_ASSIGNMENTS')">Unlink Selector Assignments</button>&nbsp;
+            <button class="btn btn-default" ng-click="unlinkTemplates('AUDIO_SETTINGS')">Unlink Audio Settings</button>
+            <button class="btn btn-default" ng-click="unlinkTemplates('OPTIONS')">Unlink Options</button>
+        </div>
+        <!-- End Options -->
+
+        <div class="row">&nbsp;</div>
+
+        <div id="clientTemplatesGrid" class="ag-theme-fresh ag-grid"></div>    
+        <p>Hold <kbd>Ctrl</kbd> to select additional items, or hold <kbd>Shift</kbd> to select several in a row</p>
+    </div>
+    
+</div>
+<div class="modal-footer">
+	<button class="btn" data-ng-click="cancel()">Cancel</button>
+	<button class="btn btn-warning" data-ng-click="save()">Save</button>
+</div>

@@ -1,0 +1,27 @@
+<!-- let vid = $("<video autoplay>").attr("id",id).addClass("wowza-video-stream");
+            let spinner = $('<i>').addClass("fa fa-refresh fa-spin wowza-spinner");
+            let div = $("<div>").css("height","100%").css("position","relative");
+            div.append(vid);
+            div.append(spinner);
+            $(query).append(div); -->
+
+<div id="STATE_ID" ng-controller="WowzaStreamController" style="height:100%;position:relative;" ng-init="setID(STATE_ID)" class="wowzaStream">
+    <!-- playsinline is necessary for iOS -->
+    <video autoplay playsinline class="wowza-video-stream"></video>
+    <i class="fa fa-refresh fa-spin wowza-spinner {{wowzaSpinnerStatus}}"></i>
+    <div class="selector-left-clickable"  hm-tap="onTap($event,selector.randID,'left')"  hm-press="onPressDown($event,selector.randID,'left')" hm-tap="onTapDown($event,selector.randID,'left')" hm-recognizer-options='[{"time":150},{"threshold":1}]'></div>
+    <div class="selector-right-clickable" hm-tap="onTap($event,selector.randID,'right')"  hm-press="onPressDown($event,selector.randID,'right')" hm-tap="onTapDown($event,selector.randID,'right')" hm-recognizer-options='[{"time":150},{"threshold":1}]'></div>
+    <div class="selector-left selector-side center-div {{selector.leftType}}">
+        <!-- <i aria-hidden="true" class="{{selector.leftIconClass}}"></i> -->
+    </div>
+    <div class="selector-right selector-side center-div {{selector.rightType}}">
+        <!-- <i aria-hidden="true" class="{{selector.rightIconClass}}"></i> -->
+    </div>
+    <div class="maximizeButton gum-option-button" ng-click="onMaximizeButtonClicked()">
+        <i class="fa fa-window-restore"></i>
+    </div>
+    <!-- <div class="publishButton">
+        <tricircle ng-click="clickPublishButton()" ng-model="tricircleState" color="green"></tricircle>
+    </div> -->
+
+</div>

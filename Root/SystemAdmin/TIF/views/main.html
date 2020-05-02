@@ -1,0 +1,49 @@
+<!-- <div class="container"> -->
+    <div class="row tifMainContainer">
+        <div class="phoneBankContainer" ng-class="collapseSidebar?'full':''">
+            <div ui-view="phoneBank"></div>
+        </div>
+        <div class="tifSideBars" ng-class="collapseSidebar?'collapsed':''">
+            <ul ng-show="collapseSidebar" class="nav nav-pills collapsedSidebar">
+                <li ng-click="collapseSidebar = false"><a href="">Show Sidebar</a></li>
+            </ul>
+            <div ng-show="!collapseSidebar">
+                <!-- If a specific phone is selected -->
+                <div ng-show="getSelectedPhone()">
+                    <!-- Options to choose sidebar -->
+                    <ul class="nav nav-pills">
+                        <li ng-click="chooseSidebar('details')"        ng-class="sidebar=='details'? 'active' : ''"><a href="">Details</a></li>
+                        <li ng-click="chooseSidebar('dialer')"         ng-class="sidebar=='dialer'? 'active' : ''"><a href="">Dialer </a> </li>
+                        <li ng-click="chooseSidebar('configuration')"  ng-class="sidebar=='configuration'? 'active' : ''"><a href=""><span class="glyphicon glyphicon-cog"></span></a></li>
+                        <li ng-click="chooseSidebar('levels')"         ng-class="sidebar=='levels'? 'active' : ''"><a href="">Levels</a></li>
+                        <li ng-click="collapseSidebar = true"             class="collapseSidebarButton"           ><a href="">Collapse <i class="fa fa-caret-right"></i></a></li>
+                    </ul>
+                    <!-- Sidebar body (Line Details/Dialer/Configuration/Levels)-->
+                    <div>
+                        <div ng-show="sidebar=='details'" ui-view="details"></div>
+                        <div ng-show="sidebar=='dialer'"  ui-view="dialer"></div>
+                        <div ng-show="sidebar=='configuration'" ui-view="configuration"></div>
+                        <div ng-if="sidebar=='levels'" ui-view="levels"></div><!--Using ng-if because the slider has trouble if it tries to initialize while hidden and ng-if makes it not exist rather than be hidden-->
+                    </div>
+                </div>
+                <!-- System Configuration tabs -->
+                <div ng-hide="getSelectedPhone()">
+                    <!-- Options -->
+                    <ul class="nav nav-pills">
+                        <li ng-click="chooseSysTab('sysStatus')"    ng-class="sysconfigTab=='sysStatus'? 'active' : ''"><a href="">Status</a></li>
+                        <li ng-click="chooseSysTab('sysConfig')"    ng-class="sysconfigTab=='sysConfig'? 'active' : ''"><a href=""><span class="glyphicon glyphicon-cog"></span></a></li>
+                        <li ng-click="chooseSysTab('sysDialPlan')"  ng-class="sysconfigTab=='sysDialPlan'? 'active' : ''"><a href="">Dial Plan</a></li>
+                        <li ng-click="collapseSidebar = true"          class="collapseSidebarButton"                     ><a href="">Collapse <i class="fa fa-caret-right"></i></a></li>
+                    </ul>
+                    <!-- Body -->
+                    <div>
+                        <div ng-show="sysconfigTab=='sysStatus'" ui-view="sysStatus"></div>
+                        <div ng-show="sysconfigTab=='sysConfig'"  ui-view="sysConfig"></div>
+                        <div ng-show="sysconfigTab=='sysDialPlan'" ui-view="sysDialPlan"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- </div> -->
+

@@ -1,0 +1,35 @@
+/* hide the speaker and microphone icons in each selector */
+.listen>i{
+	display:none;
+}
+.talk>i{
+	display:none;
+}
+.video>i{
+	display:none;
+}
+
+.selector-left,.selector-right{
+	width:5px;
+}
+.selector.talkActive .talk,.selector.listenActive .listen,.selector.videoActive .video{
+	width:15px;
+}
+/* width of selector side when tally is flashing*/
+#selectors.tallyClock .selector.tally .talk{
+	width:15px;
+}
+.selector.talkHalfway .talk, .selector.listenHalfway .listen{
+	width:10px;
+}
+
+/* Online */
+.selector:not(.offline):not(.talkActive):not(.talkHalfway) .talk{
+	background-color: #A50422;
+}
+.selector:not(.offline):not(.listenActive):not(.listenHalfway) .listen{
+	background-color: #04A51B;
+}
+.selector:not(.offline):not(.videoActive) .video{
+	background-color:rgb(143, 93, 0);
+}

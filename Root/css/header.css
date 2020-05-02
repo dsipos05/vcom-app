@@ -1,0 +1,98 @@
+
+/* Connection Status */
+#connectionStatus{
+	z-index:2000; /* more than uibmodal darkening */
+	position:fixed;
+	width:8vw;
+	height:1vh;
+	right:0;
+	top:10vh;
+	opacity:0.7;
+	font-size:3em;
+}
+.connectionStatus-0{
+	color:green
+}
+.connectionStatus-1{
+	color:yellowgreen
+}
+.connectionStatus-2{
+	color:yellow
+}
+.connectionStatus-3{
+	color:orange
+}
+.connectionStatus-4{
+	color:orangered
+}
+.connectionStatus-5{
+	color:red
+}
+
+#headerProgressBar{
+	position:fixed;
+	z-index: 2000; /* more than uibmodal darkening */
+}
+#headerProgressBar>*{ /* direct children should have full width */
+	font-size:2em;
+}
+#headerProgressBar{
+	/* position:fixed; */
+	top:40px;
+	margin-left:25%;
+	/* left:30vw; */
+	width:50%;
+	height:20px;
+}
+.progressBarLoader{
+	width:100%;
+}
+.progressBarFailure{
+	width:100%;
+}
+.progressBarSuccess{
+	background-color:white;
+	width:fit-content;
+	border-radius:15px;
+}
+
+
+#headerSpinner{
+	font-size:20px;
+	position:fixed;
+	top:50px;
+	left:49vw;
+	z-index:2000; /* more than uibmodal darkening */
+}
+
+
+/* Notifications */
+.notificationContainer{
+	z-index:2000; /* more than uibmodal darkening */
+	position:fixed;
+	word-wrap:break-word;
+	top:10vh;
+	opacity:0.9;
+}
+/* Notifications Mobile */
+.notificationContainer{
+	width:90vw;
+	left:5vw;
+}
+
+/* Notifications Desktop */
+@media only screen and (min-width:992px){
+	.notificationContainer{
+		width:50vw;
+		left:25vw;
+	}
+}
+
+
+
+#debugStatus{
+	position:fixed;
+	top:20px;
+	left:48%;
+	font-size:3em;
+}

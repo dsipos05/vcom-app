@@ -1,0 +1,110 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+                       
+            <!-- Video Feeds -->
+            <div class="panel panel-primary">
+                <div class="panel-heading">VIDEO FEEDS</div>
+                <div class="panel-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>URL</th>
+                                <th>
+                                    Default?
+                                </th>
+                                <th>
+                                    <span class="glyphicon glyphicon-cog"></span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="feed in config.videoFeeds">
+                                <td>{{feed.name}}</td>
+                                <td>{{feed.url}}</td>
+                                <td ng-click="setDefault(feed)">
+                                    <span ng-show="config.videoFeedSky == feed.uid" class="glyphicon glyphicon-check"></span>
+                                    <span ng-show="config.videoFeedSky != feed.uid" class="glyphicon glyphicon-unchecked"></span>
+                                </td>
+                                <td>
+                                    <span ng-click="removeFeed(feed)" class="glyphicon glyphicon-minus-sign"></span>
+                                </td>
+                        </tbody>
+                    </table>
+                    <button ng-click="beginCreatingFeed();" class="btn btn-primary btn-block">Add Video Feed</button>
+                    <form id="newFeedForm" ng-show="creatingFeed" ng-submit="createFeed(newFeed);">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <label>Name:</label>
+                                        <input name="name" type="text" ng-model="newFeed.name" placeholder="Name" ng-required/>
+                                    </td>
+                                    <td>
+                                        <label>URL:</label>
+                                        <input name="url" type="text" ng-model="newFeed.url" placeholder="URL" ng-required/>
+                                    </td>
+                                    <td>
+                                        <button class="btn" type="submit">Add</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Clocks -->
+            <div class="panel panel-primary">
+                <div class="panel-heading">CLOCKS</div>
+                <div class="panel-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>GMT Offset</th>
+                                <th>
+                                    <span class="glyphicon glyphicon-cog"></span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="clock in config.clocks">
+                                <td>{{clock.name}}</td>
+                                <td>{{clock.offset}}</td>
+                                <td>
+                                    <span ng-click="removeClock(clock)"  class="glyphicon glyphicon-minus-sign"></span>
+                                </td>
+                        </tbody>
+                    </table>
+                    <button ng-click="beginCreatingClock()" class="btn btn-primary btn-block">Add Clock</button>
+                    <form id="newClockForm" ng-show="creatingClock" ng-submit="createClock(newClock);">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <label>Name:</label>
+                                        <input id="clockname" name="name" type="text" ng-model="newClock.name" placeholder="Name" ng-required/>
+                                    </td>
+                                    <td>
+                                        <label>Offset:</label>
+                                        <input name="offset" type="text" ng-model="newClock.offset" placeholder="Offset" ng-required/>
+                                    </td>
+                                    <td>
+                                        <button class="btn" type="submit">Add</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            <p ng-show="unsavedChanges"> There are unsaved changes. </p> 
+            <button ng-click="saveConfig()" class="btn btn-primary btn-block">Save Changes</button>
+            <br>
+            <br>
+            <br>
+        </div>
+    </div>
+</div>

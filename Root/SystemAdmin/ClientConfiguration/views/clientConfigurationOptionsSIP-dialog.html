@@ -1,0 +1,293 @@
+<div class="modal-header">
+	<h3>Client Configuration Options</h3>
+</div>
+<div class="modal-body">
+    <div >
+        <strong>Selected Client:</strong>&nbsp;&nbsp;{{ client.LABEL_TYPE + ' / ' + client.SELECTOR_NAME + ' / ' + client.DESCRIPTION }}
+    </div>
+	<form class="form-horizontal">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">SIP Options</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row" style="margin-right: 10px;">
+                            <fieldset>
+                                <div class="form-group">
+                                    <label for="inboundSessionActivation" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 control-label">Inbound Session Activation</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                                        <ui-select id="inboundSessionActivation" ng-model="$parent.client.SIP_INBOUND_SESSION_ACTIVATION">
+                                            <ui-select-match placeholder="">{{$select.selected.label}}</ui-select-match>
+                                            <ui-select-choices repeat="item in $parent.inboundSessionActivations | filter: $select.search">
+                                                <div ng-bind-html="trustAsHtml(( item.label | highlight: $select.search ))"></div>
+                                            </ui-select-choices>
+                                        </ui-select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inboundSessionDeactivation" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 control-label">Inbound Session Deactivation</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                                        <ui-select id="inboundSessionDeactivation" ng-model="$parent.client.SIP_INBOUND_SESSION_DEACTIVATION">
+                                            <ui-select-match placeholder="">{{$select.selected.label}}</ui-select-match>
+                                            <ui-select-choices repeat="item in $parent.inboundSessionDeactivations | filter: $select.search">
+                                                <div ng-bind-html="trustAsHtml(( item.label | highlight: $select.search ))"></div>
+                                            </ui-select-choices>
+                                        </ui-select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="outboundSessionActivation" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 control-label">Outbound Session Activation</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                                        <ui-select id="outboundSessionActivation" ng-model="$parent.client.SIP_OUTBOUND_SESSION_ACTIVATION">
+                                            <ui-select-match placeholder="">{{$select.selected.label}}</ui-select-match>
+                                            <ui-select-choices repeat="item in $parent.outboundSessionActivations | filter: $select.search">
+                                                <div ng-bind-html="trustAsHtml(( item.label | highlight: $select.search ))"></div>
+                                            </ui-select-choices>
+                                        </ui-select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="outboundSessionDeactivation" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 control-label">Outbound Session Deactivation</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                                        <ui-select id="outboundSessionDeactivation" ng-model="$parent.client.SIP_OUTBOUND_SESSION_DEACTIVATION">
+                                            <ui-select-match placeholder="">{{$select.selected.label}}</ui-select-match>
+                                            <ui-select-choices repeat="item in $parent.outboundSessionDeactivations | filter: $select.search">
+                                                <div ng-bind-html="trustAsHtml(( item.label | highlight: $select.search ))"></div>
+                                            </ui-select-choices>
+                                        </ui-select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="automaticDialSequence" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 control-label">Automatic Dial Sequence</label>
+                                    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                                        <input type="text" class="form-control" ng-model="client.SIP_AUTOMATIC_DIAL_SEQUENCE" id="automaticDialSequence">
+                                    </div>
+                                    <div class="hidden-xs col-sm-4 col-md-4 col-lg-4"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="ringToneDisable" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 control-label">Send SDP with Invite Request</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                                        <toggle-switch ng-model="client.SIP_SEND_SDP_WITH_INVITE_REQUEST" labels="On,Off" stateValues="ON,OFF"></toggle-switch>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="ringToneDisable" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 control-label">Use SDP for RTP Destination</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                                        <toggle-switch ng-model="client.SIP_USE_SDP_FOR_RTP_DESTINATION" labels="On,Off" stateValues="ON,OFF"></toggle-switch>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="ringToneDisable" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 control-label">Use RTP Packets for Voice Activity Detection</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                                        <toggle-switch ng-model="client.SIP_USE_RTP_PACKETS_FOR_VOICE_ACTIVITY_DETECTION" labels="On,Off" stateValues="ON,OFF"></toggle-switch>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="rtpTimeoutInSeconds" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 control-label">RTP Timeout in Seconds</label>
+                                    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                                        <input type="number" class="form-control" ng-model="client.RTP_TIMEOUT_IN_SECONDS" id="rtpTimeoutInSeconds">
+                                    </div>
+                                    <div class="hidden-xs col-sm-4 col-md-4 col-lg-4"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inboundSessionActivation" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 control-label">RTP Keep Alive Method</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                        <ui-select id="rtpKeepAliveMethod" ng-model="$parent.client.RTP_KEEP_ALIVE_METHOD">
+                                            <ui-select-match placeholder="">{{$select.selected.label}}</ui-select-match>
+                                            <ui-select-choices repeat="item in $parent.rtpKeepAliveMethods | filter: $select.search">
+                                                <div ng-bind-html="trustAsHtml(( item.label | highlight: $select.search ))"></div>
+                                            </ui-select-choices>
+                                        </ui-select>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">Type</div>
+                                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                                            <input type="number" class="form-control" ng-model="client.RTP_KEEP_ALIVE_PAYLOAD_TYPE" id="rtpKeepAlivePayloadType">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="sipExpirationTimeInSeconds" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 control-label">SIP Session Expiration Time in Seconds</label>
+                                    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                                        <input type="number" class="form-control" ng-model="client.SIP_SESSION_EXPIRATION_TIME_IN_SECONDS" id="sipExpirationTimeInSeconds">
+                                    </div>
+                                    <div class="hidden-xs col-sm-4 col-md-4 col-lg-4"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="voiceActivityDetectionTimeInMs" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 control-label">Voice Activity Detection Validation Time in Ms</label>
+                                    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                                        <input type="number" class="form-control" ng-model="client.VOICE_ACTIVITY_DETECTION_TIME_IN_MS" id="voiceActivityDetectionTimeInMs">
+                                    </div>
+                                    <div class="hidden-xs col-sm-4 col-md-4 col-lg-4"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="voiceActivityDetectionOffDelayTimeInMs" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 control-label">Voice Activity Detection Off Delay Time in Ms</label>
+                                    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                                        <input type="number" class="form-control" ng-model="client.VOICE_ACTIVITY_DETECTION_OFF_DELAY_TIME_IN_MS" id="voiceActivityDetectionOffDelayTimeInMs">
+                                    </div>
+                                    <div class="hidden-xs col-sm-4 col-md-4 col-lg-4"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="callNotificationRingTone" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 control-label">Call Notification Ring Tone</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                        <ui-select id="callNotificationRingTone" ng-model="$parent.client.RING_TONE_FILE_NAME">
+                                            <ui-select-match placeholder="">{{$select.selected.label}}</ui-select-match>
+                                            <ui-select-choices repeat="item in $parent.soundFiles | filter: $select.search">
+                                                <div ng-bind-html="trustAsHtml(( item.label | highlight: $select.search ))"></div>
+                                            </ui-select-choices>
+                                        </ui-select>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                        
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-12 col-md-5 control-label"> Upload Ring Tone file </label>
+                                    <div class="col-xs-12 col-md-7">
+                                        <uploader
+                                            upload-fn="uploadRingtoneFile"
+                                            on-success="onSuccessUploadRingtoneFile"
+                                            on-failure="onFailureUploadRingtoneFile">
+                                        </uploader>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="autoAnswerNotificationMessage" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 control-label">Auto-Answer Notification Message</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                        <ui-select id="autoAnswerNotificationMessage" ng-model="$parent.client.ANSWER_SOUND_FILE_NAME">
+                                            <ui-select-match placeholder="">{{$select.selected.label}}</ui-select-match>
+                                            <ui-select-choices repeat="item in $parent.soundFiles | filter: $select.search">
+                                                <div ng-bind-html="trustAsHtml(( item.label | highlight: $select.search ))"></div>
+                                            </ui-select-choices>
+                                        </ui-select>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                        
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-12 col-md-5 control-label"> Upload Auto-Answer Notification Message file </label>
+                                    <div class="col-xs-12 col-md-7">
+                                        <uploader
+                                            upload-fn="uploadAnswerSoundFile"
+                                            on-success="onSuccessUploadAnswerSoundFile"
+                                            on-failure="onFailureUploadAnswerSoundFile">
+                                        </uploader>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="autoAnswerDelayTimeInMs" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 control-label">Auto-Answer Delay Time in Ms</label>
+                                    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                                        <input type="number" class="form-control" ng-model="client.AUTO_ANSWER_DELAY_TIME_IN_MS" id="autoAnswerDelayTimeInMs">
+                                    </div>
+                                    <div class="hidden-xs col-sm-4 col-md-4 col-lg-4"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="autoAnswerAccessCode" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 control-label">Auto-Answer Access Code</label>
+                                    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                                        <input type="text" class="form-control" ng-model="client.AUTO_ANSWER_ACCESS_CODE" id="autoAnswerAccessCode">
+                                    </div>
+                                    <div class="hidden-xs col-sm-4 col-md-4 col-lg-4"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="use16KHzForG722" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 control-label">Use 16 KHz for G.722 Timestamp</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                                        <toggle-switch ng-model="client.USE_16KHZ_FOR_G722_TIMESTAMP" labels="On,Off" stateValues="ON,OFF"></toggle-switch>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="internalSIPClientUserNamePrefix" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 control-label">Internal SIP  Client User Name Prefix</label>
+                                    <div class="col-xs-12 col-sm-1 col-md-1 col-lg-1">
+                                        <input type="text" class="form-control" ng-model="client.INTERNAL_SIP_CLIENT_USER_NAME_PREFIX" id="internalSIPClientUserNamePrefix">
+                                    </div>
+                                    <div class="hidden-xs col-sm-6 col-md-6 col-lg-6"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="digitsToSendOnTalkActivationDeactivation" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 control-label">Digits to Send on Talk Activation / Deactivation</label>
+                                    <div class="col-xs-5 col-sm-1 col-md-1 col-lg-1">
+                                        <input type="text" class="form-control" ng-model="client.DIGIT_TO_SEND_ON_INTERFACE_ACTIVATION" id="idigitsToSendOnTalkActivationDeactivation">
+                                    </div>
+                                    <div class="col-xs-2 col-sm-1 col-md-1 col-lg-1 text-center"><h4>/</h4></div>
+                                    <div class="col-xs-5 col-sm-1 col-md-1 col-lg-1">
+                                        <input type="text" class="form-control" ng-model="client.DIGIT_TO_SEND_ON_INTERFACE_DEACTIVATION" id="idigitsToSendOnTalkActivationDeactivation">
+                                    </div>
+                                    <div class="hidden-xs col-sm-4 col-md-4 col-lg-4"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="voiceActivityLogging" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 control-label">Log Voice Activity to Activity Log</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                                        <toggle-switch ng-model="client.VOICE_ACTIVITY_LOGGING" labels="On,Off" stateValues="ON,OFF"></toggle-switch>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">SIP Direct IP Trunk / Registered Trunk Options</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row" style="margin-right: 10px;">
+                            <fieldset>
+                                <div class="form-group">
+                                    <label for="sipTargetUserName" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 control-label">SIP Target User Name</label>
+                                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                                        <input type="text" class="form-control" ng-model="client.SIP_TARGET_USER_NAME" id="sipTargetUserName">
+                                    </div>
+                                    <div class="hidden-xs col-sm-3 col-md-3 col-lg-3"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="sipTargetPrimaryHostName" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 control-label">SIP Target Primary Host Name</label>
+                                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                                        <input type="text" class="form-control" ng-model="client.SIP_TARGET_PRIMARY_HOST" id="sipTargetPrimaryHostName">
+                                    </div>
+                                    <div class="hidden-xs col-sm-3 col-md-3 col-lg-3"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="sipTargetSecondaryHostName" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 control-label">SIP Target Secondary Host Name</label>
+                                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                                        <input type="text" class="form-control" ng-model="client.SIP_TARGET_SECONDARY_HOST" id="sipTargetSecondaryHostName">
+                                    </div>
+                                    <div class="hidden-xs col-sm-3 col-md-3 col-lg-3"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="sipTargetProxyServerIPAddress" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 control-label">SIP Target Proxy Server IP Address (optional)</label>
+                                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                                        <input type="text" class="form-control" ng-model="client.IP_ADDRESS_FOR_SIP_SERVER" id="sipTargetProxyServerIPAddress">
+                                    </div>
+                                    <div class="hidden-xs col-sm-3 col-md-3 col-lg-3"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="sipRegistrationExpirationTimeInSeconds" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 control-label">SIP Registration Expiration Time in Seconds</label>
+                                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                                        <input type="number" class="form-control" ng-model="client.SIP_REGISTRATION_EXPIRATION_TIME_IN_SECONDS" id="sipRegistrationExpirationTimeInSeconds" positiveNumber>
+                                    </div>
+                                    <div class="hidden-xs col-sm-3 col-md-3 col-lg-3"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="stunServerOrProxyIPAddress" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 control-label">STUN Server or Proxy IP Address</label>
+                                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                                        <input type="text" class="form-control" ng-model="client.IP_ADDRESS_FOR_STUN_SERVER" id="stunServerOrProxyIPAddress">
+                                    </div>
+                                    <div class="col-xs-12 col-sm-1 col-md-1 col-lg-1">
+                                        Port:
+                                    </div>
+                                    <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
+                                        <input type="number" class="form-control" ng-model="client.IP_PORT_FOR_STUN_SERVER" id="stunServerOrProxyIPPort">
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+	<button class="btn" data-ng-click="cancel()">Cancel</button>
+	<button class="btn btn-warning" data-ng-click="save()">Save</button>
+</div>

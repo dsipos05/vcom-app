@@ -1,0 +1,83 @@
+<div class="modal-header">
+	<h3>{{ screenTitle }}</h3>
+</div>
+<div class="modal-body">
+    <!-- End Notifications -->
+	<form class="form-horizontal" name="EditForm" novalidate="novalidate">
+            <!-- novalidate here prevents popups telling users to fill in missing fields, since they annoyingly pop up every time any part of the form is modified -->
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Group Identification</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row" style="margin-right: 10px;">
+                            <myform formdata="myFormData" models="myFormModels"></myform>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Options</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row" style="margin-right: 10px;">
+                            <fieldset>
+                                <div class="form-group">
+                                    <label for="disableClientLogin" class="col-xs-12 col-sm-12 col-md-9 col-lg-9 control-label">Latch Disabled</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" style="margin-top: 5px;">
+                                        <toggle-switch ng-model="group.LATCH_DISABLE" labels="ON,OFF" stateValues="ON,OFF"></toggle-switch>
+                                    </div>
+                                </div>
+                                <!-- I don't know where the SHOW_SELECTOR_NAME_OF_TALKING_GROUP_MEMBER property is supposed to come from... -->
+                                <div class="form-group">
+                                    <label for="showSelectorNameOfTalkingGroupMember" class="col-xs-12 col-sm-12 col-md-9 col-lg-9 control-label">Show Selector Name Of Talking Member</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" style="margin-top: 5px;">
+                                        <toggle-switch ng-disabled="true" ng-model="group.SHOW_SELECTOR_NAME_OF_TALKING_GROUP_MEMBER"></toggle-switch>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Selector Assignment Restrictions</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row" style="margin-right: 10px;">
+                            <fieldset>
+                                <div class="form-group">
+                                    <label for="noLocalAssignmentByAdministrator" class="col-xs-12 col-sm-12 col-md-9 col-lg-9 control-label">No Local Assignment by Administrator</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" style="margin-top: 5px;">
+                                        <toggle-switch ng-model="group.NO_LOCAL_ASSIGNMENT_BY_ADMINISTRATOR"></toggle-switch>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="noLocalAssignmentByUser" class="col-xs-12 col-sm-12 col-md-9 col-lg-9 control-label">No Local Assignment by User</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" style="margin-top: 5px;">
+                                        <toggle-switch ng-model="group.NO_LOCAL_ASSIGNMENT_BY_USER"></toggle-switch>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</form>
+	
+</div>
+<div class="modal-footer">
+	<button class="btn" data-ng-click="cancel()">Cancel</button>
+	<button class="btn btn-warning" data-ng-click="save()">Save</button>
+</div>

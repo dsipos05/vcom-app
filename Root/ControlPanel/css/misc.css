@@ -1,0 +1,10 @@
+/* Troubleshoot */
+
+.websocket-troubleshoot textarea{
+    width:100%;
+    height:300px;
+}
+
+#selectorChooserGrid{
+    height:250px;
+}

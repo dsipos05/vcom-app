@@ -1,0 +1,20 @@
+.audioFileChooser>select,.imageFileChooser>select{
+    width:calc(100% - 25px); /* leave room for the delete button below */
+    display:inline-block /* otherwise is set to 'block' and won't allow the delete button to the right */
+}
+.audioFileChooser>.deleteButton,.imageFileChooser>.deleteButton{
+    width:25px;
+    color:red;
+    font-size:25px;
+    position:relative; /* needed for the 'top' property to do anything */
+    top:4px; /* manually centers this vertically */
+    cursor:pointer;
+}
+uploader{
+    cursor:pointer;
+}
+.imageFileChooser>.imagePreview{
+    max-width:100%;
+    max-height:120px;
+}
+

@@ -1,0 +1,74 @@
+.sysInfo {
+    text-align: center;
+    background-color: #eeeeee;
+}
+.sysInfo-NORMAL {
+    background-color: #b6ff6e;
+}
+.sysInfo-WARNING {
+    background-color: #FFFF66;
+}
+.sysInfo-INFORMATION {
+    background-color: #00FFFF;
+}
+.sysInfo-ERROR {
+    background-color: #ff4d4d;
+}
+.spacer7 {
+    line-height: 7px;
+}
+
+.altRow {
+    background-color: #F1F1F1;
+    border-top: 1px solid #E4E4E4;
+    border-bottom: 1px solid #E4E4E4;
+    padding-top: 7px;
+    padding-bottom: 7px;
+}
+
+
+.center-div {
+    display: block;
+    text-align: center;
+}
+
+.selectedRow {
+    background-color: darkgray;
+}
+
+pre {
+    height: auto;
+    max-height: 600px;
+    overflow: auto;
+    background-color: #eeeeee;
+    word-break: normal !important;
+    word-wrap: normal !important;
+    white-space: pre !important;
+}
+
+/*
+ * Disables spinners for number input fields
+ */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+#browserUnsupportedContainer{
+    font-size:3em;
+}
+
+#debug_message{
+	position:fixed;
+	bottom:40px;
+	height:40px;
+	background-color:red;
+	display:none;
+	font-size:2em;
+}
+
+.dev-only{
+    opacity:0.7;
+    box-shadow:5px 10px 20px red inset;
+}

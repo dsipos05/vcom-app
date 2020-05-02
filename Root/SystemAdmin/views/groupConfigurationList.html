@@ -1,0 +1,24 @@
+<div class="container">
+    <!-- Page Controls -->
+    
+    <!-- End Page Controls -->
+    <div class="col-xs-12 col-sm-6">
+        <div class="titleBar">
+            <div class="title">Group Configuration</div>
+            <button class="btn btn-default" ng-click="refresh()">                                       <span class="glyphicon glyphicon-refresh">      </span>&nbsp;Refresh</button>
+            <button class="btn btn-primary" ng-click="add()">                                           <span class="glyphicon glyphicon-plus-sign">    </span>&nbsp;Add</button>
+            <button class="btn btn-default" ng-click="edit()"           ng-disabled="!hasOneSelected()"><span class="glyphicon glyphicon-pencil">       </span>&nbsp;Edit</button>
+            <button class="btn btn-default" ng-click="delete()"         ng-disabled="hasNoneSelected()"><span class="glyphicon glyphicon-trash">        </span>&nbsp;Delete</button>
+            <button class="btn btn-default" ng-click="showMembership()" ng-disabled="!hasOneSelected()"><span class="glyphicon glyphicon-book">         </span>&nbsp;Group Membership</button>
+        </div>
+        <div id="groupConfigurationGrid" class="ag-theme-fresh ag-grid"></div>
+    </div>
+    <div class="col-xs-12 col-sm-6">
+        <div class="titleBar">
+            <div class="title">{{getPreviewGridTitle()}}</div>
+            <!-- <button class="btn btn-primary" ng-click="add()">                                           <span class="glyphicon glyphicon-plus-sign">    </span>&nbsp;Add</button> -->
+            <!-- <button class="btn btn-default" ng-click="delete()"         ng-disabled="hasNoneSelected()"><span class="glyphicon glyphicon-trash">        </span>&nbsp;Delete</button> -->
+        </div>
+        <div id="groupMembersGrid" class="ag-theme-fresh ag-grid"></div>
+    </div>
+</div>

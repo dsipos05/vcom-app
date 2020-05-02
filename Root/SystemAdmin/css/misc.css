@@ -1,0 +1,67 @@
+/* Without this, a disabled <select> just doesn't look disabled */
+select:disabled{
+    background-color:#eeeeee;
+    cursor:not-allowed;
+}
+.disabledLabel{
+    opacity:0.5;
+    cursor: not-allowed;
+}
+
+.faded{
+    opacity:0.5;
+    cursor: not-allowed;
+}
+
+.container-wide{
+    padding-left:15px;
+    padding-right:15px;
+}
+
+.failure{
+    color:#843534;
+}
+.success{
+    color:#3c763d;
+}
+
+
+/* Client Statistics Page */
+.clientStatisticsButton{
+    margin-top:5px;
+    margin-left:10px;
+}
+
+/* Dial Plan Help Page */
+.lightgray li{
+    background-color:#F1F1F1;
+}
+
+
+
+/* Title Bar */
+.titleBar{
+    display:flex;
+    margin-bottom:5px;
+    flex-wrap:wrap;
+}
+.titleBar > *{
+    margin-right:5px;
+    margin-bottom:5px;
+}
+.title{
+    font-size:2em;
+    margin-right:15px;
+}
+
+
+
+
+.flex{
+    display:flex;
+    flex-wrap:wrap;
+}
+
+.ssl .formModal-input input{
+    font-size:14px;
+}
